@@ -1,0 +1,50 @@
+name: Помилка
+description: Пакет не встановлюється, сторінка не українською, щось зламалося
+labels: [bug]
+body:
+  - type: dropdown
+    id: product
+    attributes:
+      label: Продукт
+      options:
+        - NetScaler Gateway
+        - StoreFront
+    validations:
+      required: true
+  - type: input
+    id: build
+    attributes:
+      label: Версія / білд
+      description: "NetScaler: show ns version (напр. 14.1-73.46). StoreFront: версія з «Програми та засоби» (напр. 2507)."
+      placeholder: 14.1-73.46
+    validations:
+      required: true
+  - type: input
+    id: pack
+    attributes:
+      label: Версія мовного пакета
+      placeholder: v2.0.0
+    validations:
+      required: true
+  - type: input
+    id: theme
+    attributes:
+      label: "NetScaler: тема порталу / StoreFront: інтерфейс"
+      description: "Напр. RfWebUI, WStheme, власна тема на базі RfWebUI; для StoreFront — класичний чи Workspace."
+  - type: textarea
+    id: what
+    attributes:
+      label: Що сталося
+      description: Що робили, що очікували, що побачили. Мова браузера користувача.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Вивід статусу
+      description: "NetScaler: ua_langpack.sh status і /var/log/ua_langpack.log. StoreFront: Install-UALangPack.ps1 -Status. Приберіть паролі та внутрішні адреси."
+      render: text
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Скріншоти

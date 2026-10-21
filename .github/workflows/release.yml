@@ -1,0 +1,39 @@
+name: release
+
+# Push a tag vX.Y.Z -> checks, zip, GitHub Release with notes from the matching CHANGELOG.md section.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pack checks
+        run: python3 tools/validate.py
+
+      - name: Release notes from CHANGELOG.md
+        run: |
+          awk -v v="## ${GITHUB_REF_NAME}" '$0==v {f=1; next} /^## / {f=0} f' CHANGELOG.md > notes.md
+          if [ ! -s notes.md ]; then echo "CHANGELOG.md has no section '## ${GITHUB_REF_NAME}'"; exit 1; fi
+
+      - name: Build zip
+        run: |
+          name="UA_language_pack_${GITHUB_REF_NAME}"
+          mkdir -p "dist/$name"
+          cp -r netscaler storefront tools README.md CHANGELOG.md LICENSE "dist/$name/"
+          rm -rf "dist/$name/tools/__pycache__"
+          (cd dist && zip -r -X "$name.zip" "$name")
+          unzip -l "dist/$name.zip"
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "dist/UA_language_pack_${GITHUB_REF_NAME}.zip" \
+            --title "$GITHUB_REF_NAME" --notes-file notes.md
