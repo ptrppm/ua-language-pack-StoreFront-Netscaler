@@ -1,6 +1,6 @@
 #!/bin/sh
 # Ukrainian language pack for NetScaler Gateway (RfWebUI / WStheme), all portal themes.
-# Petro Pikulin, petr.pikulin@gmail.com, https://t.me/UA_Language_pack_Citrix
+# Petro Pikulin, petr.pikulin@gmail.com, https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler
 #
 # Keep this directory in /nsconfig/ua_langpack (survives reboot and firmware upgrade).
 #   sh /nsconfig/ua_langpack/ua_langpack.sh install     - install now and re-apply at every boot

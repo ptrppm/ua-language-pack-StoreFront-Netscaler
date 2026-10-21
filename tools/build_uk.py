@@ -58,7 +58,7 @@ for k in extra:
 
 with open(out_path, 'w', encoding='utf-8', newline='\n') as f:
     f.write('// Ukrainian language pack for NetScaler Gateway (RfWebUI / WStheme)\n')
-    f.write('// Petro Pikulin, petr.pikulin@gmail.com, https://t.me/UA_Language_pack_Citrix\n')
+    f.write('// Petro Pikulin, petr.pikulin@gmail.com, https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler\n')
     f.write('(function ($) {\n    $.localization.addStringBundle("uk", {\n')
     f.write(',\n'.join(lines))
     f.write('\n    });\n})(jQuery);\n')

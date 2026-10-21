@@ -8,7 +8,7 @@
     Backs up everything it changes, copies the pack files and appends one marked
     loader block to custom\script.js - existing customizations in script.js are kept.
 
-    Petro Pikulin, petr.pikulin@gmail.com, https://t.me/UA_Language_pack_Citrix
+    Petro Pikulin, petr.pikulin@gmail.com, https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler
 
 .EXAMPLE
     .\Install-UALangPack.ps1                  # install on this server

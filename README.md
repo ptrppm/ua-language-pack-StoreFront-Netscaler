@@ -12,7 +12,7 @@
 | Citrix StoreFront | 2507 (7.45), Windows Server 2025 | класичний інтерфейс (receiver.html) і форма входу |
 
 Зауваження, помилки в перекладі, нові білди: [Issues](https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler/issues) ·
-[Telegram](https://t.me/UA_Language_pack_Citrix) · petr.pikulin@gmail.com
+[GitHub](https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler) · petr.pikulin@gmail.com
 
 ---
 

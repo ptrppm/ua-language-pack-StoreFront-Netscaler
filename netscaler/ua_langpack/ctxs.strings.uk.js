@@ -1,5 +1,5 @@
 // Ukrainian language pack for NetScaler Gateway (RfWebUI / WStheme)
-// Petro Pikulin, petr.pikulin@gmail.com, https://t.me/UA_Language_pack_Citrix
+// Petro Pikulin, petr.pikulin@gmail.com, https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler
 (function ($) {
     $.localization.addStringBundle("uk", {
         "About": "Про програму",
