@@ -58,6 +58,15 @@ HA-пара — на **обох** вузлах.
 Тому пакет **сам відновлюється після перезавантаження та оновлення прошивки**. Перед оновленням інсталятор NetScaler
 може повідомити, що `ctxs.core.min.js` змінено, і запропонувати зробити резервну копію — відповідайте `y`.
 
+### Після оновлення прошивки: чи все перекладено
+```sh
+sh /nsconfig/ua_langpack/ua_langpack.sh check
+```
+Показує рядки нової прошивки, яких немає в перекладі (**NEW** — користувачі бачать їх англійською), і рядки, чий
+англійський текст змінився (**CHANGED** — переклад варто переглянути). Якщо прошивка змінила рядки, під час завантаження
+в `/var/log/ua_langpack.log` з'являється нагадування запустити `check`. Будь ласка, надсилайте результат в
+[Issues](https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler/issues) — так переклад оновиться для всіх.
+
 ### Статус, журнал, видалення
 ```sh
 sh /nsconfig/ua_langpack/ua_langpack.sh status
@@ -111,6 +120,14 @@ cp /var/tmp/ua_orig/logon/LogonPoint/receiver/js/localization/ru/ctxs.strings.ru
 ```
 Файли, які хтось змінив після встановлення, при видаленні залишаються (скрипт про це повідомить).
 
+### Після оновлення StoreFront: чи все перекладено
+```powershell
+.\Install-UALangPack.ps1 -Check
+```
+Порівнює англійські рядки цього StoreFront (інтерфейс і форма входу) з перекладом у пакеті: **NEW** — немає перекладу,
+**CHANGED** — англійський текст змінився. Нічого не змінює; результат надсилайте в
+[Issues](https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler/issues).
+
 ### Перехід з версії 1.x
 У 1.x переклад підключався блоком `$.ctxsAjax(... culture.uk.js ...)`. На сучасних StoreFront (Content Security Policy)
 він **не працює** — сторінка лишалася англійською. Встановлення 2.x знайде старий блок, залишить його і допише поруч робочий;
@@ -122,25 +139,35 @@ cp /var/tmp/ua_orig/logon/LogonPoint/receiver/js/localization/ru/ctxs.strings.ru
 - **NetScaler:** вікна самого плагіна EPA на комп'ютері користувача не перекладаються (мова за мовою ОС, української в плагіні немає).
 - **StoreFront:** перекладається класичний інтерфейс. Новий інтерфейс Workspace (якщо його ввімкнено для Store) має власну
   локалізацію — скрипт попередить про це.
-- **StoreFront 2507:** 17 нових рядків інтерфейсу (PWA, кнопки Google Play / App Store, заборона завантаження ICA тощо)
-  поки англійською — буде у 2.1.
 
 ## Вміст архіву
 ```
-netscaler/ua_langpack/   ctxs.strings.uk.js, ua_langpack.sh  → копіювати в /nsconfig/
-storefront/              Install-UALangPack.ps1, custom/, resources/
+netscaler/ua_langpack/   ctxs.strings.uk.js, ua_langpack.sh, en.manifest  → копіювати в /nsconfig/
+storefront/              Install-UALangPack.ps1, en.manifest, custom/, resources/
 tools/                   для оновлення перекладу під новий білд (Python 3)
 ```
+`en.manifest` — контрольні суми англійських рядків білду, під який зроблено переклад (самих текстів Citrix там немає);
+за ним `check` / `-Check` визначають нові та змінені рядки.
 
 ## Для розробників: оновлення під новий білд
-Еталон — англійський файл нового білду (`/var/netscaler/logon/LogonPoint/receiver/js/localization/en/ctxs.strings.js`):
-```sh
-python tools/build_uk.py <en ctxs.strings.js> netscaler/ua_langpack/ctxs.strings.uk.js <новий ctxs.strings.uk.js>
-python tools/terminology.py apply <новий ctxs.strings.uk.js>     # «додаток» → «застосунок»
-```
-`build_uk.py` показує ключі, яких бракує в перекладі, і зайві. Оригінальні файли Citrix у репозиторій не додаються.
+1. На оновленому NetScaler / StoreFront запустіть `check` / `-Check` — отримаєте список NEW і CHANGED з англійськими текстами.
+2. Перекладіть їх. Для NetScaler є збирач за еталоном
+   (`/var/netscaler/logon/LogonPoint/receiver/js/localization/en/ctxs.strings.js`):
+   ```sh
+   python tools/build_uk.py <en ctxs.strings.js> netscaler/ua_langpack/ctxs.strings.uk.js <новий ctxs.strings.uk.js>
+   python tools/terminology.py apply <новий ctxs.strings.uk.js>     # «додаток» → «застосунок»
+   ```
+3. Оновіть маніфест під новий білд:
+   ```sh
+   python tools/manifest.py netscaler <en ctxs.strings.js> <білд> > netscaler/ua_langpack/en.manifest
+   python tools/manifest.py storefront <en ctxs.strings_*.js> <тека з en *.resx> <версія> > storefront/en.manifest
+   ```
+4. `python tools/validate.py` — має бути 0 помилок; оновіть таблицю «Перевірено на» та CHANGELOG.
 
-Кожен коміт перевіряється автоматично (синтаксис JS / PowerShell / sh, XML у `.resx`, відсутність кирилиці в ключах).
+Оригінальні файли Citrix у репозиторій не додаються.
+
+Кожен коміт перевіряється автоматично: синтаксис JS / PowerShell / sh, XML у `.resx`, відсутність кирилиці в ключах і
+те, що кожен рядок білду з маніфесту має переклад.
 Реліз збирається сам при створенні тегу `vX.Y.Z` — див. [CHANGELOG](CHANGELOG.md).
 
 ## Ліцензія

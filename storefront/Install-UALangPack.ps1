@@ -17,6 +17,8 @@
 .EXAMPLE
     .\Install-UALangPack.ps1 -Status
 .EXAMPLE
+    .\Install-UALangPack.ps1 -Check           # after a StoreFront upgrade: what needs translating
+.EXAMPLE
     .\Install-UALangPack.ps1 -Uninstall
 .EXAMPLE
     .\Install-UALangPack.ps1 -RecycleAuthPool # install and make the logon form pick up the translation
@@ -30,6 +32,10 @@ param(
 
     [Parameter(ParameterSetName = 'Status', Mandatory)]
     [switch]$Status,
+
+    # After a StoreFront upgrade: list strings that are new or whose English text changed
+    [Parameter(ParameterSetName = 'Check', Mandatory)]
+    [switch]$Check,
 
     # Folder that holds the StoreFront IIS applications (StoreWeb, StoreAuth, ...)
     [string]$CitrixRoot = "$env:SystemDrive\inetpub\wwwroot\Citrix",
@@ -293,6 +299,73 @@ function Show-Status($Sites, $Services) {
     }
 }
 
+# ---- -Check: compare this StoreFront's English strings with the build the pack was made for ----
+# Same rule as tools/manifest.py: 'key: "raw value",' per line, first occurrence wins, md5 of UTF-8.
+
+function Get-Md5([string]$Text) {
+    $md5 = [Security.Cryptography.MD5]::Create()
+    -join ($md5.ComputeHash([Text.Encoding]::UTF8.GetBytes($Text)) | ForEach-Object { $_.ToString('x2') })
+}
+
+function Get-JsEntries([string]$Path) {
+    $out = [ordered]@{}
+    foreach ($line in [IO.File]::ReadAllLines($Path, [Text.Encoding]::UTF8)) {
+        if ($line -match '^\s*\}\);') { break }                  # end of addStringBundle
+        $m = [regex]::Match($line, '^\s*"?([A-Za-z0-9_][^":]*?)"?\s*:\s*"(.*)",?\s*$')
+        if ($m.Success -and -not $out.Contains($m.Groups[1].Value)) { $out[$m.Groups[1].Value] = $m.Groups[2].Value }
+    }
+    $out
+}
+
+function Get-ResxEntries([string]$Path) {
+    $out = [ordered]@{}
+    if (-not (Test-Path -LiteralPath $Path)) { return $out }
+    foreach ($d in ([xml][IO.File]::ReadAllText($Path, [Text.Encoding]::UTF8)).root.data) {
+        $v = if ($d.value -is [string]) { $d.value } elseif ($d.value) { $d.value.InnerText } else { '' }
+        $out[$d.name] = $v
+    }
+    $out
+}
+
+# $English: key -> English text on this server; $Translated: keys the pack translates; $Prefix: manifest source
+function Compare-Strings($Title, $English, $Translated, $Prefix, $Was) {
+    $new = @($English.Keys | Where-Object { -not $Translated.Contains($_) })
+    $changed = @($English.Keys | Where-Object {
+        $old = $Was["$Prefix`:$_"]; $old -and $old -ne (Get-Md5 $English[$_])
+    })
+    $obsolete = @($Translated.Keys | Where-Object { -not $English.Contains($_) })
+    Write-Step ("  {0}: {1} English strings; new {2}, changed {3}, obsolete {4}" -f $Title, $English.Count, $new.Count, $changed.Count, $obsolete.Count)
+    foreach ($k in $new)     { Write-Step "    NEW      ${k}: `"$($English[$k])`"" 'Yellow' }
+    foreach ($k in $changed) { Write-Step "    CHANGED  ${k}: `"$($English[$k])`"" 'Yellow' }
+    $new.Count + $changed.Count
+}
+
+function Invoke-Check($Sites, $Services) {
+    $manifest = Join-Path $Pack 'en.manifest'
+    if (-not (Test-Path $manifest)) { throw "Not found: $manifest" }
+    $lines = [IO.File]::ReadAllLines($manifest, [Text.Encoding]::UTF8)
+    $was = @{}
+    foreach ($l in $lines) { if ($l -notmatch '^#') { $p = $l.Split("`t"); $was[$p[0]] = $p[1] } }
+    Write-Step ("Pack made for StoreFront {0}" -f ($lines[0] -replace '^# storefront (\S+).*', '$1'))
+    $todo = 0
+    foreach ($s in $Sites) {
+        $en = Get-ChildItem -Path (Join-Path $s.FullName 'receiver\js\localization\en') -Filter 'ctxs.strings*.js' -ErrorAction SilentlyContinue | Select-Object -First 1
+        if (-not $en) { Write-Step "  Web $($s.Name): English bundle not found (Workspace UI only?)" 'Yellow'; continue }
+        $todo += Compare-Strings "Web $($s.Name)" (Get-JsEntries $en.FullName) (Get-JsEntries (Join-Path $Pack 'custom\wrstrings.uk.js')) 'js' $was
+    }
+    $names = @($was.Keys | Where-Object { $_ -notlike 'js:*' } | ForEach-Object { $_.Split(':')[0] } | Sort-Object -Unique)
+    foreach ($a in $Services) {
+        foreach ($n in $names) {
+            $res = Join-Path $a.FullName "App_Data\resources\$n.resx"
+            if (-not (Test-Path -LiteralPath $res)) { continue }
+            $todo += Compare-Strings "Auth $($a.Name) $n" (Get-ResxEntries $res) (Get-ResxEntries (Join-Path $Pack "resources\$n.uk.resx")) $n $was
+        }
+    }
+    if ($todo -eq 0) { Write-Step 'The translation is complete for this StoreFront.' 'Green'; return 0 }
+    Write-Step "$todo string(s) to translate or review. Report them on https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler/issues" 'Yellow'
+    return 3
+}
+
 function Invoke-Propagate {
     if (-not (Get-Command Publish-STFServerGroupConfiguration -ErrorAction SilentlyContinue)) {
         Import-Module Citrix.StoreFront -ErrorAction SilentlyContinue
@@ -333,7 +406,7 @@ function Invoke-RecycleAuthPool($Services) {
 # ---- main -------------------------------------------------------------------
 
 $principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-if (-not $Status -and -not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+if (-not $Status -and -not $Check -and -not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     throw 'Run PowerShell as Administrator.'
 }
 foreach ($p in (Join-Path $Pack 'custom'), (Join-Path $Pack 'resources')) {
@@ -352,6 +425,9 @@ if ($sites.Count -eq 0 -and $services.Count -eq 0) { throw 'Nothing to do: no St
 if ($Status) {
     Show-Status $sites $services
     return
+}
+if ($Check) {
+    exit (Invoke-Check $sites $services)
 }
 
 if ($Uninstall) {
