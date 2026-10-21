@@ -71,12 +71,50 @@ def check_text_rules():
             errors.append('storefront/custom/culture.uk.js: missing %s' % needle)
     print('ok  line endings / encodings / culture.uk.js')
 
+def check_manifest(rel, product, translated):
+    """en.manifest: '# <product> <build> en-file-md5 <md5>' + 'source:key<TAB>md5' lines;
+    every key of the build must have a translation in the pack."""
+    p = path(*rel.split('/'))
+    if not os.path.exists(p):
+        errors.append('%s: missing (python tools/manifest.py ...)' % rel)
+        return
+    lines = read_bytes(p).decode('utf-8').splitlines()
+    if not re.match(r'^# %s \S+ en-file-md5 [0-9a-f]{32}$' % product, lines[0] if lines else ''):
+        errors.append('%s: bad header %r' % (rel, lines[0] if lines else ''))
+        return
+    untranslated = []
+    for ln in lines[1:]:
+        m = re.match(r'^([A-Za-z]+):(.+)\t[0-9a-f]{32}$', ln)
+        if not m:
+            errors.append('%s: bad line %r' % (rel, ln[:60]))
+            continue
+        if m.group(2) not in translated.get(m.group(1), set()):
+            untranslated.append('%s:%s' % m.groups())
+    if untranslated:
+        errors.append('%s: %d string(s) of build %s have no translation: %s'
+                      % (rel, len(untranslated), lines[0].split()[2], ', '.join(untranslated[:15])))
+    print('ok  %-45s %d strings of %s' % (rel, len(lines) - 1, lines[0].split()[2]))
+
+def keys_js(rel):
+    return set(manifest.js_entries(path(*rel.split('/'))))
+
+def keys_resx(rel):
+    p = path(*rel.split('/'))
+    return {d.get('name') for d in ET.parse(p).getroot().findall('data')} if os.path.exists(p) else set()
+
+import manifest
+
 check_bundle('netscaler/ua_langpack/ctxs.strings.uk.js', 'uk')
 check_bundle('storefront/custom/wrstrings.uk.js', 'uk')
 for name in sorted(os.listdir(path('storefront', 'resources'))):
     if name.endswith('.uk.resx'):
         check_resx('storefront/resources/' + name)
 check_text_rules()
+check_manifest('netscaler/ua_langpack/en.manifest', 'netscaler',
+               {'js': keys_js('netscaler/ua_langpack/ctxs.strings.uk.js')})
+check_manifest('storefront/en.manifest', 'storefront',
+               dict([('js', keys_js('storefront/custom/wrstrings.uk.js'))] +
+                    [(n, keys_resx('storefront/resources/%s.uk.resx' % n)) for n in manifest.RESX]))
 
 for w in warnings:
     print('WARNING ' + w)

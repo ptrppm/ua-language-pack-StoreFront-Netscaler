@@ -6,9 +6,13 @@
 #   sh /nsconfig/ua_langpack/ua_langpack.sh install     - install now and re-apply at every boot
 #   sh /nsconfig/ua_langpack/ua_langpack.sh uninstall   - remove everything
 #   sh /nsconfig/ua_langpack/ua_langpack.sh status
+#   sh /nsconfig/ua_langpack/ua_langpack.sh check       - after a firmware upgrade: what needs translating
 
 PACK=$(cd "$(dirname "$0")" && pwd)
-LP=/var/netscaler/logon/LogonPoint
+LP=${UA_LOGONPOINT:-/var/netscaler/logon/LogonPoint}   # override only for testing
+EN=$LP/receiver/js/localization/en/ctxs.strings.js
+MANIFEST=$PACK/en.manifest                             # md5 of every English string the pack was made for
+TAB=$(printf '\t')
 CORE=$LP/receiver/js/ctxs.core.min.js
 # Gateway serves pre-auth files only from stock directories (a new localization/uk/ gets 302),
 # so the bundle lives next to the core.
@@ -25,6 +29,64 @@ PATCH=';/*'$MARK'*/(function(d){d.globalization.availableCulture("uk",{name:"uk"
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S') ua_langpack: $*"; }
 
 is_patched() { grep -q "$MARK" "$CORE" 2>/dev/null; }
+
+# FreeBSD md5 on NetScaler, md5sum elsewhere (tests)
+md5str() { if command -v md5 >/dev/null 2>&1; then md5 -q -s "$1"; else printf '%s' "$1" | md5sum | cut -d' ' -f1; fi; }
+md5file() { if command -v md5 >/dev/null 2>&1; then md5 -q "$1"; else md5sum < "$1" | cut -d' ' -f1; fi; }
+
+# "key<TAB>raw value" for every 'key: "value",' line up to the end of the bundle.
+# Same rule as tools/manifest.py; the last key character must not be a space.
+entries() {
+    sed -n -e '/^[[:space:]]*});/q' \
+        -e 's/^[[:space:]]*"\{0,1\}\([A-Za-z0-9_]\([^":]*[^":[:space:]]\)\{0,1\}\)"\{0,1\}[[:space:]]*:[[:space:]]*"\(.*\)",\{0,1\}[[:space:]]*$/\1'"$TAB"'\3/p' "$1"
+}
+
+# Firmware upgrades may add strings or change English texts; compare with the build the pack was made for
+check() {
+    [ -f "$EN" ] || { echo "English bundle not found: $EN"; exit 1; }
+    [ -f "$MANIFEST" ] || { echo "Not found: $MANIFEST"; exit 1; }
+    tmp=$(mktemp -d "${TMPDIR:-/tmp}/ua_check.XXXXXX") || exit 1
+    export LC_ALL=C
+    # first occurrence of a key wins, as in tools/manifest.py (Citrix's own file has TryAgain twice)
+    entries "$EN" | awk -F "$TAB" '!seen[$1]++' > "$tmp/en"
+    cut -f1 "$tmp/en" | sort -u > "$tmp/en.keys"
+    entries "$PACK/$BUNDLE" | cut -f1 | sort -u > "$tmp/uk.keys"
+    while IFS="$TAB" read -r k v; do
+        printf 'js:%s\t%s\n' "$k" "$(md5str "$v")"
+    done < "$tmp/en" | sort > "$tmp/now"
+    grep -v '^#' "$MANIFEST" | sort > "$tmp/was"
+
+    comm -23 "$tmp/en.keys" "$tmp/uk.keys" > "$tmp/new"
+    join -t "$TAB" "$tmp/was" "$tmp/now" | awk -F "$TAB" '$2 != $3 { sub(/^js:/, "", $1); print $1 }' > "$tmp/changed"
+    comm -13 "$tmp/en.keys" "$tmp/uk.keys" > "$tmp/obsolete"
+
+    echo "Pack made for: $(sed -n '1s/^# netscaler \([^ ]*\).*/\1/p' "$MANIFEST")"
+    echo "English strings now: $(wc -l < "$tmp/en.keys" | tr -d ' ')"
+    for kind in new changed obsolete; do
+        case $kind in
+            new)      title='NEW - not translated, shown in English' ;;
+            changed)  title='CHANGED - English text differs, review the translation' ;;
+            obsolete) title='OBSOLETE - no longer used by this firmware (harmless)' ;;
+        esac
+        echo "== $title: $(wc -l < "$tmp/$kind" | tr -d ' ')"
+        [ "$kind" = obsolete ] && continue
+        while read -r k; do
+            printf '  %s: "%s"\n' "$k" "$(awk -F "$TAB" -v k="$k" '$1 == k { print $2; exit }' "$tmp/en")"
+        done < "$tmp/$kind"
+    done
+    todo=$(cat "$tmp/new" "$tmp/changed" | wc -l | tr -d ' ')
+    rm -rf "$tmp"
+    [ "$todo" -eq 0 ] && echo "The translation is complete for this firmware." && return 0
+    echo "Report these on https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler/issues"
+    return 3
+}
+
+# at every boot: one log line when the firmware's English strings differ from the pack's build
+note_new_firmware() {
+    [ -f "$MANIFEST" ] && [ -f "$EN" ] || return 0
+    [ "$(md5file "$EN")" = "$(sed -n '1s/.*en-file-md5 //p' "$MANIFEST")" ] && return 0
+    log "NOTE: this firmware's English strings differ from the pack's build - run: sh $PACK/ua_langpack.sh check"
+}
 
 install() {
     [ -f "$PACK/$BUNDLE" ] || { log "ERROR: $PACK/$BUNDLE not found"; exit 1; }
@@ -56,6 +118,8 @@ install() {
         log "boot hook set as first line of $RC"
     fi
 
+    note_new_firmware
+
     # gateway serves logon files from integrated cache; empty after boot, stale after a live install
     log "done. In NetScaler CLI run: flush cache contentGroup loginstaticobjects"
 }
@@ -81,5 +145,6 @@ case "$1" in
     install)   install ;;
     uninstall) uninstall ;;
     status)    status ;;
-    *) echo "usage: $0 install|uninstall|status"; exit 2 ;;
+    check)     check; exit $? ;;
+    *) echo "usage: $0 install|uninstall|status|check"; exit 2 ;;
 esac
