@@ -1,0 +1,37 @@
+name: Переклад
+description: Помилка в перекладі, неперекладений рядок або новий білд Citrix
+labels: [translation]
+body:
+  - type: dropdown
+    id: product
+    attributes:
+      label: Продукт
+      options:
+        - NetScaler Gateway
+        - StoreFront
+    validations:
+      required: true
+  - type: input
+    id: build
+    attributes:
+      label: Версія / білд
+      placeholder: 14.1-73.46 / 2507
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: Де видно рядок
+      description: Екран (вхід, помилка, EPA, список застосунків …) і скріншот, якщо можна.
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: Зараз / має бути
+      description: Поточний текст і ваш варіант.
+      placeholder: |
+        Зараз: ...
+        Має бути: ...
+    validations:
+      required: true
