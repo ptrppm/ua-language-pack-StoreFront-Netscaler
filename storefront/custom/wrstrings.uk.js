@@ -41,7 +41,6 @@
         AppDetailsPopUpTitle: "Відомості ({0})",
         AppDetailsUnavailable: "Відомості про застосунок недоступні",
         AppIconColumn: "Стовпчик значка програми",
-	AppInMaintenance: "Застосунок \"{0}\" тимчасово недоступний у зв'язку із запланованим обслуговуванням.",
         ApplicationsAdded: "Будуть додані такі застосунки:",
 	ApplicationLaunchPlugin: "Модуль Citrix, що підключається, для запуску програми.",
         ApplicationsRemoved: "Будуть видалені такі застосунки:",
@@ -103,7 +102,7 @@
         Categories: "Категорії",
 	CategoriesWithCount: "Категорії ({0})",
 
-	ChangeClient: "Змінити застосунок Citrix Workspace",
+	ChangeClient: "Змінити спосіб запуску",
 	ChangeClientLaunchMethodHtml5: "Застосунки та робочі столи відкриваються в браузері.",
         ChangeClientLaunchMethodIca: "Не вдається виявити локальний застосунок Citrix Workspace. {0}",
         ChangeClientTooltipChangeClient: "Виберіть пункт \"Змінити застосунок Citrix Workspace\" для перевірки та встановлення.",
@@ -115,7 +114,7 @@
         ChangePwdWarningText: "Після успішної зміни пароля необхідно вийти із системи. Щоб скористатися застосунками, увійдіть у систему ще раз.",
         Check: "Перевірити",
         CheckingForUpgrade: "Йде пошук оновлення.",
-        CheckForUpgrade: "Виконати пошук оновлення для Citrix Receiver?",
+        CheckForUpgrade: "Перевірити наявність оновлення для застосунку Citrix Workspace?",
         ChromeAppOriginMismatch: "Виявлено непідтримуване джерело Chrome App, зверніться до служби підтримки.",
         ChromePluginHelperMessage: "Дозвольте запуск модуля Citrix на цьому веб-сайті для доступу до застосунків. Додаткові відомості див. у статті Citrix Knowledge Center {0}.",
 
@@ -127,7 +126,7 @@
 	ClearSearch: "Очистити пошук",
         ClickContinue: "клацніть <strong>Продовжити</strong>.",
 	ClickContinueToRedirectToIdpLogoffUrl: "Вихід із системи завершиться автоматично через {IDPLogoffSecondsRemaining} с.",
-        ClickInstall: "Встановіть Citrix Receiver для доступу до застосунків",
+        ClickInstall: "Встановіть застосунок Citrix Workspace для доступу до застосунків",
         ClickLogOnToContinue: "Натисніть \"Вхід\" для продовження.",
         ClickToExpandFolder: "Клацніть, щоб розгорнути папку.",
         ClickUpgrade: "Щоб оновити Citrix Workspace, клацніть \"Встановити\"",
@@ -145,11 +144,10 @@
 	ContextualSearchTitle: "Результати",
         Continue: "Продовжити",
         CookiesAreDisabledTitle: "Файли cookie вимкнено",
-        CookiesAreDisabledBody: "Перед використанням цієї версії Citrix Receiver увімкніть використання файлів cookie в браузері.",
+        CookiesAreDisabledBody: "Увімкніть файли cookie у браузері",
         CredentialsRequired: "Час роботи в системі закінчився. Щоб продовжити, виконайте вхід ще раз.",
 
         Denied: "Заборонено",
-        DesktopInMaintenance: "Робочий стіл \"{0}\" тимчасово недоступний у зв'язку із запланованим обслуговуванням.",
         DesktopAlreadyInUse: "Робочий стіл \"{0}\" уже використовується.",
         DatabaseOperationFailure: "Citrix Receiver зараз не може виконати додавання, переміщення і видалення застосунків. Зміни не будуть збережені для майбутніх сеансів.",
         DesktopInMaintenance: "Робочий стіл \"{0}\" тимчасово недоступний у зв'язку із запланованим обслуговуванням.",
@@ -210,9 +208,6 @@
         JustAMomentDetecting: "Зачекайте трохи. Йде визначення, чи встановлено застосунок Citrix Workspace.",
         KeepTyping: "Продовжувати введення з клавіатури...",
 
-        LogoffInProgress: "Вихід із Citrix Receiver...",
-        LoggedOffWithProblems: "Помилка виходу із системи",
-        LoggedOn: "Вхід виконано",
 
 
 	LaunchApplication: "Відкрити Citrix Workspace Launcher",
@@ -252,7 +247,6 @@
         MultiApprovedApps: "Запит на додавання цих застосунків затверджено.",
         MultiDeniedApps: "Запит на додавання цих застосунків відхилено.",
 
-        NoAvailableAuthMethods: "Для цієї платформи немає доступних методів входу в систему.",
         NoAppsOrDesktopsAvailable: "На даний момент застосунки і десктопи недоступні.",
         NoMatches: "Збігів не знайдено",
 
@@ -313,7 +307,6 @@
         Remove: "Видалити з обраного",
         Request: "Запит",
 	RequestApproval: "Запросити дозвіл на використання {0}?",
-	ResourceIsNotAvailable: "Ресурс \"{0}\" недоступний.",
         ResumingLogon: "Виконується відновлення входу. Зачекайте.",
         Restart: "Перезапуск",
         ResourceIsNotAvailable: "Ресурс \"{0}\" недоступний.",
@@ -385,7 +378,6 @@
         TopRated: "Найкращі за рейтингом",
         TotalRefreshFailure: "Збій оновлення",
         TryAgain: "Повторити спробу",
-        TryAnotherLogonOption: "Спробувати інший варіант входу",
         TryLater: "Повторити спробу пізніше",
         TrySearchingInApps: "Спробуйте шукати в застосунках.",
 	TryAnotherLogonOption: "Спробувати інший варіант входу",
@@ -405,13 +397,11 @@
         UseAnotherLogonOption: "Використовувати інший варіант входу",
         UseChromeApp: "Скористайтеся застосунком Citrix Workspace for Chrome для доступу до цього сайту",
         UseFullVersion: "Використовувати повну версію",
-        UseLightVersion: "Полегшена версія",
+        UseLightVersion: "Використовувати веб-браузер",
         UseReceiver: "Використовуйте застосунок Citrix Workspace для доступу до своїх застосунків і робочих столів.",
         UsingFullVersion: "Зараз ви використовуєте повну версію застосунку Citrix Workspace. Перейти на полегшену версію?",
         UsingLightVersion: "Зараз ви використовуєте полегшену версію програми Citrix Workspace. Перейти на повну версію?",
 
-        WaitWhileConfirmInstall: "Зачекайте. Йде підтвердження того, що застосунок Citrix Receiver встановлено...",
-        WelcomeToReceiver: "Ласкаво просимо в Citrix Receiver",
         YouCannotAddApps: "На даний момент ви не можете додавати застосунки.",
 
         WaitAppInstallMessage: "Застосунок буде встановлено через кілька хвилин.",
@@ -428,5 +418,23 @@
         YouCannotUseDesktops: "Зараз немає доступних вам робочих столів.",
         YouCanUseLightVersion: "За відсутності необхідності у виявленні/встановленні застосунку Citrix Workspace можна використовувати полегшену версію з меншою кількістю функцій у браузері.",
         YouHaveLoggedOff: "Вихід успішно виконано.",
+        // StoreFront 2507 (v2.1)
+        Allow: "Дозволити",
+        CannotStartAppIcaDownloadDisabled: "Не вдається запустити застосунок \"{0}\", оскільки завантаження ICA вимкнено.",
+        CannotStartDesktopIcaDownloadDisabled: "Не вдається запустити робочий стіл \"{0}\", оскільки завантаження ICA вимкнено.",
+        ChangeClientLaunchMethodNativeViaBE: "Застосунки та робочі столи відкриваються в локальному застосунку Citrix Workspace за допомогою розширення Citrix Workspace Web Extension",
+        CitrixWorkspaceApp: "Застосунок Citrix Workspace",
+        DownloadFromGooglePlay: "Завантажити з Google Play",
+        DownloadFromAppStore: "Завантажити з App Store",
+        IcaDownloadDisabledContextHtml5: "{0}<br><br>Щоб запустити цей ресурс, відкрийте <strong>Параметри облікового запису</strong> у застосунку Workspace, виберіть <strong>Змінити спосіб запуску</strong> і виберіть <strong>Використовувати веб-браузер</strong>.",
+        IcaDownloadDisabledContextIsIE: "{0}<br><br>Щоб запустити цей ресурс, переконайтеся, що встановлено застосунок Citrix Workspace для Windows і ввімкнено надбудову Citrix ICA Client для Internet Explorer.",
+        IAmUsingAnIpad: "Я використовую iPad",
+        IfNoWindowOnlyOneOption: "Якщо застосунок не виявлено, вікно не відображається. Потім натисніть {0}.",
+        NoWindowInstallMobileAppFromStore: "Якщо застосунок не виявлено, вікно не відображається. Виберіть {0} і встановіть останню версію. Потім виберіть {1}",
+        NoWindowOnIOsInstallMobileAppFromStore: "Якщо застосунок не виявлено, може з'явитися помилка про недійсну адресу. Виберіть {0} і встановіть останню версію. Потім виберіть {1}",
+        SwitchToMacOS: "Я використовую Mac",
+        PWAInstallationPrompt: "Установіть {0}, щоб відкривати свої застосунки та робочі столи з головного екрана.",
+        PWAPromptDontShowAgain: "Більше не показувати",
+        PWAShortcutName: "{0} Lite",
     });
 })(jQuery);
