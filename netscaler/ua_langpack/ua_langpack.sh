@@ -45,20 +45,29 @@ entries() {
 check() {
     [ -f "$EN" ] || { echo "English bundle not found: $EN"; exit 1; }
     [ -f "$MANIFEST" ] || { echo "Not found: $MANIFEST"; exit 1; }
+    # NetScaler's FreeBSD has no comm/join: only these tools are used; fail loudly rather than report "complete"
+    for c in awk sed sort cut mktemp wc tr grep; do
+        command -v "$c" >/dev/null 2>&1 || { echo "ERROR: required command not found: $c"; exit 1; }
+    done
     tmp=$(mktemp -d "${TMPDIR:-/tmp}/ua_check.XXXXXX") || exit 1
     export LC_ALL=C
     # first occurrence of a key wins, as in tools/manifest.py (Citrix's own file has TryAgain twice)
     entries "$EN" | awk -F "$TAB" '!seen[$1]++' > "$tmp/en"
     cut -f1 "$tmp/en" | sort -u > "$tmp/en.keys"
     entries "$PACK/$BUNDLE" | cut -f1 | sort -u > "$tmp/uk.keys"
+    if [ ! -s "$tmp/en.keys" ] || [ ! -s "$tmp/uk.keys" ]; then
+        echo "ERROR: could not read strings from $EN or $PACK/$BUNDLE"; rm -rf "$tmp"; exit 1
+    fi
     while IFS="$TAB" read -r k v; do
         printf 'js:%s\t%s\n' "$k" "$(md5str "$v")"
-    done < "$tmp/en" | sort > "$tmp/now"
-    grep -v '^#' "$MANIFEST" | sort > "$tmp/was"
+    done < "$tmp/en" > "$tmp/now"
+    grep -v '^#' "$MANIFEST" > "$tmp/was"
 
-    comm -23 "$tmp/en.keys" "$tmp/uk.keys" > "$tmp/new"
-    join -t "$TAB" "$tmp/was" "$tmp/now" | awk -F "$TAB" '$2 != $3 { sub(/^js:/, "", $1); print $1 }' > "$tmp/changed"
-    comm -13 "$tmp/en.keys" "$tmp/uk.keys" > "$tmp/obsolete"
+    # set operations with awk: file 1 is loaded into an array, file 2 is filtered against it
+    awk 'NR == FNR { t[$0]; next } !($0 in t)' "$tmp/uk.keys" "$tmp/en.keys" > "$tmp/new"
+    awk -F "$TAB" 'NR == FNR { w[$1] = $2; next } ($1 in w) && w[$1] != $2 { sub(/^js:/, "", $1); print $1 }' \
+        "$tmp/was" "$tmp/now" | sort > "$tmp/changed"
+    awk 'NR == FNR { t[$0]; next } !($0 in t)' "$tmp/en.keys" "$tmp/uk.keys" > "$tmp/obsolete"
 
     echo "Pack made for: $(sed -n '1s/^# netscaler \([^ ]*\).*/\1/p' "$MANIFEST")"
     echo "English strings now: $(wc -l < "$tmp/en.keys" | tr -d ' ')"
@@ -81,10 +90,15 @@ check() {
     return 3
 }
 
+# true when the firmware's English bundle is not the one the pack was made for
+firmware_strings_changed() {
+    [ -f "$MANIFEST" ] && [ -f "$EN" ] || return 1
+    [ "$(md5file "$EN")" != "$(sed -n '1s/.*en-file-md5 //p' "$MANIFEST")" ]
+}
+
 # at every boot: one log line when the firmware's English strings differ from the pack's build
 note_new_firmware() {
-    [ -f "$MANIFEST" ] && [ -f "$EN" ] || return 0
-    [ "$(md5file "$EN")" = "$(sed -n '1s/.*en-file-md5 //p' "$MANIFEST")" ] && return 0
+    firmware_strings_changed || return 0
     log "NOTE: this firmware's English strings differ from the pack's build - run: sh $PACK/ua_langpack.sh check"
 }
 
@@ -139,6 +153,11 @@ status() {
     is_patched && echo "core:      patched" || echo "core:      NOT patched"
     [ -f "$UKDIR/$BUNDLE" ] && echo "bundle:    present" || echo "bundle:    MISSING"
     grep -q "$MARK" "$RC" 2>/dev/null && echo "boot hook: present" || echo "boot hook: MISSING"
+    if firmware_strings_changed; then
+        echo "strings:   firmware differs from the pack's build - run: sh $PACK/ua_langpack.sh check"
+    else
+        echo "strings:   same as the pack's build ($(sed -n '1s/^# netscaler \([^ ]*\).*/\1/p' "$MANIFEST" 2>/dev/null))"
+    fi
 }
 
 case "$1" in
