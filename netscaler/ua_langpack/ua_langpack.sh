@@ -21,7 +21,7 @@ BUNDLE=ctxs.strings.uk.js
 # Legacy /vpn and /epa pages (logoff, EPA check, VPN errors) read themes/<bound theme>/resources/<lang>.xml
 # for the languages listed in its config.xml. Before logon the gateway serves only the stock file names
 # there (uk.xml gets 302), so the Ukrainian file lives next to the bundle as .js (served) and one line in
-# /vpn/resources.js loads it for "uk". /netscaler is rebuilt at every boot: the boot hook re-applies it.
+# /vpn/resources.js loads it for "uk". A firmware upgrade replaces resources.js: the boot hook re-applies it.
 THEMES=${UA_THEMES:-/var/netscaler/logon/themes}       # override only for testing
 VPNJS=${UA_VPNJS:-/netscaler/ns_gui/vpn/resources.js}  # override only for testing
 XML=uk.xml
