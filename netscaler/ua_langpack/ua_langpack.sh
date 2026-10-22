@@ -18,7 +18,12 @@ CORE=$LP/receiver/js/ctxs.core.min.js
 # so the bundle lives next to the core.
 UKDIR=$LP/receiver/js
 BUNDLE=ctxs.strings.uk.js
-RC=/nsconfig/rc.netscaler
+# Legacy /vpn and /epa pages (logoff, EPA check, VPN errors) read themes/<bound theme>/resources/<lang>.xml
+# for the languages listed in its config.xml
+THEMES=${UA_THEMES:-/var/netscaler/logon/themes}       # override only for testing
+XML=uk.xml
+XMLEN=$THEMES/Default/resources/en.xml
+RC=${UA_RC:-/nsconfig/rc.netscaler}                    # override only for testing
 MARK=UA_LANGPACK
 # First line of rc.netscaler, in background: later lines there may block forever (e.g. ntpd_ctl full_start).
 BOOTLINE="/bin/sh $PACK/ua_langpack.sh boot >> /var/log/ua_langpack.log 2>&1 & # $MARK"
@@ -42,6 +47,29 @@ entries() {
         -e 's/^[[:space:]]*"\{0,1\}\([A-Za-z0-9_]\([^":]*[^":[:space:]]\)\{0,1\}\)"\{0,1\}[[:space:]]*:[[:space:]]*"\(.*\)",\{0,1\}[[:space:]]*$/\1'"$TAB"'\3/p' "$1"
 }
 
+# "partition|tag|attributes<TAB>raw text" for every String/Property/Title line of a theme resources file.
+# Same rule as xml_entries() in tools/manifest.py; Citrix files have one element per line.
+xml_entries() {
+    awk '{
+        s = $0; sub(/\r$/, "", s); sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s)
+        if (match(s, /^<Partition id="[^"]*"/)) { part = substr(s, 16, RLENGTH - 16); next }
+        if (s !~ /^<(String|Property|Title)[ \t>\/]/) next
+        gt = index(s, ">"); head = substr(s, 2, gt - 2); rest = substr(s, gt + 1)
+        tag = head; sub(/[ \t\/].*$/, "", tag)
+        value = ""
+        if (head ~ /\/$/) {
+            head = substr(head, 1, length(head) - 1)
+        } else {
+            # text up to the last closing tag
+            close_tag = "</" tag ">"; end = 0; r = rest; off = 0
+            while ((i = index(r, close_tag)) > 0) { end = off + i; off += i; r = substr(r, i + 1) }
+            value = end ? substr(rest, 1, end - 1) : rest
+        }
+        attrs = substr(head, length(tag) + 1); sub(/^[ \t]+/, "", attrs); sub(/[ \t]+$/, "", attrs)
+        print part "|" tag "|" attrs "\t" value
+    }' "$1"
+}
+
 # Firmware upgrades may add strings or change English texts; compare with the build the pack was made for
 check() {
     [ -f "$EN" ] || { echo "English bundle not found: $EN"; exit 1; }
@@ -52,21 +80,28 @@ check() {
     done
     tmp=$(mktemp -d "${TMPDIR:-/tmp}/ua_check.XXXXXX") || exit 1
     export LC_ALL=C
-    # first occurrence of a key wins, as in tools/manifest.py (Citrix's own file has TryAgain twice)
-    entries "$EN" | awk -F "$TAB" '!seen[$1]++' > "$tmp/en"
+    # "source:key<TAB>English text"; first occurrence of a key wins, as in tools/manifest.py
+    # (Citrix's own file has TryAgain twice)
+    {
+        entries "$EN" | awk -F "$TAB" '!seen[$1]++' | sed 's/^/js:/'
+        [ -f "$XMLEN" ] && xml_entries "$XMLEN" | awk -F "$TAB" '!seen[$1]++' | sed 's/^/xml:/'
+    } > "$tmp/en"
     cut -f1 "$tmp/en" | sort -u > "$tmp/en.keys"
-    entries "$PACK/$BUNDLE" | cut -f1 | sort -u > "$tmp/uk.keys"
+    {
+        entries "$PACK/$BUNDLE" | cut -f1 | sed 's/^/js:/'
+        xml_entries "$PACK/$XML" | cut -f1 | sed 's/^/xml:/'
+    } | sort -u > "$tmp/uk.keys"
     if [ ! -s "$tmp/en.keys" ] || [ ! -s "$tmp/uk.keys" ]; then
         echo "ERROR: could not read strings from $EN or $PACK/$BUNDLE"; rm -rf "$tmp"; exit 1
     fi
     while IFS="$TAB" read -r k v; do
-        printf 'js:%s\t%s\n' "$k" "$(md5str "$v")"
+        printf '%s\t%s\n' "$k" "$(md5str "$v")"
     done < "$tmp/en" > "$tmp/now"
     grep -v '^#' "$MANIFEST" > "$tmp/was"
 
     # set operations with awk: file 1 is loaded into an array, file 2 is filtered against it
     awk 'NR == FNR { t[$0]; next } !($0 in t)' "$tmp/uk.keys" "$tmp/en.keys" > "$tmp/new"
-    awk -F "$TAB" 'NR == FNR { w[$1] = $2; next } ($1 in w) && w[$1] != $2 { sub(/^js:/, "", $1); print $1 }' \
+    awk -F "$TAB" 'NR == FNR { w[$1] = $2; next } ($1 in w) && w[$1] != $2 { print $1 }' \
         "$tmp/was" "$tmp/now" | sort > "$tmp/changed"
     awk 'NR == FNR { t[$0]; next } !($0 in t)' "$tmp/en.keys" "$tmp/uk.keys" > "$tmp/obsolete"
 
@@ -103,8 +138,61 @@ note_new_firmware() {
     log "NOTE: this firmware's English strings differ from the pack's build - run: sh $PACK/ua_langpack.sh check"
 }
 
+# resources folders of the themes (EULA holds only the EULA texts); names may contain spaces
+theme_dirs() {
+    for d in "$THEMES"/*/resources; do
+        [ -f "$d/en.xml" ] && [ -f "$d/config.xml" ] && [ "$d" != "$THEMES/EULA/resources" ] && echo "$d"
+    done
+}
+
+# config.xml of a custom theme is often a symlink to X1's: edit the file it points to
+theme_config() { realpath "$1/config.xml"; }
+
+has_uk() { grep -q '<Language>uk</Language>' "$1"; }
+
+# every theme has uk.xml and lists uk in its config.xml
+xml_installed() {
+    theme_dirs | while IFS= read -r d; do
+        [ -f "$d/$XML" ] && has_uk "$(theme_config "$d")" || echo "$d"
+    done | grep -q . && return 1
+    return 0
+}
+
+xml_install() {
+    theme_dirs | while IFS= read -r d; do
+        t=$(basename "$(dirname "$d")")
+        if [ -f "$d/$XML" ] && ! grep -q "$MARK" "$d/$XML"; then
+            log "theme $t: own $XML found, left as is"
+        elif ! cmp -s "$PACK/$XML" "$d/$XML"; then
+            cp "$PACK/$XML" "$d/$XML" && chmod 644 "$d/$XML" && log "theme $t: $XML copied"
+        fi
+        cfg=$(theme_config "$d")
+        has_uk "$cfg" && continue
+        # own line before </SupportedLanguageList>, so uninstall restores the file byte for byte
+        awk '/<\/SupportedLanguageList>/ && !done { print "    <Language>uk</Language>"; done = 1 } { print }' \
+            "$cfg" > "$cfg.ua_tmp" && cat "$cfg.ua_tmp" > "$cfg" && rm -f "$cfg.ua_tmp"
+        log "theme $t: uk added to $cfg"
+    done
+}
+
+xml_uninstall() {
+    theme_dirs | while IFS= read -r d; do
+        grep -q "$MARK" "$d/$XML" 2>/dev/null && rm -f "$d/$XML" && log "theme $(basename "$(dirname "$d")"): $XML removed"
+    done
+    # a config.xml may be shared by several themes: drop uk only when none of them has uk.xml left
+    theme_dirs | while IFS= read -r d; do
+        cfg=$(theme_config "$d")
+        has_uk "$cfg" || continue
+        theme_dirs | while IFS= read -r o; do
+            [ "$(theme_config "$o")" = "$cfg" ] && [ -f "$o/$XML" ] && echo "$o"
+        done | grep -q . && continue
+        sed -i '' '/<Language>uk<\/Language>/d' "$cfg" && log "uk removed from $cfg"
+    done
+}
+
 install() {
     [ -f "$PACK/$BUNDLE" ] || { log "ERROR: $PACK/$BUNDLE not found"; exit 1; }
+    [ -f "$PACK/$XML" ] || { log "ERROR: $PACK/$XML not found"; exit 1; }
     [ -f "$CORE" ] || { log "ERROR: $CORE not found"; exit 1; }
 
     # 1. bundle first: a patched core without the bundle would hang the portal on loading
@@ -125,7 +213,10 @@ install() {
         log "core patched"
     fi
 
-    # 3. re-apply after reboot / firmware upgrade
+    # 3. legacy /vpn and /epa pages: uk.xml in every theme
+    xml_install
+
+    # 4. re-apply after reboot / firmware upgrade
     if [ "$(head -n 1 "$RC" 2>/dev/null)" != "$BOOTLINE" ]; then
         touch "$RC"
         # drop an old hook from anywhere in the file, put the current one on top; other lines untouched
@@ -149,7 +240,7 @@ boot() {
     for i in 1 2 3 4 5; do
         sleep 60
         grep -q "$MARK" "$RC" 2>/dev/null || break      # uninstalled meanwhile
-        is_patched && cmp -s "$PACK/$BUNDLE" "$UKDIR/$BUNDLE" && continue
+        is_patched && cmp -s "$PACK/$BUNDLE" "$UKDIR/$BUNDLE" && xml_installed && continue
         log "boot: portal files were replaced, applying again"
         ( install )
     done
@@ -162,6 +253,7 @@ uninstall() {
         log "core unpatched"
     fi
     rm -f "$UKDIR/$BUNDLE"
+    xml_uninstall
     [ -f "$RC" ] && grep -q "$MARK" "$RC" && sed -i '' "/$MARK/d" "$RC" && log "boot hook removed"
     log "uninstalled. In NetScaler CLI run: $FLUSH"
 }
@@ -169,6 +261,10 @@ uninstall() {
 status() {
     is_patched && echo "core:      patched" || echo "core:      NOT patched"
     [ -f "$UKDIR/$BUNDLE" ] && echo "bundle:    present" || echo "bundle:    MISSING"
+    theme_dirs | while IFS= read -r d; do
+        t=$(basename "$(dirname "$d")")
+        [ -f "$d/$XML" ] && has_uk "$(theme_config "$d")" && echo "theme:     $t - uk" || echo "theme:     $t - NOT installed"
+    done
     grep -q "$MARK" "$RC" 2>/dev/null && echo "boot hook: present" || echo "boot hook: MISSING"
     if firmware_strings_changed; then
         echo "strings:   firmware differs from the pack's build - run: sh $PACK/ua_langpack.sh check"

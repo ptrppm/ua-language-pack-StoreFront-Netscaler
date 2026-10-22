@@ -8,7 +8,7 @@
 
 | Продукт | Перевірено на | Що перекладається |
 |---|---|---|
-| NetScaler Gateway | 14.1 build 73.46 | сторінка входу, повідомлення про помилки, EPA — у всіх темах RfWebUI та WStheme |
+| NetScaler Gateway | 14.1 build 73.46 | сторінка входу, повідомлення про помилки, EPA, сторінка після виходу, старі сторінки `/vpn` і `/epa` — у всіх темах |
 | Citrix StoreFront | 2507 (7.45), 2607 LTSR; Windows Server 2025 | класичний інтерфейс (receiver.html) і форма входу |
 
 Зауваження, помилки в перекладі, нові білди: [Issues](https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler/issues) ·
@@ -54,6 +54,9 @@ HA-пара — на **обох** вузлах.
 ### Що робить встановлення
 - кладе переклад у `/var/netscaler/logon/LogonPoint/receiver/js/`;
 - додає один рядок реєстрації мови в кінець `ctxs.core.min.js` (оригінал зберігається в `/nsconfig/ua_langpack/backup/`);
+- для старих сторінок `/vpn` і `/epa` (сторінка після виходу, перевірка EPA, помилки VPN, зміна пароля) кладе `uk.xml`
+  у `/var/netscaler/logon/themes/<тема>/resources/` кожної теми й додає `uk` до списку мов у `config.xml` теми
+  (якщо `config.xml` — посилання на файл іншої теми, змінюється той файл; власний `uk.xml` без позначки пакета не перезаписується);
 - додає першим рядком у `/nsconfig/rc.netscaler` виклик встановлення під час завантаження; інші рядки не змінюються.
   Якщо файлу немає або він порожній — це нормально, файл буде створено. Під час завантаження пакет встановлюється у фоні
   й ще кілька хвилин перевіряє, що файли порталу не замінено.
@@ -143,15 +146,15 @@ cp /var/tmp/ua_orig/logon/LogonPoint/receiver/js/localization/ru/ctxs.strings.ru
 ---
 
 ## Обмеження
-- **NetScaler:** старі сторінки `/vpn/…` (сторінка після виходу «Logoff is successful», сторінки перевірки EPA,
-  частина повідомлень про помилки VPN) поки що англійською — їх переклад готується у v2.2.
+- **NetScaler:** нову тему, створену в GUI після встановлення, пакет підхопить під час наступного завантаження
+  або після `install`.
 - **NetScaler:** вікна самого плагіна EPA на комп'ютері користувача не перекладаються (мова за мовою ОС, української в плагіні немає).
 - **StoreFront:** перекладається класичний інтерфейс. Новий інтерфейс Workspace (якщо його ввімкнено для Store) має власну
   локалізацію — скрипт попередить про це.
 
 ## Вміст архіву
 ```
-netscaler/ua_langpack/   ctxs.strings.uk.js, ua_langpack.sh, en.manifest  → копіювати в /nsconfig/
+netscaler/ua_langpack/   ctxs.strings.uk.js, uk.xml, ua_langpack.sh, en.manifest  → копіювати в /nsconfig/
 storefront/              Install-UALangPack.ps1, en.<версія>.manifest, custom/, resources/
 tools/                   для оновлення перекладу під новий білд (Python 3)
 ```
@@ -165,11 +168,12 @@ tools/                   для оновлення перекладу під н�
    (`/var/netscaler/logon/LogonPoint/receiver/js/localization/en/ctxs.strings.js`):
    ```sh
    python tools/build_uk.py <en ctxs.strings.js> netscaler/ua_langpack/ctxs.strings.uk.js <новий ctxs.strings.uk.js>
+   python tools/build_uk_xml.py <themes/Default/resources/en.xml> netscaler/ua_langpack/uk.xml <новий uk.xml>
    python tools/terminology.py apply <новий ctxs.strings.uk.js>     # «додаток» → «застосунок»
    ```
 3. Оновіть маніфест під новий білд:
    ```sh
-   python tools/manifest.py netscaler <en ctxs.strings.js> <білд> > netscaler/ua_langpack/en.manifest
+   python tools/manifest.py netscaler <en ctxs.strings.js> <themes/Default/resources/en.xml> <білд> > netscaler/ua_langpack/en.manifest
    python tools/manifest.py storefront <en ctxs.strings_*.js> <тека з en *.resx> <версія> > storefront/en.<версія>.manifest
    ```
    Для StoreFront маніфести попередніх версій не видаляйте, а переклади застарілих рядків не прибирайте:

@@ -40,6 +40,23 @@ def check_bundle(rel, lang):
         warnings.append('%s: empty translations: %s' % (rel, ', '.join(empty)))
     print('ok  %-45s %d strings' % (rel, len(items)))
 
+def check_theme_xml(rel):
+    """Theme resources of the legacy /vpn and /epa pages: well-formed, marked, English keys."""
+    p = path(*rel.split('/'))
+    try:
+        ET.parse(p)
+    except ET.ParseError as e:
+        errors.append('%s: invalid XML: %s' % (rel, e))
+        return
+    text = read_bytes(p).decode('utf-8')
+    if 'UA_LANGPACK' not in text.splitlines()[1]:
+        errors.append('%s: line 2 must be the UA_LANGPACK comment (install/uninstall find the file by it)' % rel)
+    entries = manifest.xml_entries(p)
+    for k in entries:
+        if CYR.search(k):
+            errors.append('%s: Cyrillic in key %r - the key must stay English' % (rel, k[:60]))
+    print('ok  %-45s %d strings' % (rel, len(entries)))
+
 def check_resx(rel):
     p = path(*rel.split('/'))
     try:
@@ -110,13 +127,15 @@ def lines_build(p):
 import manifest
 
 check_bundle('netscaler/ua_langpack/ctxs.strings.uk.js', 'uk')
+check_theme_xml('netscaler/ua_langpack/uk.xml')
 check_bundle('storefront/custom/wrstrings.uk.js', 'uk')
 for name in sorted(os.listdir(path('storefront', 'resources'))):
     if name.endswith('.uk.resx'):
         check_resx('storefront/resources/' + name)
 check_text_rules()
 check_manifest('netscaler/ua_langpack/en.manifest', 'netscaler',
-               {'js': keys_js('netscaler/ua_langpack/ctxs.strings.uk.js')})
+               {'js': keys_js('netscaler/ua_langpack/ctxs.strings.uk.js'),
+                'xml': set(manifest.xml_entries(path('netscaler', 'ua_langpack', 'uk.xml')))})
 # one en.<build>.manifest per supported StoreFront build; the translation covers all of them
 sf_translated = dict([('js', keys_js('storefront/custom/wrstrings.uk.js'))] +
                      [(n, keys_resx('storefront/resources/%s.uk.resx' % n)) for n in manifest.RESX])
