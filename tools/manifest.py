@@ -3,12 +3,13 @@ The pack ships it so that `check` on a newer build can tell new keys and changed
 Only hashes are stored - no Citrix text goes into the repository.
 
 usage:
-  python tools/manifest.py netscaler <en/ctxs.strings.js> <build>                 > netscaler/ua_langpack/en.manifest
+  python tools/manifest.py netscaler <en/ctxs.strings.js> <themes/Default/resources/en.xml> <build> > netscaler/ua_langpack/en.manifest
   python tools/manifest.py storefront <en/ctxs.strings_*.js> <dir with *.resx> <build> > storefront/en.<build>.manifest
 
 Hash rule (the same in ua_langpack.sh and Install-UALangPack.ps1):
   JS:   the raw text between the quotes on the "key: "value"," line, escapes as written, UTF-8, MD5
   resx: the text of <value> of each <data> in the neutral (English) <Name>.resx, UTF-8, MD5
+  xml:  the raw text between the tags of each String/Property/Title line of the theme en.xml, UTF-8, MD5
 """
 import hashlib, os, re, sys
 import xml.etree.ElementTree as ET
@@ -34,6 +35,40 @@ def js_entries(path):
     return out
 
 
+def xml_entries(path):
+    """Theme resources (themes/<theme>/resources/<lang>.xml) of the legacy /vpn and /epa pages:
+    "<partition>|<String|Property|Title>|<attributes as written>" -> raw text between the tags.
+    One element per line, as in Citrix files; the same parser is in ua_langpack.sh (awk)."""
+    out = {}
+    with open(path, encoding='utf-8-sig') as f:
+        for key, value in xml_lines(f):
+            if key is not None:
+                out.setdefault(key, value)
+    return out
+
+
+def xml_lines(lines):
+    """(key, value) for each line; (None, None) for lines that are not translatable elements."""
+    part = ''
+    for line in lines:
+        s = line.rstrip('\r\n').strip()
+        m = re.match(r'<Partition id="([^"]*)"', s)
+        if m:
+            part = m.group(1)
+        m = m or re.match(r'<(String|Property|Title)[\s>/]', s)
+        if not m or s.startswith('<Partition'):
+            yield None, None
+            continue
+        head, _, rest = s[1:].partition('>')
+        tag, value = m.group(1), ''
+        if head.endswith('/'):
+            head = head[:-1]
+        else:
+            end = rest.rfind('</%s>' % tag)
+            value = rest[:end] if end >= 0 else rest
+        yield '%s|%s|%s' % (part, tag, head[len(tag):].strip()), value
+
+
 def resx_entries(path):
     root = ET.parse(path).getroot()
     return {d.get('name'): (d.findtext('value') or '') for d in root.findall('data')}
@@ -48,9 +83,10 @@ def main():
     product = sys.argv[1]
     lines = []
     if product == 'netscaler':
-        js, build = sys.argv[2], sys.argv[3]
+        js, xml, build = sys.argv[2], sys.argv[3], sys.argv[4]
         lines.append('# netscaler %s en-file-md5 %s' % (build, file_md5(js)))
         lines += ['js:%s\t%s' % (k, md5(v)) for k, v in sorted(js_entries(js).items())]
+        lines += ['xml:%s\t%s' % (k, md5(v)) for k, v in sorted(xml_entries(xml).items())]
     elif product == 'storefront':
         js, resx_dir, build = sys.argv[2], sys.argv[3], sys.argv[4]
         lines.append('# storefront %s en-file-md5 %s' % (build, file_md5(js)))

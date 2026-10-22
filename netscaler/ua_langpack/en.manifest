@@ -597,3 +597,507 @@ js:vmware_install_reqd_msg	5704e0950fc25e8004fb2da7c9738ebd
 js:vmware_missing_title	6c4c78b1723608f945a89e9e4a5afcfe
 js:vpn_waitingmsg	440bdd88a2b9dd73654fe85403794f7f
 js:waitMessage	689a874ad549db872d639500c6294f7f
+xml:AAATM_REDIRECT_FORM|Property|id="Continue" property="value"	a0bfb8e59e6c13fc8d990781f77694fe
+xml:AAATM_REDIRECT_FORM|String|id="If you are not automatically redirected click "	bbef677ba29cc8879adf614577092798
+xml:AAATM_REDIRECT_FORM|String|id="Trailing phrase after Continue button"	d41d8cd98f00b204e9800998ecf8427e
+xml:DIALOGUE_HTML|Property|id="SubmitButton" property="value"	a4d3b161ce1309df1c4e25df28694b7b
+xml:DIALOGUE_HTML|String|id="dialogueConfirmPassword"	a627fad3af664a6f7fd81c87efc31412
+xml:DIALOGUE_HTML|String|id="dialogueHeader"	88de13523b05bd393e9a32fcce083eaf
+xml:DIALOGUE_HTML|String|id="dialogueInfo"	321e17bf0dc033065107d5bf0cf55e7f
+xml:DIALOGUE_HTML|String|id="dialoguePasswordChange"	39f2a44308f074e2e32cc178edfba1ef
+xml:DIALOGUE_HTML|Title|	31804826e3dfd0d75fbc454614912764
+xml:FS_LOGIN_DNSERR_BODY|String|id="Requested servername too long."	83feb2c0465e91f8791d4bf3881934ce
+xml:LOGOUT_OK_BODY|String|id="Logout Succeeded"	7482bd52adff06517cc1bb5b51f30ab3
+xml:LOGOUT_OK_BODY|Title|	a77ba274fbf6ae3c7903fd82cdae837e
+xml:NS_PING_DNS_ERR|Property|id="PingButton" property="value"	b85815d04cec053ce6deb8021f2df1b8
+xml:NS_PING_DNS_ERR|String|id="Failed to resolve IP address"	3b1973bb44041c3a5e788528354a86aa
+xml:NS_PING_DNS_ERR|String|id="Server:"	505de52d5ae227b6e8acb02dce2a0c4d
+xml:NS_PING_DNS_ERR|Title|	559d609193bba364f60a729f0d64cec0
+xml:REDIRECTION_BODY|String|id="This object may be found "	069d6f2b0473e6f13f672ea1b9d98511
+xml:REDIRECTION_BODY|String|id="Trailing phrase after here"	d41d8cd98f00b204e9800998ecf8427e
+xml:REDIRECTION_BODY|String|id="here"	6c92285fa6d3e827b198d120ea3ac674
+xml:TRANSFER_RSP|Property|id="CancelButton" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:TRANSFER_RSP|Property|id="TransferButton" property="value"	6950810f0d2bba97a6f710c7b965b84e
+xml:TRANSFER_RSP|String|id="Idle Time"	332b4da54e3b1b8d5972a02f9a4063cd
+xml:TRANSFER_RSP|String|id="Intranet IP Address"	349fa8a418cd360f9e6bae5a595fc199
+xml:TRANSFER_RSP|String|id="Please select which session to release in order to continue with this session."	bdd908b653fe991e7b8caca55dd9ff91
+xml:TRANSFER_RSP|String|id="Would you like to end that session?"	9df2055aabaff084a39de45ac032cd5c
+xml:TRANSFER_RSP|String|id="You are currently logged on to the Access Gateway on another device."	f29e79d66d74219e7dd6ee55ea4ac315
+xml:TRANSFER_RSP|String|id="You have reached the limit of the allowed Access Gateway sessions."	5cabbbf404392d490a6be598162197c3
+xml:TRANSFER_RSP|String|id="heading"	2704d85db3e20b21bad9289bdda9e582
+xml:TRANSFER_RSP|Title|	31804826e3dfd0d75fbc454614912764
+xml:VPN_ERRORS|String|id="Error: Access is Denied. Client SSL Certificate Invalid."	9a55b46a7e7630ad91ad340d43f3dca8
+xml:VPN_ERRORS|String|id="Error: Access is Denied. Client SSL Certificate Required."	033734794c03ea016d95bef0b14eaa75
+xml:VPN_ERRORS|String|id="Error: Access is Denied. Extraction from Client SSL Certificate Failed."	265e611a989afcedb695f2d63cf6e0d2
+xml:VPN_ERRORS|String|id="No IntranetIP available. Please try login later."	61e85c48f5d5cdeca74105e1bb44e2f6
+xml:VPN_ERRORS|String|id="No active policy is found in Primary authentication cascade"	2d0ea10ec200a33b7bc0ea1a78df28fd
+xml:VPN_ERRORS|String|id="No active policy is found in Secondary authentication cascade"	6c3e73eebdd455bc8c6dc97742b2de0e
+xml:VPN_ERRORS|String|id="No active policy is found in Tertiary authentication cascade"	2cf86299e2a5eeff5b2b9d552f40c933
+xml:VPN_ERRORS|String|id="Please contact your administrator."	5b75c2f92c4dfea6f3e9c947724bcb74
+xml:VPN_ERRORS|String|id="SAML 2 Factor must always have an active policy in primary cascade."	56c68a906fc3b1bd39806691036f231a
+xml:VPN_ERRORS|String|id="Target URL not found for redirect after successful login."	6c6e4602a349cd76bca3907a3b8bd837
+xml:VPN_ERRORS|String|id="You are not allowed to login."	70cfd893802e2ba042327733589c1e41
+xml:VPN_ERRORS|String|id="You cannot have active authentication enabled policies on secondary or tertiary cascades for 401 vserver."	ffbe44e9862fa19fa20691991d7f4a36
+xml:VPN_ERRORS|String|id="You have exceeded the maximum login attempts."	1d834062c6ca499bcab74d4de428adf4
+xml:VPN_LICERR_BODY|String|id="Error: Login exceeds maximum allowed users."	1856fb33a697c2481b82d97bcb89837a
+xml:VPN_REDIRECT_2000K|String|id="Login Successful. Please click"	d84f56a4069c3524d0733032b8e76af1
+xml:VPN_REDIRECT_2000K|String|id="here"	6c92285fa6d3e827b198d120ea3ac674
+xml:VPN_REDIRECT_2000K|String|id="if you are not automatically redirected."	ab4c2a34cb015970376f4586c06d657f
+xml:app|String|id="Configuration"	254f642527b45bc260048e30704edb39
+xml:app|String|id="Err3001"	c8744ab348297c200b5e820b6d0ecbf5
+xml:app|String|id="Err3002"	71721d884bca1168a099473272c1d857
+xml:app|String|id="Err3003"	1f71ec8685540d4684337ea7d4e407e8
+xml:app|String|id="Err3004"	7f13474cd875eaeca83549f801d35ed9
+xml:app|String|id="Err3005"	ff611a3fd1ca3cf04e1ac39213ba3dd3
+xml:app|String|id="File Transfer"	e423e92d19fd329813df1bbf907183ac
+xml:app|String|id="Help"	6a26f548831e6a8c26bfbbd9f6ec61e0
+xml:app|String|id="Home"	8cf04a9734132302f96da8e113e80ce5
+xml:app|String|id="Logoff"	9d2a1b8bf3717386effb6cc78bd3e8bb
+xml:app|String|id="Navigating away from this page ends your session."	b32c0b053aec75643f47a6df887d095d
+xml:app|Title|	31804826e3dfd0d75fbc454614912764
+xml:bookmark|String|id="id_Add"	ec211f7c20af43e742bf2570c3cb84f9
+xml:bookmark|String|id="id_EnterpriseWebSites"	8a14453bc8ef69bc883785bbddfb2752
+xml:bookmark|String|id="id_PersonalWebSites"	ce322a88e8fca336cbea6cdbe1432ebe
+xml:bookmark|String|id="id_Remove"	1063e38cb53d94d386f21227fcd84717
+xml:bookmark|String|id="none"	334c4a4c42fdb79d7ebc3e73b517e6f8
+xml:changepwd|Property|id="Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:changepwd|Property|id="Submit" property="value"	a4d3b161ce1309df1c4e25df28694b7b
+xml:changepwd|String|id="Change Password"	8f1e77e0d2be21da93cd4d9a939148f7
+xml:changepwd|String|id="Error0"	4bb12d77469ea10b92e9cde77ccc2f07
+xml:changepwd|String|id="Error1"	3f016d19aef39986108149ef41ff8798
+xml:changepwd|String|id="Error2"	6aa70f1338aa7dc4742bd7776f518616
+xml:changepwd|String|id="Error3"	564a8b2bd6e1388d95f873becc6614a6
+xml:changepwd|String|id="Error4"	a57daec4bcf257e10f7bf02bba69634c
+xml:changepwd|String|id="Error5"	96572c7262618745606958bf8f6eefdd
+xml:changepwd|String|id="For more information about changing your password, contact your help desk or system administrator."	d04745962e0127a1335cd0fbe501f3f5
+xml:changepwd|String|id="The password change failed. Please try again."	de839fbd5b3cdd93627802e374e72691
+xml:changepwd|String|id="infoMessage"	fc57270eb13596e89dbcec9aebc167b3
+xml:changepwd|String|id="labelConfirmedPassword"	d63bc940aae2bd07a319db1e0848810e
+xml:changepwd|String|id="labelNewPassword"	1a2099023e9961c8d0ef7cdb930790cf
+xml:changepwd|String|id="labelOldPassword"	2e35cd4c836035e01e50f794a9152eab
+xml:changepwd|String|id="labelUsername"	0757ff2706f42f60f935a54e832553e2
+xml:changepwd|Title|	31804826e3dfd0d75fbc454614912764
+xml:choices|String|id="Clientless Access"	739b2ccfc9e3f08a87fefdc1cbf468cf
+xml:choices|String|id="Connect with NetScaler XenApp Plug-in for Hosted Apps."	761e4fa60a277f11eb23cd586bd33f09
+xml:choices|String|id="Connect with the Access Gateway Plug-in for ActiveX."	86524d085a8ea7b6c5c011a6ebe568b8
+xml:choices|String|id="Connect with the Access Gateway Plug-in for Java."	d0071a99f02ef6a0bb8f912555f0e647
+xml:choices|String|id="Connect with the Access Gateway Plug-in for MAC."	83ca7bd8c1515cba57c40f6ac5f9956b
+xml:choices|String|id="Connect with the Access Gateway Plug-in."	cd15628cd666c64928ed263bdc990a55
+xml:choices|String|id="Connect without the Access Gateway Plug-in."	5039173f87dd49d933a29fb55c39fc5d
+xml:choices|String|id="End your session."	6d5113e6ef49e926c80c4460d674b1c2
+xml:choices|String|id="Log Off"	99e46ead4db7b5b2cfd2ccb48dc02f48
+xml:choices|String|id="NetScaler XenApp"	7905ca764173a539714cfe5c549aa1d1
+xml:choices|String|id="Network Access"	f55d80941d438f52c192911e5e1d2b28
+xml:choices|String|id="agent_description"	67d55dbded5a94e37ea655637bd39d14
+xml:choices|String|id="cvpn_description"	e9939dfa9cba509e8a07f27fe891433c
+xml:choices|String|id="hello"	8571952ad5f18dce1477c3e4dbd3d746
+xml:choices|String|id="messageTitle"	c651c3a98c6aff44cb9a2c9c1a5d5b06
+xml:choices|Title|	31804826e3dfd0d75fbc454614912764
+xml:chpwdsuccess|Property|id="Continue" property="value"	a0bfb8e59e6c13fc8d990781f77694fe
+xml:chpwdsuccess|String|id="successMessage"	5ec5134b113fa829885e3c34a7c5c652
+xml:chpwdsuccess|Title|	31804826e3dfd0d75fbc454614912764
+xml:epaerrorpage|Property|id="Button1" property="value"	0557fa923dcee4d0f86b1409f5c2167f
+xml:epaerrorpage|String|id="Access Denied"	095afbf2f1f0e5be678f5dac5c54e717
+xml:epaerrorpage|String|id="Date"	0d8d58008ef5dd7afce337373ef73993
+xml:epaerrorpage|String|id="Error"	3d9f514d46849760ef1b1412e314fd99
+xml:epaerrorpage|String|id="For more information, contact your help desk and provide the following information:"	f6cd620fb1a92975741a3ee5d546a270
+xml:epaerrorpage|String|id="Provide the following information to your support personnel:"	21a28aeb8e6eaf6b80eb0ab7da719caf
+xml:epaerrorpage|String|id="Time"	421b12365f86ff59c88ff2c21cf53a2b
+xml:epaerrorpage|String|id="To check your device again, click Back."	36ea962ea81eca2c91edbf9f7ced8212
+xml:epaerrorpage|String|id="Your device does not meet the requirements for logging on."	106f040d64790e6a8d1ccfe7c97ea220
+xml:epaerrorpage|Title|	f30a0e1988705a37ee726cf2c53c41ce
+xml:epa|Property|id="downloadbutton" property="value"	801ab24683a4a8c433c6eb40c48bcd9d
+xml:epa|Property|id="skipbutton" property="value"	25f5c514e5a81ae0610bc70b40a62143
+xml:epa|String|id="AppINFO"	4b156d11e15984eef30aaeb99ac5462e
+xml:epa|String|id="Bad response from Server for Get /epatype"	6c5c6d70078c60f95d1d3dc93dd18fa4
+xml:epa|String|id="Bad response from Server for version check"	639e1d0b5226f3b9abe8f15eb9a42428
+xml:epa|String|id="Bad response from server for Post"	a613c948e9a8c21e27dad2e6be0d01d8
+xml:epa|String|id="Bad response from server for scan results"	c5f6f48a36961d55446fa7f52ed55ae7
+xml:epa|String|id="Checking if the plug-in is installed"	4b156d11e15984eef30aaeb99ac5462e
+xml:epa|String|id="ClassicEpa not supported from browser"	be7be2f404887a49d6d09bb306c9401a
+xml:epa|String|id="Device certificate check failed"	2361fadbf85e92536a04b35f9c39d08f
+xml:epa|String|id="End point analysis failed"	39457ffd37c4bed68b567d16f176619e
+xml:epa|String|id="Endpoint Analysis plug-in is either not launched/installed. Please launch or click on the download link provided."	59dab88bcae92e7eb11fcda03cdb2597
+xml:epa|String|id="Err3006"	6f80225f276a6db411239030607c2563
+xml:epa|String|id="Failed to fetch scans from server"	5e3a253491b21b5409629842ea621531
+xml:epa|String|id="Failed to generate scan results"	adce7dd05ff3e05904fbe691dbeef681
+xml:epa|String|id="If you do not want your device checked, click Skip Check."	a5ddce35974c7accfd2a01268fa6d349
+xml:epa|String|id="Internal Error"	96d89f220262fbc555cd17d0b62c9dd0
+xml:epa|String|id="The Access Gateway must confirm that you have the minimum requirements on your device before you can log on."	a20a2805ebded830e0d00eb17dc1a3d9
+xml:epa|String|id="This client machine does not match the required security"	f25385209ab7c995c6c5925abf599285
+xml:epa|String|id="To begin the check, click the yellow bar on the top of the page and follow the instructions."	13aff89eeddb3658502c287bafb3e808
+xml:epa|String|id="To install or upgrade the software, click Download."	901332cae150d9a9551533821406a8ba
+xml:epa|String|id="You are downgrading the NetScaler Endpoint Analysis Client"	2a4170b06c7e34a21bb7100ff3178150
+xml:epa|String|id="You do not have the latest version of Endpoint Analysis plug-in installed. Please download the updated plug-in from the link provided"	f0e27ee1af70cccd7376b6df6231198a
+xml:epa|String|id="Your device is checked automatically if the NetScaler Endpoint Analysis Plug-in software is already installed."	d3c347c4e655b169d7e4f600fb31ef7e
+xml:epa|String|id="loginAgentCdaHeaderText"	efec0899728f52811c63fdbfe95315a5
+xml:epa|String|id="secs"	975a85a4ffa56e23c70e2bbeaf405ac7
+xml:epa|Title|	31804826e3dfd0d75fbc454614912764
+xml:err2002|String|id="errortitle"	748e8a9da23258b7d403fab9827b8986
+xml:err2002|String|id="footer"	cecefd777628e8fb3564349e609c9170
+xml:err2002|String|id="info"	f4730021321167d31266a0169c921ee7
+xml:err2002|Title|	7852939b672b64b7a9d7612872701062
+xml:err2004|String|id="errortitle"	1b4a5a4526b565711cf84ab267fbce9c
+xml:err2004|String|id="footer"	cecefd777628e8fb3564349e609c9170
+xml:err2004|String|id="info"	ba2ae214dbbd715da28ff3a956341a6e
+xml:err2004|Title|	7852939b672b64b7a9d7612872701062
+xml:err2005|String|id="errortitle"	771838179829c86b6cb193a432afa598
+xml:err2005|String|id="footer"	cecefd777628e8fb3564349e609c9170
+xml:err2005|String|id="info"	c382f08febbfd6796285239d57975f4e
+xml:err2005|Title|	7852939b672b64b7a9d7612872701062
+xml:err2006|String|id="errortitle"	f23647fb1573e9ac550a6f7d27482c63
+xml:err2006|String|id="footer"	cecefd777628e8fb3564349e609c9170
+xml:err2006|String|id="info"	e2185b6ecb4297a1998ffe9e1968d81a
+xml:err2006|Title|	7852939b672b64b7a9d7612872701062
+xml:f_ndisagent|Property|id="Button_Download" property="src"	15a19cccb225875339a2e1d17cfa6942
+xml:f_ndisagent|Property|id="Download" property="value"	801ab24683a4a8c433c6eb40c48bcd9d
+xml:f_ndisagent|String|id="/vpns/images/Download_Hoverpng"	3c0bfa348f59ca2ee8f1454f4a625711
+xml:f_ndisagent|String|id="/vpns/images/Downloadpng"	15a19cccb225875339a2e1d17cfa6942
+xml:f_ndisagent|String|id="AppINFO"	4b156d11e15984eef30aaeb99ac5462e
+xml:f_ndisagent|String|id="Citrix_Access_Gateway"	31804826e3dfd0d75fbc454614912764
+xml:f_ndisagent|String|id="Click_Download"	79f4a8bf0e53fa424146a52fe30bb95a
+xml:f_ndisagent|String|id="For_more_information_contact_your_help_desk_or_system_administrator"	4725f5c3e80d994f8a67567b98d67f07
+xml:f_ndisagent|String|id="If_a_proxy_server_is_configured"	8871fe912849bc2b8f6339819f13e646
+xml:f_ndisagent|String|id="If_the_Access_Gateway_Plugin_is_installed"	cbf6aa13c8d9b6d72fe774898f01d983
+xml:f_ndisagent|String|id="If_the_Access_Gateway_Plugin_is_not_installed"	5d90b3b3e5edd33e18e294aa0cc201c0
+xml:f_ndisagent|String|id="In_the_File_Download_dialog_box_click_Run"	04e1e29facb8bbc314904f0f09e9dd12
+xml:f_ndisagent|String|id="In_the_Internet_Explorer_dialog_box_click_Run_to_install_the_Access_Gateway_Plugin_for_Windows"	27b4fc86fc65d0fd8e0fe3a4f1bea03d
+xml:f_ndisagent|String|id="To_install_the_Access_Gateway_Plugin_for_Windows"	80b51427baad445d78b6eccaf3a27560
+xml:f_ndisagent|String|id="secs"	975a85a4ffa56e23c70e2bbeaf405ac7
+xml:f_ndisagent|String|id="waitingmsg"	440bdd88a2b9dd73654fe85403794f7f
+xml:f_ndisagent|Title|	31804826e3dfd0d75fbc454614912764
+xml:f_services1|String|id="For further help or information, contact your help desk or system administrator."	b394b3f46d3d148e8afa920525614a3f
+xml:f_services1|String|id="If the Access Gateway Plug-in for ActiveX does not start automatically"	839aa894933074e6c2fa6418b167d91d
+xml:f_services1|String|id="NetScaler Gateway"	31804826e3dfd0d75fbc454614912764
+xml:f_services1|String|id="Please click here to download Secure Access client to this Pocket PC"	02b6fd101e7670f1e3277f2fc265acf0
+xml:f_services1|String|id="The Access Gateway Plug-in is not supported on your operating system."	e11f706b00c806683daa7dbe77086e7b
+xml:f_services1|Title|	31804826e3dfd0d75fbc454614912764
+xml:f_services|Property|id="Button_Download" property="src"	15a19cccb225875339a2e1d17cfa6942
+xml:f_services|String|id="/vpns/images/Download.png"	15a19cccb225875339a2e1d17cfa6942
+xml:f_services|String|id="/vpns/images/Download_Hover.png"	3c0bfa348f59ca2ee8f1454f4a625711
+xml:f_services|String|id="Click Download"	79f4a8bf0e53fa424146a52fe30bb95a
+xml:f_services|String|id="For more information contact your help desk or system administrator."	4725f5c3e80d994f8a67567b98d67f07
+xml:f_services|String|id="If a proxy server is configured"	bec28ca9746e39e7fabc3a5fefa37866
+xml:f_services|String|id="If the Access Gateway Plug-in is installed"	185a5d3e16591988125affb70e3b41a3
+xml:f_services|String|id="If the Access Gateway Plug-in is not installed"	5d90b3b3e5edd33e18e294aa0cc201c0
+xml:f_services|String|id="In the File Download dialog box, click Run."	04e1e29facb8bbc314904f0f09e9dd12
+xml:f_services|String|id="In the Internet Explorer dialog box, click Run to install the Access Gateway Plug-in for Windows."	27b4fc86fc65d0fd8e0fe3a4f1bea03d
+xml:f_services|String|id="NetScaler Gateway"	31804826e3dfd0d75fbc454614912764
+xml:f_services|String|id="The Access Gateway Plug-in is not supported on your operating system."	e11f706b00c806683daa7dbe77086e7b
+xml:f_services|String|id="To connect to the Access Gateway Plug-in, you need to install some software."	a3eccfb26f6c2dc1e165139a37ca18b3
+xml:f_services|String|id="To install the Access Gateway Plug-in for Windows"	80b51427baad445d78b6eccaf3a27560
+xml:f_services|String|id="waitingmsg"	440bdd88a2b9dd73654fe85403794f7f
+xml:f_services|Title|	31804826e3dfd0d75fbc454614912764
+xml:fsaddress|String|id="id_Address"	2bf1d5fae1c321d594fdedf05058f709
+xml:fsdelfile|Property|id="Button_Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:fsdelfile|Property|id="Button_Delete" property="value"	f2a6c498fb90ee345d997f888fce3b18
+xml:fsdelfile|String|id="Are you sure ?"	01da36bdc7136ee63b0c6ff9689576c6
+xml:fsdelfile|String|id="Delete"	f2a6c498fb90ee345d997f888fce3b18
+xml:fsdelfile|String|id="Directory:"	46238115be50712fd1d92c2362fb8e47
+xml:fsdelfile|String|id="File:"	ae21d822d879539a75c3d6fd91c2acb3
+xml:fsgotoerror|String|id="Error: AAA feature not enabled."	b3e81be5b6df139fa0a07c9f9842bd1f
+xml:fsgotoerror|String|id="Error: Access is Denied. Client SSL Certificate Invalid."	9a55b46a7e7630ad91ad340d43f3dca8
+xml:fsgotoerror|String|id="Error: Access is Denied. Client SSL Certificate Required."	033734794c03ea016d95bef0b14eaa75
+xml:fsgotoerror|String|id="Error: Access is Denied. Extraction from Client SSL Certificate Failed."	265e611a989afcedb695f2d63cf6e0d2
+xml:fsgotoerror|String|id="Error: Access is Denied."	209a03e96c4c10295f53100767f5cade
+xml:fsgotoerror|String|id="Error: File system authorization failed."	6a693c508341abe011be50844b17690b
+xml:fsgotoerror|String|id="Error: Login exceeds maximum allowed users."	1856fb33a697c2481b82d97bcb89837a
+xml:fsgotoerror|String|id="Error: Not a privileged User."	8ee1d6bcb79b280f6b35511bba20aa96
+xml:fsgotoerror|String|id="Error:Session has expired"	f03930637a1baa6a4e0916f57fd52f7d
+xml:fsgotoerror|String|id="Failed to change directory."	bc50dffbdb4c6e1c23a72939024ba5ca
+xml:fsgotoerror|String|id="Failed to connect."	187629ff0cb71b6d0aa8519327ddacdc
+xml:fsgotoerror|String|id="Failed to create a file in the server due to existing file with the same name."	4f1d14da5446fa379584188ebf5d2419
+xml:fsgotoerror|String|id="Failed to create file"	860c95e22bfe8d0f8e50a72079643a09
+xml:fsgotoerror|String|id="Failed to delete the file."	419eca3d7b505a259d9129f17a0ebce7
+xml:fsgotoerror|String|id="Failed to download file"	3a889d38c738289282e5ab5a4085e092
+xml:fsgotoerror|String|id="Failed to download shared folders list."	ec9e639e35ffedd285cdce13df2e3f82
+xml:fsgotoerror|String|id="Failed to establish NetBios session to the server."	da7f4826900da397a57512ab67cd1e60
+xml:fsgotoerror|String|id="Failed to get attributes"	b7d4ef9ce2251177f55589bc84cb471f
+xml:fsgotoerror|String|id="Failed to list folder due to too many files in this directory."	8243365d4437cef7c047487e3ccf8ccc
+xml:fsgotoerror|String|id="Failed to list neighborhood servers due to too many servers in this network."	abcac58e70b743f4bf67287afc01d5c5
+xml:fsgotoerror|String|id="Failed to list share folders due to too many share folders in this server."	a94df70910234726735078d41f8f28ab
+xml:fsgotoerror|String|id="Failed to login."	11def70a8cbd66f7b146f8500285b1c1
+xml:fsgotoerror|String|id="Failed to make TCP connection to the server."	d4aa34e22916f5f369a1387332df3ba1
+xml:fsgotoerror|String|id="Failed to make a directory."	128ce369aac61954fa4b0f18b9026ce1
+xml:fsgotoerror|String|id="Failed to negatiate a protocol to the server."	75051b9ffa89ecb9bacc551d9953c015
+xml:fsgotoerror|String|id="Failed to open the file."	b7acf29958234227fe2eab2766380fe4
+xml:fsgotoerror|String|id="Failed to parse URL, invalid URL."	551de938698ceff808b1ab3661799cd7
+xml:fsgotoerror|String|id="Failed to remove a directory."	9d96ac4f5f2dc50804cc8af4477ecc8e
+xml:fsgotoerror|String|id="Failed to rename the file."	d05cf85f9754b01971cf10285d13dd96
+xml:fsgotoerror|String|id="Failed to setup a session to the server."	1fb63b5a80133e7654ec2db8d496aa5d
+xml:fsgotoerror|String|id="Failed to setup the tree connection to the server."	91da96fff480a2d3ff3e565e6c285545
+xml:fsgotoerror|String|id="Incorrect login credential to this server."	f74b0902a933b7fb6dbeaad26210474e
+xml:fsgotoerror|String|id="Internal Error."	413a593273d24ecdcef3d0761aaab957
+xml:fsgotoerror|String|id="Last login session has been expired. Please login again."	8e48c464e9a1def93790273a38d5ddb9
+xml:fsgotoerror|String|id="Logoff is successful."	322d8509ef5e71556740f03fb67f3d5a
+xml:fsgotoerror|String|id="Max length (512 bytes) of file system path is exceeded."	ab889470e7d6ef43c2b97b40a8a8d7ca
+xml:fsgotoerror|String|id="Need to login SSL VPN first."	e86a8ddb28289f41c489b7c34442acb9
+xml:fsgotoerror|String|id="Need to login neighborhood first."	12a447059a9b47d56d882ae407cde24f
+xml:fsgotoerror|String|id="There is no shared folder in this server"	17ab86d508d6aa73e9df7a4ab6e53fe4
+xml:fsgotoerror|String|id="This feature is not supported"	a0f0862a59498244a45633881a255ae6
+xml:fsgotoerror|String|id="Wins IP is neither provided nor configured."	082ab7f5a96a4820abb7f3bccd1a3e87
+xml:fsgotoerror|String|id="Wins IP is not configured."	c38cab1bcb370e89b7d1d601a98f4582
+xml:fsgotoerror|String|id="Wins IP is not provided."	f0bdfd4d7130dc6047792b2f89aacda5
+xml:fsgotoerror|String|id="Wins IP is provided in wrong format."	60dcd100ad0dd219ada7dd797ab37653
+xml:fsgotoerror|String|id="sentenceterminator"	5058f1af8388633f609cadb75a75dc9d
+xml:fsgotoerror|String|id="sso failed"	2ebe8b1933a9589b6277d877704d4a02
+xml:fsgoto|Property|id="id_CancelButton" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:fsgoto|Property|id="id_LogOnButton" property="value"	37390f071814487e4948cfa045ed76fd
+xml:fsgoto|String|id="hideLink"	0c2345ee849a5bc019e9d9a6851eb2e1
+xml:fsgoto|String|id="id_Address"	2bf1d5fae1c321d594fdedf05058f709
+xml:fsgoto|String|id="id_Doamin"	bd5f9f37b54fe8f66369f74784576e6c
+xml:fsgoto|String|id="id_FileServer"	67b459fe56a232cfbb4e15175f1d880f
+xml:fsgoto|String|id="id_Password"	b341a59d5636ed3d6a819137495b08a0
+xml:fsgoto|String|id="id_Username"	16bbbfbcdd4937fe2816dfc09dcdb09a
+xml:fsgoto|String|id="loading"	4381b667ecfd06041db1ee258f98ec83
+xml:fsgoto|String|id="showLink"	ab9e6806dc9168cf20b1526e121b5f44
+xml:fsicons|Property|id="id_DeleteLink" property="title"	c7ddf8c209320957a0e70cc3776bdb89
+xml:fsicons|Property|id="id_DownloadLink" property="title"	55074bdc8b5364cae9edafaddc547c52
+xml:fsicons|Property|id="id_LogOffLink" property="title"	0323de4f66a1700e2173e9bcdce02715
+xml:fsicons|Property|id="id_LogOnLink" property="title"	cbf771ac705505e1d3fa58e48bef5993
+xml:fsicons|Property|id="id_NewFolderLink" property="title"	be71831039c773dff4940861c803b5b5
+xml:fsicons|Property|id="id_RefreshLink" property="title"	30200db7a087ea662f40c2758d043460
+xml:fsicons|Property|id="id_RenameLink" property="title"	931a572be63cf0fbb4445fe683b07987
+xml:fsicons|Property|id="id_UpLink" property="title"	05a362c82c1b9b19ebdc2d06580b760c
+xml:fsicons|Property|id="id_UploadLink" property="title"	aa93a35a371f38c9a7d4ad40988fcc8b
+xml:fsicons|String|id="id_Delete"	f2a6c498fb90ee345d997f888fce3b18
+xml:fsicons|String|id="id_Download"	801ab24683a4a8c433c6eb40c48bcd9d
+xml:fsicons|String|id="id_LogOff"	d911693e56ee83e675a992cd4614f568
+xml:fsicons|String|id="id_LogOn"	c0f549da7078da53fe6882c60c7c509a
+xml:fsicons|String|id="id_NewFolder"	d8751b1610238ef633937e4555bc5459
+xml:fsicons|String|id="id_Refresh"	63a6a88c066880c5ac42394a22803ca6
+xml:fsicons|String|id="id_Rename"	904a8304056d77e4547744781b7ceb50
+xml:fsicons|String|id="id_Up"	258f49887ef8d14ac268c92b02503aaa
+xml:fsicons|String|id="id_Upload"	91412465ea9169dfd901dd5e7c96dd99
+xml:fslogin|Title|	5fd2e0bdbb8d182576766c0c7b740373
+xml:fslogout|Property|id="Button_Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:fslogout|Property|id="Button_Logoff" property="value"	9d2a1b8bf3717386effb6cc78bd3e8bb
+xml:fslogout|String|id="Are you sure?"	729a51874fe901b092899e9e8b31c97a
+xml:fslogout|String|id="Logoff"	9d2a1b8bf3717386effb6cc78bd3e8bb
+xml:fsmkdir|Property|id="Button_Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:fsmkdir|Property|id="Button_Create" property="value"	686e697538050e4664636337cc3b834f
+xml:fsmkdir|String|id="Create Directory"	1a66ebe97638ee1c7c8f277aacb01e5e
+xml:fsmkdir|String|id="New Folder:"	8367f2ff5bed97fcb43cb26b33875252
+xml:fsmkdir|String|id="No folder name specified. Please enter a folder name."	8f863c0b843151baf32cd67d87cd26a3
+xml:fsmkdir|String|id="Under Directory:"	d8855750686a101a504349dcc8100516
+xml:fsneighbor|String|id="id_Domain"	bd5f9f37b54fe8f66369f74784576e6c
+xml:fsneighbor|String|id="id_Login"	051672911a3f1f05efba78a553ef6fe2
+xml:fsneighbor|String|id="id_NetworkNeighborhood"	faa6d8a4006a930be5223ad2bc0bf608
+xml:fsneighbor|String|id="id_Password"	b341a59d5636ed3d6a819137495b08a0
+xml:fsping|Property|id="PingButton" property="value"	b85815d04cec053ce6deb8021f2df1b8
+xml:fsping|Property|id="id_PingButton" property="value"	a4d3b161ce1309df1c4e25df28694b7b
+xml:fsping|String|id="Failed to resolve IP address for"	ced9e15fe3f3bdcfdffa7a002fd571ef
+xml:fsping|String|id="ServerLabel"	505de52d5ae227b6e8acb02dce2a0c4d
+xml:fsping|String|id="is alive"	044e1c17261ba12f2566f39e81b0f87a
+xml:fsping|String|id="is not alive"	8f678c3ca5d336426f9dea0e3a0945cf
+xml:fsping|String|id="server"	cf1e8c14e54505f60aa10ceb8d5d8ab3
+xml:fsrename|Property|id="Button_Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:fsrename|Property|id="Button_Rename" property="value"	904a8304056d77e4547744781b7ceb50
+xml:fsrename|String|id="Directory:"	46238115be50712fd1d92c2362fb8e47
+xml:fsrename|String|id="From:"	1e6d57e813355689e9c77e947d73ad8f
+xml:fsrename|String|id="No alternative name is specified. Please enter one."	7f814a3185dad38f5db6fbeadfe6e853
+xml:fsrename|String|id="Rename"	904a8304056d77e4547744781b7ceb50
+xml:fsrename|String|id="To:"	33caa076f23f453dd4061726f3706325
+xml:fsrmdir|Property|id="Button_Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:fsrmdir|Property|id="Button_Delete" property="value"	f2a6c498fb90ee345d997f888fce3b18
+xml:fsrmdir|String|id="Are you sure ?"	01da36bdc7136ee63b0c6ff9689576c6
+xml:fsrmdir|String|id="Delete Directory"	3ba4c3224daac814a8db9b9ebb09e45a
+xml:fsrmdir|String|id="Directory:"	46238115be50712fd1d92c2362fb8e47
+xml:fsupload|Property|id="Button_Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:fsupload|Property|id="Button_Upload" property="value"	91412465ea9169dfd901dd5e7c96dd99
+xml:fsupload|String|id="Directory:"	46238115be50712fd1d92c2362fb8e47
+xml:fsupload|String|id="Invalid file specified. Please try again."	9d2a6ac5d520f5f0b6accc89130266e1
+xml:fsupload|String|id="No file specified. Please enter a filename"	08aec6935073c0ed1a8731daa53cc65f
+xml:fsupload|String|id="Upload File"	fbb7d71920afdff488c3514f3f99fe7c
+xml:fsupload|String|id="Upload File:"	3840055cb9db328b2c79c413a18c9c75
+xml:ftlist|String|id="id_Add"	ec211f7c20af43e742bf2570c3cb84f9
+xml:ftlist|String|id="id_EnterpriseFileShares"	29784c0dd59bc380b750258c35d35178
+xml:ftlist|String|id="id_PersonalFileShares"	cd54529c359ae4c98a8abf38d9b7bdaf
+xml:ftlist|String|id="id_Remove"	1063e38cb53d94d386f21227fcd84717
+xml:ftlist|String|id="none"	334c4a4c42fdb79d7ebc3e73b517e6f8
+xml:loading|String|id="Loading..."	8524de963f07201e5c086830d370797f
+xml:loading|String|id="One Moment Please"	3f7ae01fe906466511621c4c2c448e00
+xml:loading|Title|	31804826e3dfd0d75fbc454614912764
+xml:locale|String|id="ShortDateFormat"	e46369185a1e345fd3f6636f3781cac5
+xml:locale|String|id="ShortTimeFormat"	b2beb1ad35a624171a8fc6fac04c8c7a
+xml:logon|Property|id="Enter user name" property="title"	474dfe2f125c931cc580fd10cc946cbb
+xml:logon|Property|id="Log_On" property="value"	37390f071814487e4948cfa045ed76fd
+xml:logon|Property|id="passwd" property="title"	483bc24d842fe8f3ec3a6f92fbd31922
+xml:logon|Property|id="passwd1" property="title"	df4e9043499dbd07f071dd43617c298b
+xml:logon|String|id="Enter password"	483bc24d842fe8f3ec3a6f92fbd31922
+xml:logon|String|id="Enter_password2_Alert"	9a1461cb9b821e4233007d899dd0ed31
+xml:logon|String|id="Password"	dc647eb65e6711e155375218212b3964
+xml:logon|String|id="Password2"	7f008de7ff7ca332ee496e228c4d92d8
+xml:logon|String|id="User_name"	987dce661afca3372aa3e05702fb1d06
+xml:logon|String|id="Welcome"	83218ac34c1834c26781fe4bde918ee4
+xml:logon|String|id="You need to enter login name"	471a027a2ceb6a905d7085f9127e633b
+xml:logon|String|id="You need to enter passwd"	eb1c03a9701f9d5a74f700b7ed6fb4d0
+xml:logon|String|id="ctl08_loginAgentCdaHeaderText2"	991245441b7f02a003f500e0d3c61694
+xml:logon|String|id="domain"	eae639a70006feff484a39363c977e24
+xml:logon|String|id="errorMessageLabel4001"	71d9da661c9cd42097a16ef5e6271fe7
+xml:logon|String|id="errorMessageLabel4002"	f649ff322ee00df7f67dc608238c5285
+xml:logon|String|id="errorMessageLabel4003"	551e64f1083f750c9ef4764bb2f2f4b6
+xml:logon|String|id="errorMessageLabel4004"	5cd2d17f7c157a182e747c9a3abb9290
+xml:logon|String|id="errorMessageLabel4005"	5cd2d17f7c157a182e747c9a3abb9290
+xml:logon|String|id="errorMessageLabel4006"	d167e1bb6ef4966f02876f19e042d992
+xml:logon|String|id="errorMessageLabel4007"	251dbb0af557765e8594563cd75108a3
+xml:logon|String|id="errorMessageLabel4008"	01b0a98f830ff7741deeac3f4b6aac62
+xml:logon|String|id="errorMessageLabel4009"	8d05440efb58cac8c51f852440a0a010
+xml:logon|String|id="errorMessageLabel4010"	f649ff322ee00df7f67dc608238c5285
+xml:logon|String|id="errorMessageLabel4011"	1f0174c0672959f72f2ea51567182b65
+xml:logon|String|id="errorMessageLabel4012"	1cbb32e81a2bb186f1132baeae46c16c
+xml:logon|String|id="errorMessageLabel4013"	54023b172158689d6e486d160326e9b6
+xml:logon|String|id="errorMessageLabel4014"	52928bd946e3480fcb27e1d1dec8c6fe
+xml:logon|String|id="errorMessageLabel4015"	869ced5f9d605e82e9dccb03044d28c3
+xml:logon|String|id="errorMessageLabel4016"	71f2aef1835995c8d62863f27666f779
+xml:logon|String|id="errorMessageLabel4017"	f39debde131af098e0819b2abb119f81
+xml:logon|String|id="errorMessageLabel4018"	e80ac1dec129eb9a3ea7864ccd11cbce
+xml:logon|String|id="errorMessageLabel4019"	e6e3544656da753f6d2e95e1b7a5e83f
+xml:logon|String|id="errorMessageLabel4021"	534d978e61a8a7fc926f02b257480442
+xml:logon|String|id="errorMessageLabel4027"	80be2ef9a4e6d0c21e993cccef550d60
+xml:logon|String|id="errorMessageLabelBase"	3d626548c184eb50be521da783828697
+xml:logon|String|id="errorMessageLabelMax"	ac4e7a4f341e7281b0f6f274f9ec3905
+xml:logon|String|id="eula_agreement"	bd53ab094fda728b1f395b17c12178ed
+xml:logon|String|id="eula_title"	8b2b2cc807f4171d37004d230a3434d4
+xml:logon|String|id="eulaback"	0557fa923dcee4d0f86b1409f5c2167f
+xml:logon|String|id="terms"	f6b041d2274feb68641bf1f41e55c5b5
+xml:logon|Title|	31804826e3dfd0d75fbc454614912764
+xml:logout|Property|id="Log_On" property="value"	37390f071814487e4948cfa045ed76fd
+xml:logout|String|id="Logoff is successful."	322d8509ef5e71556740f03fb67f3d5a
+xml:logout|String|id="ctl10_cdaHeaderText"	99e46ead4db7b5b2cfd2ccb48dc02f48
+xml:logout|Title|	31804826e3dfd0d75fbc454614912764
+xml:m_services|Property|id="Button_Download" property="src"	15a19cccb225875339a2e1d17cfa6942
+xml:m_services|Property|id="Download" property="value"	801ab24683a4a8c433c6eb40c48bcd9d
+xml:m_services|Property|id="Download_Ubuntu" property="value"	5824fc252f27b6a310f2e2d0f302e9b7
+xml:m_services|String|id="/vpns/images/Download.png"	15a19cccb225875339a2e1d17cfa6942
+xml:m_services|String|id="/vpns/images/Download_Hover.png"	3c0bfa348f59ca2ee8f1454f4a625711
+xml:m_services|String|id="Checking if the plug-in is installed"	4b156d11e15984eef30aaeb99ac5462e
+xml:m_services|String|id="Click Download"	79f4a8bf0e53fa424146a52fe30bb95a
+xml:m_services|String|id="Contact your system administrator"	2beeda6f9362ebbec5cdb8e17a9b87b6
+xml:m_services|String|id="For more information contact your help desk or system administrator."	4725f5c3e80d994f8a67567b98d67f07
+xml:m_services|String|id="If a proxy server is configured Linux"	8871fe912849bc2b8f6339819f13e646
+xml:m_services|String|id="If a proxy server is configured"	8871fe912849bc2b8f6339819f13e646
+xml:m_services|String|id="If the Access Gateway Linux-Plug-in is not installed"	54fee4fbc9a030df4515cebffbd1c3a4
+xml:m_services|String|id="If the Access Gateway Plug-in is not installed"	0d2bbbba9bb77dac075bd010c1032040
+xml:m_services|String|id="If the Linux-Plug-in is installed"	c7f01678ee42a5f91cd9a526267806d3
+xml:m_services|String|id="If the Plug-in is installed"	9ed324ff4ea0af13e5ad00db63a79af7
+xml:m_services|String|id="In the File Download dialog box, click Run."	04e1e29facb8bbc314904f0f09e9dd12
+xml:m_services|String|id="In the Web browser dialog box, click Run to start the installaTion."	4bdae5574187320112820d5470ecff15
+xml:m_services|String|id="Launch button description"	b8fbc251daeaccb24a03cd6221c22837
+xml:m_services|String|id="Linux install using software center"	a43c0fb76a21ff71079ea5dfe8fd6911
+xml:m_services|String|id="NetScaler Gateway"	31804826e3dfd0d75fbc454614912764
+xml:m_services|String|id="Please wait for the VPN session to be established."	440bdd88a2b9dd73654fe85403794f7f
+xml:m_services|String|id="This is a beta version of Access Gateway Plug-in for Mac OS X."	61b7a42639e9f3be148415cc59c2ff6b
+xml:m_services|String|id="To install the Access Gateway Plug-in for Mac OS X"	7d7e83511263dde26d8512751797f140
+xml:m_services|String|id="To install the Netscaler Access Gateway Client for Linux"	47c57914d590469a74968a63a9f079c0
+xml:m_services|String|id="Your administrator requires you to use CSA"	4b87b0c60a001976271e9d78a3a69748
+xml:m_services|String|id="secs"	975a85a4ffa56e23c70e2bbeaf405ac7
+xml:m_services|Title|	31804826e3dfd0d75fbc454614912764
+xml:newbm|Property|id="Button_Add" property="value"	ec211f7c20af43e742bf2570c3cb84f9
+xml:newbm|Property|id="Button_Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:newbm|String|id="Add a Bookmark"	07132289024c88882c410db98d159161
+xml:newbm|String|id="Incorrect_FS_address"	87124cc117962e61780dfe30df877543
+xml:newbm|String|id="RDPLink"	cf35832082c3053a98c62cb4ec8679fe
+xml:newbm|String|id="The bookmark contains invalid URI characters. Please enter a valid Web address."	030f3c55b3e56e9e89e047afeb6d03b5
+xml:newbm|String|id="The bookmark is using the script tag, which is not allowed. Please enter a valid description."	8e1e6491c840c3c280625557b03cde3a
+xml:newbm|String|id="The bookmark is using the script tag, which is not allowed. Please enter a valid name."	2629040a6f6f474caae97b1a299ff068
+xml:newbm|String|id="The maximum length of each field is 256 characters."	4f998f342091e5aba4857729adcd127f
+xml:newbm|String|id="To add a RDP Link info"	362c97aac296ed2c3cefbf4696ce2f9b
+xml:newbm|String|id="To add a Web site, type in the full address"	15df67011a4ad5efba4311498af2b203
+xml:newbm|String|id="To add a file share, type in the server and folder name"	f7b228199f735f873f3d4ccba99280c8
+xml:newbm|String|id="You must provide a URL for your bookmark."	9d702b8fbf6c426b046b3076983b4c20
+xml:newbm|String|id="ctl10_labelConfirmNewPassword"	d0042a700e9bdf79689d63ee6846dc0e
+xml:newbm|String|id="ctl10_labelNewPassword"	2bf1d5fae1c321d594fdedf05058f709
+xml:newbm|String|id="ctl10_labelUsername"	4e140ba723a03baa6948340bf90e2ef6
+xml:newbm|Title|	31804826e3dfd0d75fbc454614912764
+xml:nscode|String|id="Cannot create a directory in the root directory."	4f66a1c8156c981005ce765e3a28a49c
+xml:nscode|String|id="Cannot upload a file into root directory."	63b230eac44f6859737fb094e68a09f5
+xml:nscode|String|id="Choose a directory to display usage first."	e301265c8e7b1b7677e95a28d4f5717c
+xml:nscode|String|id="Loading..."	8524de963f07201e5c086830d370797f
+xml:nscode|String|id="Modified"	35e0c8c0b180c95d4e122e55ed62cc64
+xml:nscode|String|id="Name"	49ee3087348e8d44e1feda1917443987
+xml:nscode|String|id="Neighborhood"	23c532d4dfc66f6a220242f0592a0bf4
+xml:nscode|String|id="Please choose a file to be deleted first."	47e19d55e072ed773c075a9c258959f9
+xml:nscode|String|id="Please choose a file to be downloaded first."	d4b91f9ad1257903302b4d3ab06720e7
+xml:nscode|String|id="Please choose a file to be renamed first."	a96abecffa7b5d21d95d65fa685f5b5f
+xml:nscode|String|id="Root share folder cannot be deleted."	c08a0107eea239b2710e9b6bc2336d9a
+xml:nscode|String|id="Root share folder cannot be renamed."	9298b0bc1d5a268e512006ff9a3402b4
+xml:nscode|String|id="Size"	6f6cb72d544962fa333e2e34ce64f719
+xml:nscode|String|id="Support file system access only"	a90fc0d6cda109182a0b50aa3ffd7c30
+xml:nscode|String|id="The feature to download a folder is not supported."	3eeeb537548446bc5b15c18d2781a570
+xml:nscode|String|id="There is no up folder"	71381c009893d8a32ec1f99615342d8c
+xml:nscode|String|id="Type"	a1fa27779242b4902f7ae3bdd5c6d508
+xml:nscode|String|id="file"	8c7dd922ad47494fc02c388e12c00eac
+xml:nscode|String|id="folder"	851148b4fd8fd7ae74bd9100c5c0c898
+xml:portal|Property|id="id_ChangePassword" property="value"	8f1e77e0d2be21da93cd4d9a939148f7
+xml:portal|Property|id="id_LogOff" property="value"	99e46ead4db7b5b2cfd2ccb48dc02f48
+xml:portal|Property|id="id_UserGuide" property="href"	9219debaa971cd7301a82ba1f477b5c9
+xml:portal|String|id="ctl00_applications_label"	1ddf333c6654f7f89c739dddfb4cc429
+xml:portal|String|id="ctl00_fileShares_label"	40737a46288ded681f01971b3f7356fa
+xml:portal|String|id="ctl00_help_label"	6a26f548831e6a8c26bfbbd9f6ec61e0
+xml:portal|String|id="ctl00_ping_label"	b85815d04cec053ce6deb8021f2df1b8
+xml:portal|String|id="ctl00_tip_label"	12ae2a12586001e30745cb0457586ae3
+xml:portal|String|id="ctl00_webSites_label"	8a988a74541ed629f6771c1895861e51
+xml:portal|String|id="id_Email"	ce8ae9da5b7cd6c3df2929543a9af92d
+xml:portal|String|id="id_FileTransfer"	e423e92d19fd329813df1bbf907183ac
+xml:portal|String|id="id_Home"	8cf04a9734132302f96da8e113e80ce5
+xml:portal|String|id="id_UserGuide"	7a97419a6312bf2f5dcdb87d844f3d07
+xml:portal|Title|	31804826e3dfd0d75fbc454614912764
+xml:postepa|Property|id="downloadbutton" property="value"	801ab24683a4a8c433c6eb40c48bcd9d
+xml:postepa|Property|id="launchbutton" property="value"	9506f0fd0f7f1b07960b15b4c9e68d1a
+xml:postepa|Property|id="skipbutton" property="value"	25f5c514e5a81ae0610bc70b40a62143
+xml:postepa|String|iD="You are downgrading the NetScaler Endpoint Analysis Client to an earlier version."	2a4170b06c7e34a21bb7100ff3178150
+xml:postepa|String|id="(Please) use the Access Gateway Plug-in to run the check of your device. "	5a17ef896bb55fa9f9c271f8e084974c
+xml:postepa|String|id="(You can) use the Access Gateway Plug-in to run the check of your device. "	5a17ef896bb55fa9f9c271f8e084974c
+xml:postepa|String|id="AppINFO"	4b156d11e15984eef30aaeb99ac5462e
+xml:postepa|String|id="Automatic start of the Endpoint Analysis plug-in failed. Please click Launch to manually start the plug-in."	a568229da8fc7ac1ebf928bfe7a6f0e9
+xml:postepa|String|id="Checking Your Device"	efec0899728f52811c63fdbfe95315a5
+xml:postepa|String|id="Checking if the plug-in is installed"	4b156d11e15984eef30aaeb99ac5462e
+xml:postepa|String|id="End point analysis failed"	39457ffd37c4bed68b567d16f176619e
+xml:postepa|String|id="Endpoint Analysis plug-in is either not launched/installed. Please launch or click on the download link provided."	59dab88bcae92e7eb11fcda03cdb2597
+xml:postepa|String|id="For further help or information, contact your help desk or system administrator."	b394b3f46d3d148e8afa920525614a3f
+xml:postepa|String|id="If you do not want your device checked, click Skip Check."	5c587056af8d0e8696c155ec40ee0625
+xml:postepa|String|id="Internal Error"	96d89f220262fbc555cd17d0b62c9dd0
+xml:postepa|String|id="Manual start of the Endpoint Analysis plug-in failed as it is not installed. Please click Download to install the plug-in."	aea724b7dacb2504585245860a80dbe6
+xml:postepa|String|id="Please "	ff4b7b2c2544cb4ec8712d08c0b5473b
+xml:postepa|String|id="The Access Gateway must confirm that you have the minimum requirements on your device before you can log on."	03c1c2a540e35e095eab6367d8d9167b
+xml:postepa|String|id="The Endpoint Analysis Plug-in failed to start. "	a67a97803ddbb3deae2fbf2fc4066e06
+xml:postepa|String|id="The user skipped the scan"	a5960eaa51b5ed0625b1b7dddcc2a261
+xml:postepa|String|id="To begin the check, click the yellow bar on the top of the page and follow the instructions."	13aff89eeddb3658502c287bafb3e808
+xml:postepa|String|id="To install or upgrade the software, click Download."	a5ddce35974c7accfd2a01268fa6d349
+xml:postepa|String|id="You can "	a01284831b25369be655c447cc5d2d34
+xml:postepa|String|id="You do not have the latest version of Endpoint Analysis plug-in installed. Please download the updated plug-in from the link provided"	f0e27ee1af70cccd7376b6df6231198a
+xml:postepa|String|id="Your device is checked automatically if the NetScaler Endpoint Analysis Plug-in software is already installed."	0dd0c7a46beb8592219c43e35eb2fb79
+xml:postepa|String|id="secs"	975a85a4ffa56e23c70e2bbeaf405ac7
+xml:postepa|Title|	31804826e3dfd0d75fbc454614912764
+xml:rmbm|Property|id="Button_Cancel" property="value"	ea4788705e6873b424c65e91c2846b19
+xml:rmbm|Property|id="Button_Remove" property="value"	1063e38cb53d94d386f21227fcd84717
+xml:rmbm|String|id="Remove Bookmarks"	44f4987b66e4f778bd9306fd77aaaaae
+xml:rmbm|String|id="To remove a bookmark, select it and click Remove."	2ff295ec534c4fe62b94813c26b5dac9
+xml:rmbm|String|id="When a bookmark is removed, it cannot be retrieved."	26f7b76543f89c7fdfa55679e6e4be92
+xml:rmbm|String|id="none"	334c4a4c42fdb79d7ebc3e73b517e6f8
+xml:rmbm|Title|	31804826e3dfd0d75fbc454614912764
+xml:tips|String|id="id_NextTip"	90b6de98c42963b9d7d0a7571a923465
+xml:tips|String|id="tip_0"	666dac88cc792c20b611c0d19b3ea419
+xml:tips|String|id="tip_1"	51ce8f440cd8d6cc09c4e530223e03e0
+xml:tips|String|id="tip_10"	34d5b430c5e5c6a9e0c543eaf315db52
+xml:tips|String|id="tip_11"	3a9ad7e308a55dcbf6a253321eb46e0f
+xml:tips|String|id="tip_12"	25fb17f29af9df483ff2dbe269fb5d7e
+xml:tips|String|id="tip_13"	0f703f6357050ed6977783aa39397f61
+xml:tips|String|id="tip_14"	728628abe91a4cb5cbe3a703eb0dd716
+xml:tips|String|id="tip_15"	c6da618e94f048a9e53c6fdff85a959c
+xml:tips|String|id="tip_16"	50d998d9f949f9ea71888be679dddc10
+xml:tips|String|id="tip_17"	9d0887bc91d965f0bf05ec78090187fb
+xml:tips|String|id="tip_18"	8a5f810372622f70c20b2ba9609631f8
+xml:tips|String|id="tip_19"	37cc782df19929b7816a66f47cb5b53e
+xml:tips|String|id="tip_2"	001975eb1ecc4f85b9f1d35ba91af468
+xml:tips|String|id="tip_20"	489a6ca60172fb2e5e767e7230e623ad
+xml:tips|String|id="tip_21"	8614b789aa12ac222d2929a3a4fe0c30
+xml:tips|String|id="tip_22"	4d3cbae4333d457af439baf1742c0d6b
+xml:tips|String|id="tip_3"	35885a64f9ef75fff0f63e713b77c2d5
+xml:tips|String|id="tip_4"	caee513c5b7cfc06b3104c49631c6c1f
+xml:tips|String|id="tip_5"	ecbdba08eff31172ce5ca27781b895d1
+xml:tips|String|id="tip_6"	38b31b3cdede5d1bb68b0b45b6c8558e
+xml:tips|String|id="tip_7"	20a83e4e58b94b24d9fa0df2b3263bbd
+xml:tips|String|id="tip_8"	b7fc56e4e04c4d6719642410664393a5
+xml:tips|String|id="tip_9"	e0e5fcc6dbbac0babf2f6c3e3a793464

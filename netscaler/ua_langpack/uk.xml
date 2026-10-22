@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- UA_LANGPACK: Ukrainian language pack, https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler -->
+<Resources>
+  <Partition id="locale">
+    <String id="ShortDateFormat">dd.MM.yyyy</String>
+    <String id="ShortTimeFormat">H:mm</String>
+  </Partition>
+  <Partition id="epa">
+    <Title>NetScaler Gateway</Title>
+    <String id="Internal Error">Внутрішня помилка</String>
+    <String id="Err3006">Не вдалося запустити плагін. &lt;BR&gt;Зверніться до служби підтримки або системного адміністратора.</String>
+    <String id="You are downgrading the NetScaler Endpoint Analysis Client">Ви встановлюєте попередню версію клієнта NetScaler Endpoint Analysis.\nВікно браузера Internet Explorer закриється автоматично.\nЩоб увійти, знову відкрийте Internet Explorer.</String>
+    <String id="loginAgentCdaHeaderText">Перевірка конфігурації вашого пристрою</String>
+    <String id="The Access Gateway must confirm that you have the minimum requirements on your device before you can log on."> Перед підключенням до внутрішньої мережі вашої організації потрібно перевірити, чи відповідає ваш комп'ютер певним вимогам.</String>
+    <String id="To begin the check, click the yellow bar on the top of the page and follow the instructions.">Щоб почати перевірку, клацніть жовту панель угорі сторінки й дотримуйтеся вказівок.</String>
+    <String id="To install or upgrade the software, click Download.">  &amp;nbsp; </String>
+    <String id="Your device is checked automatically if the NetScaler Endpoint Analysis Plug-in software is already installed.">Завантажте програму, яка виконує цю перевірку.</String>
+    <String id="AppINFO">Перевірка, чи встановлено плагін</String>
+    <String id="Checking if the plug-in is installed">Перевірка, чи встановлено плагін</String>
+    <String id="secs">сек.</String>
+    <String id="You do not have the latest version of Endpoint Analysis plug-in installed. Please download the updated plug-in from the link provided">Не встановлено останню версію плагіна Endpoint Analysis. Завантажте оновлений плагін за наданим посиланням</String>
+    <String id="Endpoint Analysis plug-in is either not launched/installed. Please launch or click on the download link provided.">Плагін Endpoint Analysis не запущено або не встановлено. Запустіть його або скористайтеся наданим посиланням для завантаження.</String>
+    <String id="End point analysis failed">Помилка аналізу пристрою</String>
+    <String id="If you do not want your device checked, click Skip Check.">  &amp;nbsp;  </String>
+    <Property id="downloadbutton" property="value">Завантажити</Property>
+    <Property id="skipbutton" property="value">Пропустити перевірку</Property>
+    <String id="This client machine does not match the required security">Цей комп'ютер не відповідає вимогам безпеки</String>
+    <String id="Bad response from server for scan results">Неправильна відповідь сервера на результати сканування</String>
+    <String id="Bad response from server for Post">Неправильна відповідь сервера на запит POST</String>
+    <String id="Failed to generate scan results">Не вдалося сформувати результати сканування</String>
+    <String id="Failed to fetch scans from server">Не вдалося отримати перевірки із сервера</String>
+    <String id="Device certificate check failed">Не вдалося перевірити сертифікат пристрою</String>
+    <String id="Bad response from Server for version check">Неправильна відповідь сервера під час перевірки версії</String>
+    <String id="ClassicEpa not supported from browser">Класичний EPA не підтримується в браузері</String>
+    <String id="Bad response from Server for Get /epatype">Неправильна відповідь сервера на запит GET /epatype</String>
+  </Partition>
+  <Partition id="epaerrorpage">
+    <Title>NetScaler Gateway: помилка застосунку</Title>
+    <String id="Access Denied">Доступ заборонено</String>
+    <String id="Your device does not meet the requirements for logging on.">Ваш пристрій не відповідає вимогам для входу в захищену мережу.</String>
+    <String id="For more information, contact your help desk and provide the following information:">Щоб дізнатися більше, зверніться до служби підтримки або системного адміністратора.</String>
+    <String id="Provide the following information to your support personnel:">Надайте працівникам служби підтримки таку інформацію:</String>
+    <String id="Date">Дата:</String>
+    <String id="Time">Час:</String>
+    <String id="Error">Помилка:</String>
+    <String id="To check your device again, click Back.">Щоб перевірити пристрій ще раз, натисніть «Назад».</String>
+    <Property id="Button1" property="value">Назад</Property>
+  </Partition>
+  <Partition id="postepa">
+    <Title>NetScaler Gateway</Title>
+    <String id="Internal Error">Внутрішня помилка</String>
+    <String id="Please ">Будь ласка,</String>
+    <String id="(Please) use the Access Gateway Plug-in to run the check of your device. ">скористайтеся&amp;nbsp;плагіном&amp;nbsp;NetScaler&amp;nbsp;Gateway&lt;/A&gt;, щоб перевірити свій пристрій.</String>
+    <String id="For further help or information, contact your help desk or system administrator.">Щоб отримати допомогу або додаткову інформацію, зверніться до служби підтримки або системного адміністратора.</String>
+    <String id="The Endpoint Analysis Plug-in failed to start. ">Не вдалося запустити плагін Endpoint Analysis.</String>
+    <String id="You can ">Ви можете</String>
+    <String id="(You can) use the Access Gateway Plug-in to run the check of your device. ">скористатися&amp;nbsp;плагіном&amp;nbsp;NetScaler&amp;nbsp;Gateway&lt;/A&gt;, щоб перевірити свій пристрій.</String>
+    <String id="The user skipped the scan">Користувач пропустив перевірку</String>
+    <String iD="You are downgrading the NetScaler Endpoint Analysis Client to an earlier version.">Ви встановлюєте попередню версію клієнта NetScaler Endpoint Analysis.\nВікно браузера Internet Explorer закриється автоматично.\nЩоб увійти, знову відкрийте Internet Explorer.</String>
+    <String id="Checking Your Device">Перевірка конфігурації вашого пристрою</String>
+    <String id="The Access Gateway must confirm that you have the minimum requirements on your device before you can log on.">Перед підключенням до внутрішньої мережі вашої організації потрібно перевірити, чи відповідає ваш комп'ютер певним вимогам.</String>
+    <String id="To begin the check, click the yellow bar on the top of the page and follow the instructions.">Щоб почати перевірку, клацніть жовту панель угорі сторінки й дотримуйтеся вказівок.</String>
+    <String id="To install or upgrade the software, click Download.">  &amp;nbsp;  </String>
+    <String id="Your device is checked automatically if the NetScaler Endpoint Analysis Plug-in software is already installed.">Завантажте програму, яка виконує цю перевірку.</String>
+    <String id="AppINFO">Перевірка, чи встановлено плагін</String>
+    <String id="secs">сек.</String>
+    <String id="Checking if the plug-in is installed">Перевірка, чи встановлено плагін</String>
+    <String id="You do not have the latest version of Endpoint Analysis plug-in installed. Please download the updated plug-in from the link provided">Не встановлено останню версію плагіна Endpoint Analysis. Завантажте оновлений плагін за наданим посиланням</String>
+    <String id="Manual start of the Endpoint Analysis plug-in failed as it is not installed. Please click Download to install the plug-in.">Не вдалося запустити плагін Endpoint Analysis вручну, оскільки його не встановлено. Натисніть «Завантажити», щоб установити плагін.</String>
+    <String id="Endpoint Analysis plug-in is either not launched/installed. Please launch or click on the download link provided.">Плагін Endpoint Analysis не запущено або не встановлено. Запустіть його або скористайтеся наданим посиланням для завантаження.</String>
+    <String id="Automatic start of the Endpoint Analysis plug-in failed. Please click Launch to manually start the plug-in.">Не вдалося автоматично запустити плагін Endpoint Analysis. Натисніть «Запустити», щоб запустити плагін вручну.</String>
+    <String id="End point analysis failed">Помилка аналізу пристрою</String>
+    <String id="If you do not want your device checked, click Skip Check."> &amp;nbsp; </String>
+    <Property id="downloadbutton" property="value">Завантажити</Property>
+    <Property id="skipbutton" property="value">Пропустити перевірку</Property>
+    <Property id="launchbutton" property="value">Запустити</Property>
+  </Partition>
+  <Partition id="logon">
+    <Title>NetScaler Gateway</Title>
+    <String id="Welcome">Ласкаво просимо</String>
+    <String id="ctl08_loginAgentCdaHeaderText2">Щоб продовжити, увійдіть у систему.</String>
+    <String id="User_name">Ім'я користувача</String>
+    <Property id="Enter user name" property="title">Введіть ім'я користувача</Property>
+    <String id="Password">Пароль</String>
+    <Property id="passwd" property="title">Введіть пароль</Property>
+    <String id="Password2">Пароль 2</String>
+    <Property id="passwd1" property="title">Введіть код доступу</Property>
+    <String id="Enter password">Введіть пароль</String>
+    <Property id="Log_On" property="value">Увійти</Property>
+    <String id="You need to enter login name">Потрібно ввести ім'я для входу</String>
+    <String id="You need to enter passwd">Потрібно ввести пароль</String>
+	<String id="Enter_password2_Alert">Потрібно ввести другий пароль</String>
+	<String id="domain">Домен</String>
+	<String id="eula_title">Ліцензійна угода з кінцевим користувачем</String>
+	<String id="eula_agreement">Я приймаю&amp;nbsp;</String>
+	<String id="terms">Умови&amp;nbsp;використання</String>
+    <String id="errorMessageLabelBase">errorMessageLabel</String>
+    <String id="eulaback">Назад</String>
+    <String id="errorMessageLabel4001">Неправильні облікові дані. Спробуйте ще раз.</String>
+    <String id="errorMessageLabel4002">Зараз у вас немає дозволу на вхід.</String>
+    <String id="errorMessageLabel4003">Не вдається підключитися до сервера. Спробуйте підключитися ще раз за кілька хвилин.</String>
+    <String id="errorMessageLabel4004">Не вдається підключитися. Спробуйте підключитися ще раз.</String>
+    <String id="errorMessageLabel4005">Не вдається підключитися. Спробуйте підключитися ще раз.</String>
+    <String id="errorMessageLabel4006">Неправильне ім'я користувача.</String>
+    <String id="errorMessageLabel4007">Неправильний пароль.</String>
+    <String id="errorMessageLabel4008">Паролі не збігаються.</String>
+    <String id="errorMessageLabel4009">Користувача не знайдено.</String>
+    <String id="errorMessageLabel4010">Зараз у вас немає дозволу на вхід.</String>
+    <String id="errorMessageLabel4011">Ваш обліковий запис вимкнено.</String>
+    <String id="errorMessageLabel4012">Термін дії вашого пароля минув.</String>
+    <String id="errorMessageLabel4013">У вас немає дозволу на вхід.</String>
+    <String id="errorMessageLabel4014">Не вдалося змінити пароль.</String>
+    <String id="errorMessageLabel4015">Ваш обліковий запис тимчасово заблоковано.</String>
+    <String id="errorMessageLabel4016">Не вдалося оновити пароль. Пароль має відповідати вимогам домену щодо довжини, складності та історії паролів.</String>
+    <String id="errorMessageLabel4017">Не вдається обробити ваш запит.</String>
+    <String id="errorMessageLabel4018">Ваш пристрій не відповідає вимогам відповідності. Зверніться до адміністратора.</String>
+    <String id="errorMessageLabel4019">Ваш пристрій не є керованим. Зверніться до адміністратора.</String>
+    <String id="errorMessageLabel4021">Термін дії вашого облікового запису минув.</String>
+    <String id="errorMessageLabel4027">Контрольні запитання та відповіді не зареєстровано</String>
+
+    <String id="errorMessageLabelMax">4027</String>
+  </Partition>
+  <Partition id="loading">
+    <Title>NetScaler Gateway</Title>
+    <String id="One Moment Please">Зачекайте, будь ласка</String>
+    <String id="Loading...">Завантаження...</String>
+  </Partition>
+  <Partition id="changepwd">
+    <Title>NetScaler Gateway</Title>
+    <String id="Error0">Не вдалося змінити пароль. Переконайтеся, що поточний пароль указано правильно, і спробуйте ще раз.</String>
+    <String id="Error1">Під час спроби змінити ваш пароль у NetScaler Gateway сталася помилка. Спробуйте ще раз.</String>
+    <String id="Error2">Вам не дозволено змінювати пароль. Зверніться до служби підтримки або системного адміністратора.</String>
+    <String id="Error3">Щоб змінити пароль, заповніть усі поля.&lt;BR&gt;</String>
+    <String id="Error4">Новий пароль і підтвердження не збігаються. Спробуйте ще раз.</String>
+    <String id="Error5">У NetScaler Gateway виникла непередбачена ситуація. Зверніться до служби підтримки або системного адміністратора.</String>
+    <String id="The password change failed. Please try again.">Не вдалося змінити пароль. Спробуйте ще раз.&lt;BR&gt;</String>
+    <String id="infoMessage">Якщо ви не хочете змінювати пароль, натисніть «Скасувати», щоб повернутися на головну сторінку.</String>
+    <String id="Change Password">Зміна пароля</String>
+    <String id="For more information about changing your password, contact your help desk or system administrator.">Щоб дізнатися більше про зміну пароля, зверніться до служби підтримки або системного адміністратора.</String>
+    <String id="labelUsername">Ім'я користувача:</String>
+    <String id="labelOldPassword">Старий пароль:</String>
+    <String id="labelNewPassword">Новий пароль:</String>
+    <String id="labelConfirmedPassword">Підтвердьте новий пароль:</String>
+    <Property id="Submit" property="value">Надіслати</Property>
+    <Property id="Cancel" property="value">Скасувати</Property>
+  </Partition>
+  <Partition id="chpwdsuccess">
+    <Title>NetScaler Gateway</Title>
+    <String id="successMessage"> Ваш пароль змінено.</String>
+    <Property id="Continue" property="value">Продовжити</Property>
+  </Partition>
+  <Partition id="logout">
+    <Title>NetScaler Gateway</Title>
+    <String id="ctl10_cdaHeaderText">Вихід</String>
+    <String id="Logoff is successful.">Вихід успішно виконано.</String>
+	<Property id="Log_On" property="value">Увійти</Property>
+  </Partition>
+  <Partition id="VPN_ERRORS">
+    <String id="You are not allowed to login.">Вам не дозволено входити в систему.</String>
+    <String id="Please contact your administrator.">Зверніться до адміністратора.</String>
+    <String id="Target URL not found for redirect after successful login.">Не знайдено цільову URL-адресу для переспрямування після успішного входу.</String>
+    <String id="SAML 2 Factor must always have an active policy in primary cascade.">У первинному каскаді для SAML 2 Factor завжди має бути активна політика.</String>
+    <String id="You have exceeded the maximum login attempts.">Ви перевищили максимальну кількість спроб входу.</String>
+    <String id="No active policy is found in Primary authentication cascade">У первинному каскаді автентифікації не знайдено активної політики</String>
+    <String id="No active policy is found in Secondary authentication cascade">У вторинному каскаді автентифікації не знайдено активної політики</String>
+    <String id="No active policy is found in Tertiary authentication cascade">У третинному каскаді автентифікації не знайдено активної політики</String>
+    <String id="You cannot have active authentication enabled policies on secondary or tertiary cascades for 401 vserver.">Для віртуального сервера 401 не можна мати активні політики автентифікації у вторинному або третинному каскаді.</String>
+    <String id="No IntranetIP available. Please try login later.">Немає вільних IP-адрес внутрішньої мережі. Спробуйте увійти пізніше.</String>
+    <String id="Error: Access is Denied. Client SSL Certificate Required.">Помилка: доступ заборонено. Потрібен клієнтський сертифікат SSL.</String>
+    <String id="Error: Access is Denied. Client SSL Certificate Invalid.">Помилка: доступ заборонено. Клієнтський сертифікат SSL недійсний.</String>
+    <String id="Error: Access is Denied. Extraction from Client SSL Certificate Failed.">Помилка: доступ заборонено. Не вдалося отримати дані з клієнтського сертифіката SSL.</String>
+  </Partition>
+  <Partition id="VPN_REDIRECT_2000K">
+    <String id="Login Successful. Please click">Вхід успішно виконано. Клацніть</String>
+    <String id="here">тут,</String>
+    <String id="if you are not automatically redirected.">якщо вас не переспрямовано автоматично.</String>
+  </Partition>
+  <Partition id="AAATM_REDIRECT_FORM">
+    <String id="If you are not automatically redirected click ">Якщо вас не переспрямовано автоматично, натисніть</String>
+    <Property id="Continue" property="value">Продовжити</Property>
+    <String id="Trailing phrase after Continue button"></String>
+  </Partition>
+  <Partition id="REDIRECTION_BODY">
+    <String id="This object may be found ">Цей об'єкт можна знайти</String>
+    <String id="here">тут</String>
+    <String id="Trailing phrase after here"></String>
+  </Partition>
+  <Partition id="LOGOUT_OK_BODY">
+    <Title>Сторінку переміщено</Title>
+    <String id="Logout Succeeded">Вихід успішно виконано</String>
+  </Partition>
+  <Partition id="VPN_LICERR_BODY">
+    <String id="Error: Login exceeds maximum allowed users.">Помилка: перевищено максимальну дозволену кількість користувачів.</String>
+  </Partition>
+  <Partition id="FS_LOGIN_DNSERR_BODY">
+    <String id="Requested servername too long.">Запитане ім'я сервера задовге.</String>
+  </Partition>
+  <Partition id="NS_PING_DNS_ERR">
+    <Title>Форма ping</Title>
+    <String id="Server:">Сервер:</String>
+    <Property id="PingButton" property="value">Ping</Property>
+    <String id="Failed to resolve IP address">Не вдалося визначити IP-адресу</String>
+  </Partition>
+  <Partition id="DIALOGUE_HTML">
+    <Title>NetScaler Gateway</Title>
+    <String id="dialogueHeader">Потрібна додаткова інформація</String>
+    <String id="dialogueInfo">Введіть відповідь нижче.</String>
+    <String id="dialoguePasswordChange">Термін дії пароля минув. Введіть новий пароль.</String>
+    <String id="dialogueConfirmPassword">Підтвердьте пароль</String>
+    <Property id="SubmitButton" property="value">Надіслати</Property>
+  </Partition>
+  <Partition id="TRANSFER_RSP">
+    <Title>NetScaler Gateway</Title>
+    <String id="heading">Перенесення входу</String>
+    <String id="You are currently logged on to the Access Gateway on another device.">Ви вже ввійшли в NetScaler Gateway на іншому пристрої.</String>
+    <String id="Would you like to end that session?">Завершити той сеанс?</String>
+    <String id="You have reached the limit of the allowed Access Gateway sessions.">Ви досягли граничної кількості дозволених сеансів NetScaler Gateway.</String>
+    <String id="Please select which session to release in order to continue with this session.">Виберіть сеанс, який потрібно завершити, щоб продовжити цей сеанс.</String>
+    <String id="Intranet IP Address">IP-адреса у внутрішній мережі</String>
+    <String id="Idle Time">Час простою (Г:ХХ:СС)</String>
+    <Property id="TransferButton" property="value">Перенести</Property>
+    <Property id="CancelButton" property="value">Скасувати</Property>
+  </Partition>
+  <Partition id="choices">
+    <Title>NetScaler Gateway</Title>
+    <String id="Network Access">Мережевий доступ</String>
+    <String id="Connect with the Access Gateway Plug-in for ActiveX.">Підключитися за допомогою плагіна NetScaler Gateway для ActiveX.</String>
+    <String id="Connect with the Access Gateway Plug-in.">Підключитися за допомогою плагіна NetScaler Gateway.</String>
+    <String id="Connect with the Access Gateway Plug-in for Java.">Підключитися за допомогою плагіна NetScaler Gateway для Java.</String>
+    <String id="Connect with the Access Gateway Plug-in for MAC.">Підключитися за допомогою плагіна NetScaler Gateway для Mac.</String>
+    <String id="NetScaler XenApp">Доступ до віртуальних застосунків і робочих столів</String>
+    <String id="Connect with NetScaler XenApp Plug-in for Hosted Apps.">Виберіть, щоб отримати доступ до віртуальних застосунків і робочих столів організації через NetScaler Receiver.</String>
+    <String id="Clientless Access">Безклієнтський доступ</String>
+    <String id="Connect without the Access Gateway Plug-in.">Підключитися без плагіна NetScaler Gateway.</String>
+    <String id="Log Off">Вийти</String>
+    <String id="End your session.">Завершити сеанс.</String>
+    <String id="messageTitle">Виберіть один із варіантів:</String>
+	<String id="hello">Вітаємо,&amp;nbsp;&amp;nbsp;</String>
+	<String id="agent_description">Доступ до ресурсів організації через повноцінний VPN-клієнт на вашому пристрої. Якщо плагін ще не встановлено, вам буде запропоновано дозволити його встановлення. Використовуйте цей варіант лише на довіреному пристрої.</String>
+    <String id="cvpn_description">Виберіть безклієнтський режим, щоб отримати доступ до ресурсів через веб-браузер. Захищений доступ обмежено вікном браузера, у якому ви ввійшли у VPN. Використовуйте цей варіант на недовіреному пристрої.</String>
+  </Partition>
+  <Partition id="f_services">
+    <Title>NetScaler Gateway</Title>
+    <String id="NetScaler Gateway">NetScaler Gateway</String>
+    <String id="waitingmsg">Зачекайте, поки встановиться сеанс VPN.</String>
+    <String id="If the Access Gateway Plug-in is installed">Якщо плагін NetScaler Gateway встановлено, виберіть «Пуск &amp;gt; Усі програми &amp;gt; NetScaler &amp;gt; NetScaler Gateway», щоб запустити застосунок.</String>
+    <String id="If the Access Gateway Plug-in is not installed">Якщо плагін NetScaler Gateway не встановлено, натисніть «Завантажити», щоб установити програму й підключитися автоматично.</String>
+    <String id="If a proxy server is configured">Якщо налаштовано проксі-сервер, додайте «localhost» до винятків проксі-сервера у веб-браузері.</String>
+    <String id="For more information contact your help desk or system administrator.">Щоб дізнатися більше, зверніться до служби підтримки або системного адміністратора.</String>
+    <Property id="Button_Download" property="src">/vpns/images/Download.png</Property>
+    <String id="/vpns/images/Download_Hover.png">/vpns/images/Download_Hover.png</String>
+    <String id="/vpns/images/Download.png">/vpns/images/Download.png</String>
+    <String id="To install the Access Gateway Plug-in for Windows">Установлення плагіна NetScaler Gateway для Windows</String>
+    <String id="Click Download">1.  Натисніть &lt;B&gt;Завантажити&lt;/B&gt;.</String>
+    <String id="In the File Download dialog box, click Run.">2.  У діалоговому вікні завантаження файлу натисніть &lt;B&gt;Запустити&lt;/B&gt;.</String>
+    <String id="In the Internet Explorer dialog box, click Run to install the Access Gateway Plug-in for Windows.">3.  У діалоговому вікні браузера натисніть &lt;B&gt;Запустити&lt;/B&gt;, щоб установити плагін NetScaler Gateway для Windows.</String>
+    <String id="The Access Gateway Plug-in is not supported on your operating system.">Плагін NetScaler Gateway не підтримується у вашій операційній системі.</String>
+    <String id="To connect to the Access Gateway Plug-in, you need to install some software.">Щоб підключитися через плагін NetScaler Gateway, потрібно встановити програмне забезпечення.</String>
+  </Partition>
+  <Partition id="f_ndisagent">
+    <Title>NetScaler Gateway</Title>
+    <String id="Citrix_Access_Gateway">NetScaler Gateway</String>
+    <String id="If_the_Access_Gateway_Plugin_is_installed">Якщо плагін NetScaler Gateway встановлено, але не запущено, виберіть «Пуск &amp;gt; Усі програми &amp;gt; NetScaler &amp;gt; NetScaler Gateway», щоб запустити застосунок.</String>
+    <String id="If_the_Access_Gateway_Plugin_is_not_installed">Якщо плагін NetScaler Gateway не встановлено, натисніть «Завантажити», щоб установити програму й підключитися автоматично.</String>
+    <String id="waitingmsg">Зачекайте, поки встановиться сеанс VPN.</String>
+    <String id="If_a_proxy_server_is_configured">Якщо налаштовано проксі-сервер, додайте «localhost» до винятків проксі-сервера у веб-браузері.</String>
+    <String id="For_more_information_contact_your_help_desk_or_system_administrator">Щоб дізнатися більше, зверніться до служби підтримки або системного адміністратора.</String>
+    <Property id="Download" property="value">Завантажити</Property>
+	<Property id="Button_Download" property="src">/vpns/images/Download.png</Property>
+    <String id="/vpns/images/Download_Hoverpng">/vpns/images/Download_Hover.png</String>
+    <String id="/vpns/images/Downloadpng">/vpns/images/Download.png</String>
+    <String id="To_install_the_Access_Gateway_Plugin_for_Windows">Установлення плагіна NetScaler Gateway для Windows</String>
+    <String id="Click_Download">1.  Натисніть &lt;B&gt;Завантажити&lt;/B&gt;.</String>
+    <String id="In_the_File_Download_dialog_box_click_Run">2.  У діалоговому вікні завантаження файлу натисніть &lt;B&gt;Запустити&lt;/B&gt;.</String>
+    <String id="In_the_Internet_Explorer_dialog_box_click_Run_to_install_the_Access_Gateway_Plugin_for_Windows">3.  У діалоговому вікні браузера натисніть &lt;B&gt;Запустити&lt;/B&gt;, щоб установити плагін NetScaler Gateway для Windows.</String>
+	<String id="AppINFO">Перевірка, чи встановлено плагін</String>
+    <String id="secs">сек.</String>
+  </Partition>
+  <Partition id="m_services">
+    <Title>NetScaler Gateway</Title>
+    <String id="NetScaler Gateway">NetScaler Gateway</String>
+    <String id="Please wait for the VPN session to be established.">Зачекайте, поки встановиться сеанс VPN.</String>
+    <String id="This is a beta version of Access Gateway Plug-in for Mac OS X.">Це бета-версія плагіна NetScaler Gateway для Mac OS X.</String>
+    <String id="If the Plug-in is installed">Якщо плагін встановлено, виберіть «Програми -&amp;gt; NetScaler Gateway», щоб увійти.</String>
+    <String id="If the Linux-Plug-in is installed">Якщо клієнт NetScaler Gateway (nsgclient) встановлено, відкрийте «Dashboard -&amp;gt; nsgclient», щоб увійти.</String>
+	<String id="Your administrator requires you to use CSA">Адміністратор вимагає використовувати Citrix Secure Access для автентифікації та доступу.</String>
+    <String id="If the Access Gateway Plug-in is not installed">Відкрийте App Store, знайдіть Citrix Secure Access і натисніть «Отримати», щоб завантажити.</String>
+	<String id="Contact your system administrator">Якщо проблема не зникає, зверніться до системного адміністратора.</String>
+    <String id="Launch button description">Якщо плагін уже встановлено, натисніть кнопку «Запустити», щоб запустити його вручну.</String>
+	  <String id="If the Access Gateway Linux-Plug-in is not installed">Якщо клієнт NetScaler Gateway не встановлено, натисніть «Завантажити» й установіть пакет debian, щоб підключитися автоматично.</String>
+    <String id="If a proxy server is configured">Якщо налаштовано проксі-сервер, додайте «localhost» до винятків проксі-сервера у веб-браузері.</String>
+    <String id="If a proxy server is configured Linux">Якщо налаштовано проксі-сервер, додайте «localhost» до винятків проксі-сервера у веб-браузері.</String>
+    <String id="For more information contact your help desk or system administrator.">Щоб дізнатися більше, зверніться до служби підтримки або системного адміністратора.</String>
+    <String id="Checking if the plug-in is installed">Перевірка, чи встановлено плагін</String>
+    <String id="secs">сек.</String>
+    <Property id="Download" property="value">Завантажити</Property>
+    <Property id="Download_Ubuntu" property="value">Завантажити для попередніх версій Ubuntu</Property>
+	  <Property id="Button_Download" property="src">/vpns/images/Download.png</Property>
+    <String id="/vpns/images/Download_Hover.png">/vpns/images/Download_Hover.png</String>
+    <String id="/vpns/images/Download.png">/vpns/images/Download.png</String>
+    <String id="To install the Access Gateway Plug-in for Mac OS X">Установлення плагіна NetScaler Gateway для Mac OS X</String>
+    <String id="To install the Netscaler Access Gateway Client for Linux">Установлення клієнта NetScaler Gateway для Linux (зараз підтримується в Ubuntu)</String>
+    <String id="Click Download">1.  Натисніть &lt;B&gt;Завантажити&lt;/B&gt;.</String>
+    <String id="In the File Download dialog box, click Run.">2.  У діалоговому вікні завантаження файлу натисніть &lt;B&gt;Запустити&lt;/B&gt;.</String>
+    <String id="Linux install using software center">2.  Установіть завантажений пакет debian за допомогою Ubuntu Software Center</String>
+    <String id="In the Web browser dialog box, click Run to start the installaTion.">3.  У діалоговому вікні веб-браузера натисніть &lt;B&gt;Запустити&lt;/B&gt;, щоб почати встановлення.</String>
+  </Partition>
+  <Partition id="f_services1">
+    <Title>NetScaler Gateway</Title>
+    <String id="NetScaler Gateway">NetScaler Gateway</String>
+    <String id="If the Access Gateway Plug-in for ActiveX does not start automatically">Якщо плагін NetScaler Gateway для ActiveX не запускається автоматично, ви можете відкрити &lt;A HREF="/vpns/app.html" onclick="ns_loadsessionwindow(); return false;"&gt;вікно сеансу NetScaler Gateway&lt;/A&gt; вручну.</String>
+    <String id="Please click here to download Secure Access client to this Pocket PC">&lt;A HREF="/vpns/scripts/ARM/nsvpnc.exe"&gt;Клацніть тут&lt;/A&gt;, щоб завантажити плагін NetScaler на цей Pocket PC, потім запустіть клієнт, щоб увійти на вебсайт Secure Access.</String>
+    <String id="The Access Gateway Plug-in is not supported on your operating system.">Плагін NetScaler Gateway не підтримується у вашій операційній системі.</String>
+    <String id="For further help or information, contact your help desk or system administrator.">Щоб отримати допомогу або додаткову інформацію, зверніться до служби підтримки або системного адміністратора.</String>
+  </Partition>
+  <Partition id="app">
+    <Title>NetScaler Gateway</Title>
+    <String id="Err3001">Ви вже ввійшли в NetScaler Gateway.</String>
+    <String id="Err3002">Ви не ввійшли в NetScaler Gateway.</String>
+    <String id="Err3003">NetScaler Gateway підтримує Internet Explorer 4 і новіші версії.</String>
+    <String id="Err3004">Не вдалося завантажити плагін. Зверніться до адміністратора NetScaler Gateway.</String>
+    <String id="Err3005">Не вдалося активувати ActiveX. Зверніться до адміністратора NetScaler Gateway.</String>
+    <String id="Navigating away from this page ends your session.">Якщо ви залишите цю сторінку, сеанс завершиться.</String>
+    <String id="Home">Головна</String>
+    <String id="File Transfer">Передавання файлів</String>
+    <String id="Configuration">Конфігурація</String>
+    <String id="Help">Довідка</String>
+    <String id="Logoff">Вийти</String>
+  </Partition>
+  <Partition id="err2002">
+    <Title>Портал NetScaler Gateway</Title>
+    <String id="errortitle">Помилка 2002: потрібно встановити dsclient.exe.</String>
+    <String id="info">NetScaler виявив, що на вашому комп'ютері не встановлено dsclient.exe. Це програмне забезпечення Microsoft потрібне NetScaler Gateway для шифрування та розшифрування. &lt;A HREF="/" onclick="return ns_doupdate();"&gt;Клацніть тут&lt;/A&gt;, щоб установити його. Дотримуйтеся вказівок, щоб завершити встановлення, перезавантажте комп'ютер і знову ввійдіть у систему.</String>
+    <String id="footer">Авторське право &amp;copy;2004 NetScaler, Inc. Усі права захищені.</String>
+  </Partition>
+  <Partition id="err2004">
+    <Title>Портал NetScaler Gateway</Title>
+    <String id="errortitle">Помилка 2004: не встановлено обов'язкове програмне забезпечення безпеки пристрою.</String>
+    <String id="info">Адміністратор вимагає, щоб для доступу до NetScaler Gateway ваш комп'ютер був захищений програмним забезпеченням безпеки. NetScaler Gateway виявив, що ваш комп'ютер не відповідає цій вимозі. Обов'язковим програмним забезпеченням безпеки може бути персональний брандмауер, антивірус, захист від зломів або спеціальний застосунок.&lt;P&gt;Помилка &lt;I&gt;2004&lt;/I&gt;: на цьому комп'ютері не встановлено програмне забезпечення безпеки. Зверніться до адміністратора, щоб установити його.</String>
+    <String id="footer">Авторське право &amp;copy;2004 NetScaler, Inc. Усі права захищені.</String>
+  </Partition>
+  <Partition id="err2005">
+    <Title>Портал NetScaler Gateway</Title>
+    <String id="errortitle">Помилка 2005: обов'язкове програмне забезпечення безпеки пристрою потребує оновлення.</String>
+    <String id="info">Адміністратор вимагає, щоб для доступу до NetScaler Gateway ваш комп'ютер був захищений програмним забезпеченням безпеки. NetScaler Gateway виявив, що ваш комп'ютер не відповідає цій вимозі. Обов'язковим програмним забезпеченням безпеки може бути персональний брандмауер, антивірус, захист від зломів або спеціальний застосунок.&lt;P&gt;Помилка &lt;I&gt;2005&lt;/I&gt;: версія встановленого на цьому комп'ютері програмного забезпечення безпеки не відповідає вимогам. Зверніться до адміністратора, щоб оновити його.</String>
+    <String id="footer">Авторське право &amp;copy;2004 NetScaler, Inc. Усі права захищені.</String>
+  </Partition>
+  <Partition id="err2006">
+    <Title>Портал NetScaler Gateway</Title>
+    <String id="errortitle">Помилка 2006: обов'язкове програмне забезпечення безпеки пристрою не активовано.</String>
+    <String id="info">Адміністратор вимагає, щоб для доступу до NetScaler Gateway ваш комп'ютер був захищений програмним забезпеченням безпеки. NetScaler Gateway виявив, що ваш комп'ютер не відповідає цій вимозі. Обов'язковим програмним забезпеченням безпеки може бути персональний брандмауер, антивірус, захист від зломів або спеціальний застосунок.&lt;P&gt;Помилка &lt;I&gt;2006&lt;/I&gt;: програмне забезпечення безпеки встановлено на цьому комп'ютері, але зараз не активовано. Активуйте обов'язкове програмне забезпечення безпеки.</String>
+    <String id="footer">Авторське право &amp;copy;2004 NetScaler, Inc. Усі права захищені.</String>
+  </Partition>
+  <Partition id="portal">
+    <Title>NetScaler Gateway</Title>
+    <String id="ctl00_applications_label">Застосунки</String>
+    <String id="ctl00_ping_label">Ping</String>
+    <String id="ctl00_tip_label">Порада</String>
+    <String id="ctl00_help_label">Довідка</String>
+    <String id="ctl00_webSites_label">Вебсайти</String>
+    <String id="ctl00_fileShares_label">Спільні папки</String>
+    <String id="id_Home">Головна</String>
+    <String id="id_Email">Електронна пошта</String>
+    <String id="id_FileTransfer">Передавання файлів</String>
+    <Property id="id_ChangePassword" property="value">Змінити пароль</Property>
+    <Property id="id_LogOff" property="value">Вийти</Property>
+    <String id="id_UserGuide">Посібник користувача</String>
+    <Property id="id_UserGuide" property="href">/vpns/help/SAC_Windows/Title-Page.html</Property>
+  </Partition>
+  <Partition id="fsping">
+    <String id="ServerLabel">Сервер:</String>
+    <String id="Failed to resolve IP address for">Не вдалося визначити IP-адресу для:</String>
+    <String id="server">сервер</String>
+    <String id="is alive">доступний</String>
+    <String id="is not alive">недоступний</String>
+    <Property id="PingButton" property="value">Ping</Property>
+    <Property id="id_PingButton" property="value">Надіслати</Property>
+  </Partition>
+  <Partition id="bookmark">
+    <String id="none">немає</String>
+    <String id="id_EnterpriseWebSites">Корпоративні вебсайти</String>
+    <String id="id_PersonalWebSites">Особисті вебсайти</String>
+    <String id="id_Add">Додати</String>
+    <String id="id_Remove">Видалити</String>
+  </Partition>
+  <Partition id="newbm">
+    <Title>NetScaler Gateway</Title>
+    <String id="Add a Bookmark">Додати закладку</String>
+    <String id="To add a Web site, type in the full address">Щоб додати вебсайт, введіть повну адресу, наприклад: http://my.company.com/.</String>
+    <String id="To add a file share, type in the server and folder name">Щоб додати спільну папку, введіть ім'я сервера й папки, наприклад: \\fileserver\foldername.</String>
+    <String id="To add a RDP Link info">Щоб додати посилання RDP, введіть IP-адресу або ім'я сервера й порт у форматі serverIP:port і встановіть прапорець «RDP Link».</String>
+    <String id="The maximum length of each field is 256 characters.">Максимальна довжина кожного поля — 256 символів.</String>
+    <String id="ctl10_labelUsername">Ім'я:</String>
+    <String id="ctl10_labelNewPassword">Адреса:</String>
+    <String id="ctl10_labelConfirmNewPassword">Опис:</String>
+    <String id="RDPLink">Посилання RDP</String>
+    <Property id="Button_Add" property="value">Додати</Property>
+    <Property id="Button_Cancel" property="value">Скасувати</Property>
+    <String id="You must provide a URL for your bookmark.">Для закладки потрібно вказати URL-адресу.</String>
+	<String id="Incorrect_FS_address">Функція спільних папок більше не підтримується.</String>
+    <String id="The bookmark contains invalid URI characters. Please enter a valid Web address.">Закладка містить неприпустимі символи URI. Введіть дійсну вебадресу.</String>
+    <String id="The bookmark is using the script tag, which is not allowed. Please enter a valid name.">У закладці використано тег &lt;script&gt;, що заборонено. Введіть дійсне ім'я.</String>
+    <String id="The bookmark is using the script tag, which is not allowed. Please enter a valid description.">У закладці використано тег &lt;script&gt;, що заборонено. Введіть дійсний опис.</String>
+  </Partition>
+  <Partition id="rmbm">
+    <Title>NetScaler Gateway</Title>
+    <String id="Remove Bookmarks">Видалити закладки</String>
+    <String id="To remove a bookmark, select it and click Remove.">Щоб видалити закладку, виберіть її та натисніть «Видалити».</String>
+    <String id="When a bookmark is removed, it cannot be retrieved.">Видалену закладку не можна відновити. Якщо закладку видалено випадково, створіть її знову за допомогою «Додати закладку».</String>
+    <Property id="Button_Remove" property="value">Видалити</Property>
+    <Property id="Button_Cancel" property="value">Скасувати</Property>
+    <String id="none">немає</String>
+  </Partition>
+  <Partition id="ftlist">
+    <String id="none">немає</String>
+    <String id="id_EnterpriseFileShares">Корпоративні спільні папки</String>
+    <String id="id_PersonalFileShares">Особисті спільні папки</String>
+    <String id="id_Add">Додати</String>
+    <String id="id_Remove">Видалити</String>
+  </Partition>
+  <Partition id="fslogin">
+    <Title>NetScaler Secure Access: віддалений захищений доступ до файлової системи</Title>
+  </Partition>
+  <Partition id="fsicons">
+    <String id="id_LogOn">Увійти</String>
+    <Property id="id_LogOnLink" property="title">Знайти сервер</Property>
+    <String id="id_Up">Вгору</String>
+    <Property id="id_UpLink" property="title">Перейти до батьківської папки</Property>
+    <String id="id_Refresh">Оновити</String>
+    <Property id="id_RefreshLink" property="title">Оновити цю папку</Property>
+    <String id="id_NewFolder">Нова&amp;nbsp;папка</String>
+    <Property id="id_NewFolderLink" property="title">Створити папку</Property>
+    <String id="id_Download">Завантажити</String>
+    <Property id="id_DownloadLink" property="title">Завантажити файл</Property>
+    <String id="id_Upload">Вивантажити</String>
+    <Property id="id_UploadLink" property="title">Вивантажити файл у поточну папку</Property>
+    <String id="id_Delete">Видалити</String>
+    <Property id="id_DeleteLink" property="title">Видалити файл або порожню папку</Property>
+    <String id="id_Rename">Перейменувати</String>
+    <Property id="id_RenameLink" property="title">Перейменувати файл або папку</Property>
+    <String id="id_LogOff">Вийти</String>
+    <Property id="id_LogOffLink" property="title">Вихід</Property>
+  </Partition>
+  <Partition id="fsaddress">
+    <String id="id_Address">Адреса:</String>
+  </Partition>
+  <Partition id="fsneighbor">
+    <String id="id_NetworkNeighborhood">Мережеве оточення</String>
+    <String id="id_Login">Ім'я для входу:</String>
+    <String id="id_Password">Пароль:</String>
+    <String id="id_Domain">Домен:</String>
+  </Partition>
+  <Partition id="fsgoto">
+    <String id="loading">Вхід...</String>
+    <String id="id_FileServer">Файловий сервер</String>
+    <String id="id_Address">Адреса:</String>
+    <String id="id_Username">Ім'я&amp;nbsp;користувача:</String>
+    <String id="id_Password">Пароль:</String>
+    <String id="id_Doamin">Домен:</String>
+    <Property id="id_LogOnButton" property="value">Увійти</Property>
+    <Property id="id_CancelButton" property="value">Скасувати</Property>
+    <String id="showLink">Ввести&amp;nbsp;облікові&amp;nbsp;дані</String>
+    <String id="hideLink">Приховати&amp;nbsp;облікові&amp;nbsp;дані</String>
+  </Partition>
+  <Partition id="fsgotoerror">
+    <String id="sentenceterminator">.</String>
+    <String id="Internal Error.">Внутрішня помилка.</String>
+    <String id="Wins IP is not configured.">IP-адресу WINS не налаштовано.</String>
+    <String id="Wins IP is not provided.">IP-адресу WINS не надано.</String>
+    <String id="Wins IP is neither provided nor configured.">IP-адресу WINS не надано й не налаштовано.</String>
+    <String id="Wins IP is provided in wrong format.">IP-адресу WINS надано в неправильному форматі.</String>
+    <String id="Need to login neighborhood first.">Спершу потрібно ввійти в мережеве оточення.</String>
+    <String id="Failed to connect.">Не вдалося підключитися.</String>
+    <String id="Failed to change directory.">Не вдалося змінити каталог.</String>
+    <String id="Failed to make a directory.">Не вдалося створити каталог.</String>
+    <String id="Failed to remove a directory.">Не вдалося видалити каталог.</String>
+    <String id="Failed to delete the file.">Не вдалося видалити файл.</String>
+    <String id="Failed to rename the file.">Не вдалося перейменувати файл.</String>
+    <String id="Failed to login.">Не вдалося ввійти.</String>
+    <String id="Last login session has been expired. Please login again.">Термін дії останнього сеансу минув. Увійдіть знову.</String>
+    <String id="Logoff is successful.">Вихід успішно виконано.</String>
+    <String id="Failed to open the file.">Не вдалося відкрити файл.</String>
+    <String id="Need to login SSL VPN first.">Спершу потрібно ввійти в NetScaler Gateway.</String>
+    <String id="Failed to parse URL, invalid URL.">Не вдалося розібрати URL-адресу: неправильна URL-адреса.</String>
+    <String id="Incorrect login credential to this server.">Неправильні облікові дані для цього сервера.</String>
+    <String id="Max length (512 bytes) of file system path is exceeded.">Перевищено максимальну довжину шляху у файловій системі (512 байтів).</String>
+    <String id="Failed to make TCP connection to the server.">Не вдалося встановити TCP-з'єднання із сервером.</String>
+    <String id="Failed to establish NetBios session to the server.">Не вдалося встановити сеанс NetBIOS із сервером.</String>
+    <String id="Failed to negatiate a protocol to the server.">Не вдалося узгодити протокол із сервером.</String>
+    <String id="Failed to setup a session to the server.">Не вдалося встановити сеанс із сервером.</String>
+    <String id="Failed to setup the tree connection to the server.">Не вдалося встановити з'єднання з ресурсом сервера.</String>
+    <String id="This feature is not supported">Ця функція не підтримується</String>
+    <String id="Failed to download shared folders list.">Не вдалося завантажити список спільних папок.</String>
+    <String id="Failed to create a file in the server due to existing file with the same name.">Не вдалося створити файл на сервері: файл із таким ім'ям уже існує.</String>
+    <String id="Failed to create file">Не вдалося створити файл</String>
+    <String id="Failed to list folder due to too many files in this directory.">Не вдалося показати вміст папки: у цьому каталозі забагато файлів.</String>
+    <String id="Failed to list neighborhood servers due to too many servers in this network.">Не вдалося показати сервери мережевого оточення: у цій мережі забагато серверів.</String>
+    <String id="Failed to list share folders due to too many share folders in this server.">Не вдалося показати спільні папки: на цьому сервері забагато спільних папок.</String>
+    <String id="There is no shared folder in this server">На цьому сервері немає спільних папок</String>
+    <String id="Failed to download file">Не вдалося завантажити файл</String>
+    <String id="Failed to get attributes">Не вдалося отримати атрибути</String>
+    <String id="sso failed">Помилка SSO</String>
+    <String id="Error: Access is Denied.">Помилка: доступ заборонено.</String>
+    <String id="Error: Not a privileged User.">Помилка: користувач не має привілеїв.</String>
+    <String id="Error: File system authorization failed.">Помилка: не вдалося авторизуватися у файловій системі.</String>
+    <String id="Error:Session has expired">Помилка: термін дії сеансу минув</String>
+    <String id="Error: Login exceeds maximum allowed users.">Помилка: перевищено максимальну дозволену кількість користувачів.</String>
+    <String id="Error: Access is Denied. Client SSL Certificate Required.">Помилка: доступ заборонено. Потрібен клієнтський сертифікат SSL.</String>
+    <String id="Error: Access is Denied. Client SSL Certificate Invalid.">Помилка: доступ заборонено. Клієнтський сертифікат SSL недійсний.</String>
+    <String id="Error: Access is Denied. Extraction from Client SSL Certificate Failed.">Помилка: доступ заборонено. Не вдалося отримати дані з клієнтського сертифіката SSL.</String>
+    <String id="Error: AAA feature not enabled.">Помилка: функцію AAA не ввімкнено.</String>
+  </Partition>
+  <Partition id="nscode">
+    <String id="Name">Ім'я</String>
+    <String id="Size">Розмір</String>
+    <String id="Type">Тип</String>
+    <String id="Modified">Змінено</String>
+    <String id="file">файл</String>
+    <String id="folder">папка</String>
+    <String id="Loading...">Завантаження...</String>
+    <String id="There is no up folder">Батьківської папки немає</String>
+    <String id="Please choose a file to be downloaded first.">Спершу виберіть файл для завантаження.</String>
+    <String id="The feature to download a folder is not supported.">Завантаження папок не підтримується.</String>
+    <String id="Cannot upload a file into root directory.">Не можна вивантажити файл у кореневий каталог.</String>
+    <String id="Cannot create a directory in the root directory.">Не можна створити каталог у кореневому каталозі.</String>
+    <String id="Root share folder cannot be deleted.">Кореневу спільну папку не можна видалити.</String>
+    <String id="Please choose a file to be deleted first.">Спершу виберіть файл для видалення.</String>
+    <String id="Root share folder cannot be renamed.">Кореневу спільну папку не можна перейменувати.</String>
+    <String id="Please choose a file to be renamed first.">Спершу виберіть файл для перейменування.</String>
+    <String id="Choose a directory to display usage first.">Спершу виберіть каталог, щоб показати використання.</String>
+    <String id="Support file system access only">Підтримується лише доступ до файлової системи</String>
+    <String id="Neighborhood">Мережеве оточення</String>
+  </Partition>
+  <Partition id="fsmkdir">
+    <String id="No folder name specified. Please enter a folder name.">Ім'я папки не вказано. Введіть ім'я папки.</String>
+    <String id="Create Directory">Створити каталог</String>
+    <String id="Under Directory:">У каталозі:</String>
+    <String id="New Folder:">Нова папка:</String>
+    <Property id="Button_Create" property="value">Створити</Property>
+    <Property id="Button_Cancel" property="value">Скасувати</Property>
+  </Partition>
+  <Partition id="fsrmdir">
+    <String id="Delete Directory">Видалити каталог</String>
+    <String id="Directory:">Каталог:</String>
+    <String id="Are you sure ?">Ви впевнені?</String>
+    <Property id="Button_Delete" property="value">Видалити</Property>
+    <Property id="Button_Cancel" property="value">Скасувати</Property>
+  </Partition>
+  <Partition id="fsupload">
+    <String id="Upload File">Вивантажити файл</String>
+    <String id="No file specified. Please enter a filename">Файл не вказано. Введіть ім'я файлу</String>
+    <String id="Invalid file specified. Please try again.">Вказано неправильний файл. Спробуйте ще раз.</String>
+    <String id="Upload File:">Вивантажити файл:</String>
+    <String id="Directory:">Каталог:</String>
+    <Property id="Button_Upload" property="value">Вивантажити</Property>
+    <Property id="Button_Cancel" property="value">Скасувати</Property>
+  </Partition>
+  <Partition id="fsdelfile">
+    <String id="Delete">Видалити</String>
+    <String id="Directory:">Каталог:</String>
+    <String id="File:">Файл:</String>
+    <String id="Are you sure ?">Ви впевнені?</String>
+    <Property id="Button_Delete" property="value">Видалити</Property>
+    <Property id="Button_Cancel" property="value">Скасувати</Property>
+  </Partition>
+  <Partition id="fsrename">
+    <String id="Rename">Перейменувати</String>
+    <String id="No alternative name is specified. Please enter one.">Нове ім'я не вказано. Введіть його.</String>
+    <String id="Directory:">Каталог:</String>
+    <String id="From:">Звідки:</String>
+    <String id="To:">Куди:</String>
+    <Property id="Button_Rename" property="value">Перейменувати</Property>
+    <Property id="Button_Cancel" property="value">Скасувати</Property>
+  </Partition>
+  <Partition id="fslogout">
+    <String id="Logoff">Вийти</String>
+    <String id="Are you sure?">Ви впевнені?</String>
+    <Property id="Button_Logoff" property="value">Вийти</Property>
+    <Property id="Button_Cancel" property="value">Скасувати</Property>
+  </Partition>
+  <Partition id="tips">
+    <String id="id_NextTip">Наступна порада</String>
+    <String id="tip_0">Якщо ви ввійшли з громадського комп'ютера, наприклад у готелі чи аеропорту, вийдіть із системи, перш ніж відійти від комп'ютера.</String>
+    <String id="tip_1">Мережевий трафік, що проходить через тунель NetScaler Gateway, зашифровано.</String>
+    <String id="tip_2">Ви можете отримати доступ до спільних папок у внутрішній мережі за допомогою застосунку передавання файлів, який запускається з інтерфейсу доступу.</String>
+    <String id="tip_3">Ви можете створювати закладки на улюблені вебсайти та спільні папки. Щоб створити закладку, натисніть «Додати» й введіть дані закладки.</String>
+    <String id="tip_4">Довідку щодо плагіна NetScaler Gateway див. у посібнику користувача плагіна NetScaler Gateway для Windows. Посібник можна відкрити, вибравши «Посібник користувача» в інтерфейсі доступу або «Довідка» в меню значка NetScaler Gateway в області сповіщень.</String>
+    <String id="tip_5">Завершивши роботу, не забудьте вийти із системи.</String>
+    <String id="tip_6">З міркувань безпеки NetScaler Gateway закриває застосунок, якщо він не використовується протягом певного часу.</String>
+    <String id="tip_7">Щоб видалити закладку, натисніть «Видалити».</String>
+    <String id="tip_8">Можна одночасно відкрити кілька сеансів передавання файлів. Натисніть кнопку «Передавання файлів» у вікні захищеного віддаленого сеансу, щоб відкрити застосунок передавання файлів.</String>
+    <String id="tip_9">Облікові дані для сеансу NetScaler Gateway можуть відрізнятися від облікових даних для застосунку передавання файлів.</String>
+    <String id="tip_10">У застосунку передавання файлів можна отримати доступ до віддалених файлових серверів, клацнувши значок «Мережеве оточення» на лівій панелі.</String>
+    <String id="tip_11">Завершуючи роботу із застосунком передавання файлів, NetScaler рекомендує натиснути «Вийти», а не просто закрити вікно інтерфейсу доступу.</String>
+    <String id="tip_12">Ви можете створювати закладки на вебсайти у внутрішній мережі та в інтернеті або на файлові сервери. Щоб створити закладку на файловий сервер, використовуйте формат \\server\share.</String>
+    <String id="tip_13">За допомогою інструмента ping в інтерфейсі доступу можна перевірити доступність серверів у внутрішній мережі та в інтернеті.</String>
+    <String id="tip_14">Якщо у вікні сеансу з'являється код або повідомлення про помилку, скористайтеся посібником користувача плагіна NetScaler Gateway для Windows, щоб усунути проблему.</String>
+    <String id="tip_15">NetScaler Gateway підтримує поширені консольні застосунки, як-от Telnet, FTP і SSH.</String>
+    <String id="tip_16">Якщо у вас виникли технічні проблеми з NetScaler Gateway, надайте системному адміністраторові клієнтську трасу, щоб допомогти визначити причину. Щоб дізнатися, як отримати трасу, зверніться до системного адміністратора.</String>
+    <String id="tip_17">Якщо плагін NetScaler Gateway уже встановлено, але не запущено, його можна запустити з меню «Пуск» замість завантаження з вебсайту.</String>
+    <String id="tip_18">Якщо під час роботи в NetScaler Gateway з'єднання із застосунками закриваються, це налаштування NetScaler Gateway з міркувань безпеки.</String>
+    <String id="tip_19">Щоб зменшити вікно захищеного сеансу, згорніть його в область сповіщень. Якщо закрити вікно сеансу, сеанс NetScaler Gateway завершиться.</String>
+    <String id="tip_20">Можна налаштувати рівень журналювання плагіна NetScaler Gateway, щоб бачити, які з'єднання встановлюються через NetScaler Gateway.</String>
+    <String id="tip_21">Підтримуються всі веббраузери в Windows.</String>
+    <String id="tip_22">Щоб підключитися до однорангового NetScaler Gateway за допомогою плагіна NetScaler Gateway, введіть доменне ім'я у форматі:  \\prefix_logonname.</String>
+  </Partition>
+</Resources>

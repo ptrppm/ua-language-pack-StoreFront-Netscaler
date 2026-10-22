@@ -18,7 +18,16 @@ CORE=$LP/receiver/js/ctxs.core.min.js
 # so the bundle lives next to the core.
 UKDIR=$LP/receiver/js
 BUNDLE=ctxs.strings.uk.js
-RC=/nsconfig/rc.netscaler
+# Legacy /vpn and /epa pages (logoff, EPA check, VPN errors) read themes/<bound theme>/resources/<lang>.xml
+# for the languages listed in its config.xml. Before logon the gateway serves only the stock file names
+# there (uk.xml gets 302), so the Ukrainian file lives next to the bundle as .js (served) and one line in
+# /vpn/resources.js loads it for "uk". A firmware upgrade replaces resources.js: the boot hook re-applies it.
+THEMES=${UA_THEMES:-/var/netscaler/logon/themes}       # override only for testing
+VPNJS=${UA_VPNJS:-/netscaler/ns_gui/vpn/resources.js}  # override only for testing
+XML=uk.xml
+VPNXML=ctxs.vpn.uk.xml.js
+XMLEN=$THEMES/Default/resources/en.xml
+RC=${UA_RC:-/nsconfig/rc.netscaler}                    # override only for testing
 MARK=UA_LANGPACK
 # First line of rc.netscaler, in background: later lines there may block forever (e.g. ntpd_ctl full_start).
 BOOTLINE="/bin/sh $PACK/ua_langpack.sh boot >> /var/log/ua_langpack.log 2>&1 & # $MARK"
@@ -26,6 +35,10 @@ FLUSH='flush cache contentGroup loginstaticobjects (an error there only means in
 
 # Must stay on one line: uninstall removes it with sed by the marker.
 PATCH=';/*'$MARK'*/(function(d){d.globalization.availableCulture("uk",{name:"uk",englishName:"Ukrainian",nativeName:"\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430",stringBundle:"/logon/LogonPoint/receiver/js/ctxs.strings.uk.js",customStringBundle:""})})(jQuery);'
+
+# Must stay on one line. Wraps ResourceManager: a theme's uk.xml is read from $VPNXML instead;
+# on any failure the page falls back to its usual loading (English).
+VPNPATCH=';/*'$MARK'*/(function(R){if(typeof R!="function"||!window.DOMParser)return;window.ResourceManager=function(b,p){R.call(this,b,p);var imp=this.ImportXML;this.ImportXML=function(url,isConfig){if(!isConfig&&/^\/logon\/themes\/[^\/]+\/resources\/uk\.xml/.test(url)){try{var q=this.GetXMLHttpRequest();q.open("GET","/logon/LogonPoint/receiver/js/'$VPNXML'",false);q.send();var x=q.status==200&&new DOMParser().parseFromString(q.responseText,"text/xml");if(x&&!x.getElementsByTagName("parsererror").length){this.ResourceXML=x;this.LoadResource();return}}catch(e){}}return imp.call(this,url,isConfig)}}})(window.ResourceManager);'
 
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S') ua_langpack: $*"; }
 
@@ -42,6 +55,29 @@ entries() {
         -e 's/^[[:space:]]*"\{0,1\}\([A-Za-z0-9_]\([^":]*[^":[:space:]]\)\{0,1\}\)"\{0,1\}[[:space:]]*:[[:space:]]*"\(.*\)",\{0,1\}[[:space:]]*$/\1'"$TAB"'\3/p' "$1"
 }
 
+# "partition|tag|attributes<TAB>raw text" for every String/Property/Title line of a theme resources file.
+# Same rule as xml_entries() in tools/manifest.py; Citrix files have one element per line.
+xml_entries() {
+    awk '{
+        s = $0; sub(/\r$/, "", s); sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s)
+        if (match(s, /^<Partition id="[^"]*"/)) { part = substr(s, 16, RLENGTH - 16); next }
+        if (s !~ /^<(String|Property|Title)[ \t>\/]/) next
+        gt = index(s, ">"); head = substr(s, 2, gt - 2); rest = substr(s, gt + 1)
+        tag = head; sub(/[ \t\/].*$/, "", tag)
+        value = ""
+        if (head ~ /\/$/) {
+            head = substr(head, 1, length(head) - 1)
+        } else {
+            # text up to the last closing tag
+            close_tag = "</" tag ">"; end = 0; r = rest; off = 0
+            while ((i = index(r, close_tag)) > 0) { end = off + i; off += i; r = substr(r, i + 1) }
+            value = end ? substr(rest, 1, end - 1) : rest
+        }
+        attrs = substr(head, length(tag) + 1); sub(/^[ \t]+/, "", attrs); sub(/[ \t]+$/, "", attrs)
+        print part "|" tag "|" attrs "\t" value
+    }' "$1"
+}
+
 # Firmware upgrades may add strings or change English texts; compare with the build the pack was made for
 check() {
     [ -f "$EN" ] || { echo "English bundle not found: $EN"; exit 1; }
@@ -52,21 +88,28 @@ check() {
     done
     tmp=$(mktemp -d "${TMPDIR:-/tmp}/ua_check.XXXXXX") || exit 1
     export LC_ALL=C
-    # first occurrence of a key wins, as in tools/manifest.py (Citrix's own file has TryAgain twice)
-    entries "$EN" | awk -F "$TAB" '!seen[$1]++' > "$tmp/en"
+    # "source:key<TAB>English text"; first occurrence of a key wins, as in tools/manifest.py
+    # (Citrix's own file has TryAgain twice)
+    {
+        entries "$EN" | awk -F "$TAB" '!seen[$1]++' | sed 's/^/js:/'
+        [ -f "$XMLEN" ] && xml_entries "$XMLEN" | awk -F "$TAB" '!seen[$1]++' | sed 's/^/xml:/'
+    } > "$tmp/en"
     cut -f1 "$tmp/en" | sort -u > "$tmp/en.keys"
-    entries "$PACK/$BUNDLE" | cut -f1 | sort -u > "$tmp/uk.keys"
+    {
+        entries "$PACK/$BUNDLE" | cut -f1 | sed 's/^/js:/'
+        xml_entries "$PACK/$XML" | cut -f1 | sed 's/^/xml:/'
+    } | sort -u > "$tmp/uk.keys"
     if [ ! -s "$tmp/en.keys" ] || [ ! -s "$tmp/uk.keys" ]; then
         echo "ERROR: could not read strings from $EN or $PACK/$BUNDLE"; rm -rf "$tmp"; exit 1
     fi
     while IFS="$TAB" read -r k v; do
-        printf 'js:%s\t%s\n' "$k" "$(md5str "$v")"
+        printf '%s\t%s\n' "$k" "$(md5str "$v")"
     done < "$tmp/en" > "$tmp/now"
     grep -v '^#' "$MANIFEST" > "$tmp/was"
 
     # set operations with awk: file 1 is loaded into an array, file 2 is filtered against it
     awk 'NR == FNR { t[$0]; next } !($0 in t)' "$tmp/uk.keys" "$tmp/en.keys" > "$tmp/new"
-    awk -F "$TAB" 'NR == FNR { w[$1] = $2; next } ($1 in w) && w[$1] != $2 { sub(/^js:/, "", $1); print $1 }' \
+    awk -F "$TAB" 'NR == FNR { w[$1] = $2; next } ($1 in w) && w[$1] != $2 { print $1 }' \
         "$tmp/was" "$tmp/now" | sort > "$tmp/changed"
     awk 'NR == FNR { t[$0]; next } !($0 in t)' "$tmp/en.keys" "$tmp/uk.keys" > "$tmp/obsolete"
 
@@ -103,8 +146,68 @@ note_new_firmware() {
     log "NOTE: this firmware's English strings differ from the pack's build - run: sh $PACK/ua_langpack.sh check"
 }
 
+# resources folders of the themes (EULA holds only the EULA texts); names may contain spaces
+theme_dirs() {
+    for d in "$THEMES"/*/resources; do
+        [ -f "$d/en.xml" ] && [ -f "$d/config.xml" ] && [ "$d" != "$THEMES/EULA/resources" ] && echo "$d"
+    done
+}
+
+# config.xml of a custom theme is often a symlink to X1's: edit the file it points to
+theme_config() { realpath "$1/config.xml"; }
+
+has_uk() { grep -q '<Language>uk</Language>' "$1"; }
+
+vpn_patched() { grep -q "$MARK" "$VPNJS" 2>/dev/null; }
+
+# Ukrainian file served, /vpn/resources.js patched, every theme lists uk in its config.xml
+xml_installed() {
+    cmp -s "$PACK/$XML" "$UKDIR/$VPNXML" && vpn_patched || return 1
+    theme_dirs | while IFS= read -r d; do
+        has_uk "$(theme_config "$d")" || echo "$d"
+    done | grep -q . && return 1
+    return 0
+}
+
+xml_install() {
+    # file first: a listed uk without it only falls back to English, but keep the same order as the core
+    if ! cmp -s "$PACK/$XML" "$UKDIR/$VPNXML"; then
+        cp "$PACK/$XML" "$UKDIR/$VPNXML" && chmod 644 "$UKDIR/$VPNXML" && log "vpn pages: $VPNXML copied to $UKDIR"
+    fi
+    if [ -f "$VPNJS" ] && ! vpn_patched; then
+        if [ "$(tail -c 1 "$VPNJS" | od -An -c | tr -d ' ')" = '\n' ]; then
+            printf '%s\n' "$VPNPATCH" >> "$VPNJS" && log "vpn pages: $VPNJS patched"
+        else
+            log "ERROR: $VPNJS does not end with a newline - vpn pages stay English"
+        fi
+    fi
+    theme_dirs | while IFS= read -r d; do
+        cfg=$(theme_config "$d")
+        has_uk "$cfg" && continue
+        # own line before </SupportedLanguageList>, so uninstall restores the file byte for byte
+        awk '/<\/SupportedLanguageList>/ && !done { print "    <Language>uk</Language>"; done = 1 } { print }' \
+            "$cfg" > "$cfg.ua_tmp" && cat "$cfg.ua_tmp" > "$cfg" && rm -f "$cfg.ua_tmp"
+        log "theme $(basename "$(dirname "$d")"): uk added to $cfg"
+    done
+}
+
+xml_uninstall() {
+    vpn_patched && sed -i '' "/$MARK/d" "$VPNJS" && log "vpn pages: $VPNJS unpatched"
+    rm -f "$UKDIR/$VPNXML"
+    # keep uk where an admin has put an own uk.xml into a theme sharing that config.xml
+    theme_dirs | while IFS= read -r d; do
+        cfg=$(theme_config "$d")
+        has_uk "$cfg" || continue
+        theme_dirs | while IFS= read -r o; do
+            [ "$(theme_config "$o")" = "$cfg" ] && [ -f "$o/$XML" ] && echo "$o"
+        done | grep -q . && continue
+        sed -i '' '/<Language>uk<\/Language>/d' "$cfg" && log "uk removed from $cfg"
+    done
+}
+
 install() {
     [ -f "$PACK/$BUNDLE" ] || { log "ERROR: $PACK/$BUNDLE not found"; exit 1; }
+    [ -f "$PACK/$XML" ] || { log "ERROR: $PACK/$XML not found"; exit 1; }
     [ -f "$CORE" ] || { log "ERROR: $CORE not found"; exit 1; }
 
     # 1. bundle first: a patched core without the bundle would hang the portal on loading
@@ -125,7 +228,10 @@ install() {
         log "core patched"
     fi
 
-    # 3. re-apply after reboot / firmware upgrade
+    # 3. legacy /vpn and /epa pages
+    xml_install
+
+    # 4. re-apply after reboot / firmware upgrade
     if [ "$(head -n 1 "$RC" 2>/dev/null)" != "$BOOTLINE" ]; then
         touch "$RC"
         # drop an old hook from anywhere in the file, put the current one on top; other lines untouched
@@ -149,7 +255,7 @@ boot() {
     for i in 1 2 3 4 5; do
         sleep 60
         grep -q "$MARK" "$RC" 2>/dev/null || break      # uninstalled meanwhile
-        is_patched && cmp -s "$PACK/$BUNDLE" "$UKDIR/$BUNDLE" && continue
+        is_patched && cmp -s "$PACK/$BUNDLE" "$UKDIR/$BUNDLE" && xml_installed && continue
         log "boot: portal files were replaced, applying again"
         ( install )
     done
@@ -162,6 +268,7 @@ uninstall() {
         log "core unpatched"
     fi
     rm -f "$UKDIR/$BUNDLE"
+    xml_uninstall
     [ -f "$RC" ] && grep -q "$MARK" "$RC" && sed -i '' "/$MARK/d" "$RC" && log "boot hook removed"
     log "uninstalled. In NetScaler CLI run: $FLUSH"
 }
@@ -169,6 +276,11 @@ uninstall() {
 status() {
     is_patched && echo "core:      patched" || echo "core:      NOT patched"
     [ -f "$UKDIR/$BUNDLE" ] && echo "bundle:    present" || echo "bundle:    MISSING"
+    cmp -s "$PACK/$XML" "$UKDIR/$VPNXML" && vpn_patched && echo "vpn pages: patched" || echo "vpn pages: NOT patched"
+    theme_dirs | while IFS= read -r d; do
+        t=$(basename "$(dirname "$d")")
+        has_uk "$(theme_config "$d")" && echo "theme:     $t - uk listed" || echo "theme:     $t - uk NOT listed"
+    done
     grep -q "$MARK" "$RC" 2>/dev/null && echo "boot hook: present" || echo "boot hook: MISSING"
     if firmware_strings_changed; then
         echo "strings:   firmware differs from the pack's build - run: sh $PACK/ua_langpack.sh check"
