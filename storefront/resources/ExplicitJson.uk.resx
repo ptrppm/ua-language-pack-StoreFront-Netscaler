@@ -126,4 +126,7 @@
   <data name="UnhandledExceptionOccurred" xml:space="preserve">
     <value>Сталася помилка типу '{0}'. Повідомлення: '{1}'. Трасування стека: '{2}'</value>
   </data>
+  <data name="UnexpectedErrorOccurred" xml:space="preserve">
+    <value>Сталася неочікувана помилка. Зверніться до адміністратора.</value>
+  </data>
 </root>

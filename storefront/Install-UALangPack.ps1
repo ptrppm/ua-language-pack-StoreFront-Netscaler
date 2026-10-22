@@ -340,13 +340,26 @@ function Compare-Strings($Title, $English, $Translated, $Prefix, $Was) {
     $new.Count + $changed.Count
 }
 
+# One en.<build>.manifest per StoreFront build the pack was checked on: the installed build's one, else the newest
+function Select-Manifest {
+    $all = @(Get-ChildItem -LiteralPath $Pack -Filter 'en.*.manifest' | Sort-Object Name)
+    if (-not $all) { throw "Not found: $Pack\en.<build>.manifest" }
+    $build = Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*' -ErrorAction SilentlyContinue |
+        Where-Object { $_.PSObject.Properties['DisplayName'] -and $_.DisplayName -match 'StoreFront' -and
+                       $_.PSObject.Properties['DisplayVersion'] -and $_.DisplayVersion -match '^\d{4}\.' } |
+        ForEach-Object { $_.DisplayVersion.Split('.')[0] } | Select-Object -First 1
+    $m = @($all | Where-Object { $_.Name -eq "en.$build.manifest" })
+    if ($m) { return $m[0].FullName }
+    Write-Step "  The pack has no manifest for this StoreFront ($build); comparing with the newest one" 'Yellow'
+    $all[-1].FullName
+}
+
 function Invoke-Check($Sites, $Services) {
-    $manifest = Join-Path $Pack 'en.manifest'
-    if (-not (Test-Path $manifest)) { throw "Not found: $manifest" }
+    $manifest = Select-Manifest
     $lines = [IO.File]::ReadAllLines($manifest, [Text.Encoding]::UTF8)
     $was = @{}
     foreach ($l in $lines) { if ($l -notmatch '^#') { $p = $l.Split("`t"); $was[$p[0]] = $p[1] } }
-    Write-Step ("Pack made for StoreFront {0}" -f ($lines[0] -replace '^# storefront (\S+).*', '$1'))
+    Write-Step ("Comparing with the strings of StoreFront {0}" -f ($lines[0] -replace '^# storefront (\S+).*', '$1'))
     $todo = 0
     foreach ($s in $Sites) {
         $en = Get-ChildItem -Path (Join-Path $s.FullName 'receiver\js\localization\en') -Filter 'ctxs.strings*.js' -ErrorAction SilentlyContinue | Select-Object -First 1

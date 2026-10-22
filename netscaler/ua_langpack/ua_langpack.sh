@@ -21,7 +21,8 @@ BUNDLE=ctxs.strings.uk.js
 RC=/nsconfig/rc.netscaler
 MARK=UA_LANGPACK
 # First line of rc.netscaler, in background: later lines there may block forever (e.g. ntpd_ctl full_start).
-BOOTLINE="/bin/sh $PACK/ua_langpack.sh install >> /var/log/ua_langpack.log 2>&1 & # $MARK"
+BOOTLINE="/bin/sh $PACK/ua_langpack.sh boot >> /var/log/ua_langpack.log 2>&1 & # $MARK"
+FLUSH='flush cache contentGroup loginstaticobjects (an error there only means integrated caching is off - nothing to flush)'
 
 # Must stay on one line: uninstall removes it with sed by the marker.
 PATCH=';/*'$MARK'*/(function(d){d.globalization.availableCulture("uk",{name:"uk",englishName:"Ukrainian",nativeName:"\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430",stringBundle:"/logon/LogonPoint/receiver/js/ctxs.strings.uk.js",customStringBundle:""})})(jQuery);'
@@ -135,7 +136,23 @@ install() {
     note_new_firmware
 
     # gateway serves logon files from integrated cache; empty after boot, stale after a live install
-    log "done. In NetScaler CLI run: flush cache contentGroup loginstaticobjects"
+    log "done. In NetScaler CLI run: $FLUSH"
+}
+
+# at every boot, from rc.netscaler in background: apply, then re-check for a few minutes
+# in case the portal files appear or get replaced later in the boot
+boot() {
+    i=0
+    while [ ! -f "$CORE" ] && [ $i -lt 30 ]; do sleep 10; i=$((i + 1)); done
+    log "boot"
+    ( install )
+    for i in 1 2 3 4 5; do
+        sleep 60
+        grep -q "$MARK" "$RC" 2>/dev/null || break      # uninstalled meanwhile
+        is_patched && cmp -s "$PACK/$BUNDLE" "$UKDIR/$BUNDLE" && continue
+        log "boot: portal files were replaced, applying again"
+        ( install )
+    done
 }
 
 uninstall() {
@@ -146,7 +163,7 @@ uninstall() {
     fi
     rm -f "$UKDIR/$BUNDLE"
     [ -f "$RC" ] && grep -q "$MARK" "$RC" && sed -i '' "/$MARK/d" "$RC" && log "boot hook removed"
-    log "uninstalled. In NetScaler CLI run: flush cache contentGroup loginstaticobjects"
+    log "uninstalled. In NetScaler CLI run: $FLUSH"
 }
 
 status() {
@@ -162,6 +179,7 @@ status() {
 
 case "$1" in
     install)   install ;;
+    boot)      boot ;;
     uninstall) uninstall ;;
     status)    status ;;
     check)     check; exit $? ;;

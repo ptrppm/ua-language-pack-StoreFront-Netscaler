@@ -1,10 +1,10 @@
-"""Build en.manifest: one line per English string, "<source>:<key><TAB><md5 of the English text>".
+"""Build an en manifest: one line per English string, "<source>:<key><TAB><md5 of the English text>".
 The pack ships it so that `check` on a newer build can tell new keys and changed English texts apart.
 Only hashes are stored - no Citrix text goes into the repository.
 
 usage:
   python tools/manifest.py netscaler <en/ctxs.strings.js> <build>                 > netscaler/ua_langpack/en.manifest
-  python tools/manifest.py storefront <en/ctxs.strings_*.js> <dir with *.resx> <build> > storefront/en.manifest
+  python tools/manifest.py storefront <en/ctxs.strings_*.js> <dir with *.resx> <build> > storefront/en.<build>.manifest
 
 Hash rule (the same in ua_langpack.sh and Install-UALangPack.ps1):
   JS:   the raw text between the quotes on the "key: "value"," line, escapes as written, UTF-8, MD5

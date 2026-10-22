@@ -102,6 +102,11 @@ def keys_resx(rel):
     p = path(*rel.split('/'))
     return {d.get('name') for d in ET.parse(p).getroot().findall('data')} if os.path.exists(p) else set()
 
+def lines_build(p):
+    with open(p, encoding='utf-8') as f:
+        head = f.readline().split()
+    return head[2] if len(head) > 2 else ''
+
 import manifest
 
 check_bundle('netscaler/ua_langpack/ctxs.strings.uk.js', 'uk')
@@ -112,9 +117,16 @@ for name in sorted(os.listdir(path('storefront', 'resources'))):
 check_text_rules()
 check_manifest('netscaler/ua_langpack/en.manifest', 'netscaler',
                {'js': keys_js('netscaler/ua_langpack/ctxs.strings.uk.js')})
-check_manifest('storefront/en.manifest', 'storefront',
-               dict([('js', keys_js('storefront/custom/wrstrings.uk.js'))] +
-                    [(n, keys_resx('storefront/resources/%s.uk.resx' % n)) for n in manifest.RESX]))
+# one en.<build>.manifest per supported StoreFront build; the translation covers all of them
+sf_translated = dict([('js', keys_js('storefront/custom/wrstrings.uk.js'))] +
+                     [(n, keys_resx('storefront/resources/%s.uk.resx' % n)) for n in manifest.RESX])
+sf_manifests = sorted(n for n in os.listdir(path('storefront')) if re.match(r'^en\.\d{4}\.manifest$', n))
+if not sf_manifests:
+    errors.append('storefront: no en.<build>.manifest')
+for name in sf_manifests:
+    check_manifest('storefront/' + name, 'storefront', sf_translated)
+    if lines_build(path('storefront', name)) != name.split('.')[1]:
+        errors.append('storefront/%s: header build does not match the file name' % name)
 
 for w in warnings:
     print('WARNING ' + w)

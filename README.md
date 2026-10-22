@@ -9,7 +9,7 @@
 | Продукт | Перевірено на | Що перекладається |
 |---|---|---|
 | NetScaler Gateway | 14.1 build 73.46 | сторінка входу, повідомлення про помилки, EPA — у всіх темах RfWebUI та WStheme |
-| Citrix StoreFront | 2507 (7.45), Windows Server 2025 | класичний інтерфейс (receiver.html) і форма входу |
+| Citrix StoreFront | 2507 (7.45), 2607 LTSR; Windows Server 2025 | класичний інтерфейс (receiver.html) і форма входу |
 
 Зауваження, помилки в перекладі, нові білди: [Issues](https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler/issues) ·
 [GitHub](https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler) · petr.pikulin@gmail.com
@@ -29,6 +29,7 @@
    ```
    flush cache contentGroup loginstaticobjects
    ```
+   Якщо команда повертає помилку, ймовірно, Integrated Caching вимкнено — тоді очищати нічого, крок можна пропустити.
 4. Відкрийте портал у браузері з українською мовою.
 
 HA-пара — на **обох** вузлах.
@@ -54,6 +55,8 @@ HA-пара — на **обох** вузлах.
 - кладе переклад у `/var/netscaler/logon/LogonPoint/receiver/js/`;
 - додає один рядок реєстрації мови в кінець `ctxs.core.min.js` (оригінал зберігається в `/nsconfig/ua_langpack/backup/`);
 - додає першим рядком у `/nsconfig/rc.netscaler` виклик встановлення під час завантаження; інші рядки не змінюються.
+  Якщо файлу немає або він порожній — це нормально, файл буде створено. Під час завантаження пакет встановлюється у фоні
+  й ще кілька хвилин перевіряє, що файли порталу не замінено.
 
 Тому пакет **сам відновлюється після перезавантаження та оновлення прошивки**. Перед оновленням інсталятор NetScaler
 може повідомити, що `ctxs.core.min.js` змінено, і запропонувати зробити резервну копію — відповідайте `y`.
@@ -74,6 +77,9 @@ cat /var/log/ua_langpack.log
 sh /nsconfig/ua_langpack/ua_langpack.sh uninstall     # потім: flush cache contentGroup loginstaticobjects
 ```
 Після видалення файли NetScaler повертаються до оригіналу байт у байт.
+
+Якщо `status` показує `boot hook: MISSING` — рядок зник з `/nsconfig/rc.netscaler` (наприклад, його перезаписав інший
+скрипт; так робить штатний `consoleSetLoginPrompt.sh` під час зміни запрошення консолі). Просто запустіть `install` ще раз.
 
 ### Підписи і брендинг теми
 У редакторі теми (GUI) немає української у списку мов — це нормально, список зашитий в інтерфейс адміністрування.
@@ -124,7 +130,8 @@ cp /var/tmp/ua_orig/logon/LogonPoint/receiver/js/localization/ru/ctxs.strings.ru
 ```powershell
 .\Install-UALangPack.ps1 -Check
 ```
-Порівнює англійські рядки цього StoreFront (інтерфейс і форма входу) з перекладом у пакеті: **NEW** — немає перекладу,
+Порівнює англійські рядки цього StoreFront (інтерфейс і форма входу) з перекладом у пакеті й з маніфестом його
+версії (`en.<версія>.manifest`; якщо такого немає — з найновішим): **NEW** — немає перекладу,
 **CHANGED** — англійський текст змінився. Нічого не змінює; результат надсилайте в
 [Issues](https://github.com/ptrppm/ua-language-pack-StoreFront-Netscaler/issues).
 
@@ -136,6 +143,8 @@ cp /var/tmp/ua_orig/logon/LogonPoint/receiver/js/localization/ru/ctxs.strings.ru
 ---
 
 ## Обмеження
+- **NetScaler:** старі сторінки `/vpn/…` (сторінка після виходу «Logoff is successful», сторінки перевірки EPA,
+  частина повідомлень про помилки VPN) поки що англійською — їх переклад готується у v2.2.
 - **NetScaler:** вікна самого плагіна EPA на комп'ютері користувача не перекладаються (мова за мовою ОС, української в плагіні немає).
 - **StoreFront:** перекладається класичний інтерфейс. Новий інтерфейс Workspace (якщо його ввімкнено для Store) має власну
   локалізацію — скрипт попередить про це.
@@ -143,10 +152,11 @@ cp /var/tmp/ua_orig/logon/LogonPoint/receiver/js/localization/ru/ctxs.strings.ru
 ## Вміст архіву
 ```
 netscaler/ua_langpack/   ctxs.strings.uk.js, ua_langpack.sh, en.manifest  → копіювати в /nsconfig/
-storefront/              Install-UALangPack.ps1, en.manifest, custom/, resources/
+storefront/              Install-UALangPack.ps1, en.<версія>.manifest, custom/, resources/
 tools/                   для оновлення перекладу під новий білд (Python 3)
 ```
-`en.manifest` — контрольні суми англійських рядків білду, під який зроблено переклад (самих текстів Citrix там немає);
+`en.manifest` / `en.<версія>.manifest` — контрольні суми англійських рядків білдів, під які зроблено переклад
+(самих текстів Citrix там немає);
 за ним `check` / `-Check` визначають нові та змінені рядки.
 
 ## Для розробників: оновлення під новий білд
@@ -160,8 +170,10 @@ tools/                   для оновлення перекладу під н�
 3. Оновіть маніфест під новий білд:
    ```sh
    python tools/manifest.py netscaler <en ctxs.strings.js> <білд> > netscaler/ua_langpack/en.manifest
-   python tools/manifest.py storefront <en ctxs.strings_*.js> <тека з en *.resx> <версія> > storefront/en.manifest
+   python tools/manifest.py storefront <en ctxs.strings_*.js> <тека з en *.resx> <версія> > storefront/en.<версія>.manifest
    ```
+   Для StoreFront маніфести попередніх версій не видаляйте, а переклади застарілих рядків не прибирайте:
+   пакет один для всіх підтримуваних версій.
 4. `python tools/validate.py` — має бути 0 помилок; оновіть таблицю «Перевірено на» та CHANGELOG.
 
 Оригінальні файли Citrix у репозиторій не додаються.
