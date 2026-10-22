@@ -19,9 +19,13 @@ CORE=$LP/receiver/js/ctxs.core.min.js
 UKDIR=$LP/receiver/js
 BUNDLE=ctxs.strings.uk.js
 # Legacy /vpn and /epa pages (logoff, EPA check, VPN errors) read themes/<bound theme>/resources/<lang>.xml
-# for the languages listed in its config.xml
+# for the languages listed in its config.xml. Before logon the gateway serves only the stock file names
+# there (uk.xml gets 302), so the Ukrainian file lives next to the bundle as .js (served) and one line in
+# /vpn/resources.js loads it for "uk". /netscaler is rebuilt at every boot: the boot hook re-applies it.
 THEMES=${UA_THEMES:-/var/netscaler/logon/themes}       # override only for testing
+VPNJS=${UA_VPNJS:-/netscaler/ns_gui/vpn/resources.js}  # override only for testing
 XML=uk.xml
+VPNXML=ctxs.vpn.uk.xml.js
 XMLEN=$THEMES/Default/resources/en.xml
 RC=${UA_RC:-/nsconfig/rc.netscaler}                    # override only for testing
 MARK=UA_LANGPACK
@@ -31,6 +35,10 @@ FLUSH='flush cache contentGroup loginstaticobjects (an error there only means in
 
 # Must stay on one line: uninstall removes it with sed by the marker.
 PATCH=';/*'$MARK'*/(function(d){d.globalization.availableCulture("uk",{name:"uk",englishName:"Ukrainian",nativeName:"\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430",stringBundle:"/logon/LogonPoint/receiver/js/ctxs.strings.uk.js",customStringBundle:""})})(jQuery);'
+
+# Must stay on one line. Wraps ResourceManager: a theme's uk.xml is read from $VPNXML instead;
+# on any failure the page falls back to its usual loading (English).
+VPNPATCH=';/*'$MARK'*/(function(R){if(typeof R!="function"||!window.DOMParser)return;window.ResourceManager=function(b,p){R.call(this,b,p);var imp=this.ImportXML;this.ImportXML=function(url,isConfig){if(!isConfig&&/^\/logon\/themes\/[^\/]+\/resources\/uk\.xml/.test(url)){try{var q=this.GetXMLHttpRequest();q.open("GET","/logon/LogonPoint/receiver/js/'$VPNXML'",false);q.send();var x=q.status==200&&new DOMParser().parseFromString(q.responseText,"text/xml");if(x&&!x.getElementsByTagName("parsererror").length){this.ResourceXML=x;this.LoadResource();return}}catch(e){}}return imp.call(this,url,isConfig)}}})(window.ResourceManager);'
 
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S') ua_langpack: $*"; }
 
@@ -150,36 +158,43 @@ theme_config() { realpath "$1/config.xml"; }
 
 has_uk() { grep -q '<Language>uk</Language>' "$1"; }
 
-# every theme has uk.xml and lists uk in its config.xml
+vpn_patched() { grep -q "$MARK" "$VPNJS" 2>/dev/null; }
+
+# Ukrainian file served, /vpn/resources.js patched, every theme lists uk in its config.xml
 xml_installed() {
+    cmp -s "$PACK/$XML" "$UKDIR/$VPNXML" && vpn_patched || return 1
     theme_dirs | while IFS= read -r d; do
-        [ -f "$d/$XML" ] && has_uk "$(theme_config "$d")" || echo "$d"
+        has_uk "$(theme_config "$d")" || echo "$d"
     done | grep -q . && return 1
     return 0
 }
 
 xml_install() {
-    theme_dirs | while IFS= read -r d; do
-        t=$(basename "$(dirname "$d")")
-        if [ -f "$d/$XML" ] && ! grep -q "$MARK" "$d/$XML"; then
-            log "theme $t: own $XML found, left as is"
-        elif ! cmp -s "$PACK/$XML" "$d/$XML"; then
-            cp "$PACK/$XML" "$d/$XML" && chmod 644 "$d/$XML" && log "theme $t: $XML copied"
+    # file first: a listed uk without it only falls back to English, but keep the same order as the core
+    if ! cmp -s "$PACK/$XML" "$UKDIR/$VPNXML"; then
+        cp "$PACK/$XML" "$UKDIR/$VPNXML" && chmod 644 "$UKDIR/$VPNXML" && log "vpn pages: $VPNXML copied to $UKDIR"
+    fi
+    if [ -f "$VPNJS" ] && ! vpn_patched; then
+        if [ "$(tail -c 1 "$VPNJS" | od -An -c | tr -d ' ')" = '\n' ]; then
+            printf '%s\n' "$VPNPATCH" >> "$VPNJS" && log "vpn pages: $VPNJS patched"
+        else
+            log "ERROR: $VPNJS does not end with a newline - vpn pages stay English"
         fi
+    fi
+    theme_dirs | while IFS= read -r d; do
         cfg=$(theme_config "$d")
         has_uk "$cfg" && continue
         # own line before </SupportedLanguageList>, so uninstall restores the file byte for byte
         awk '/<\/SupportedLanguageList>/ && !done { print "    <Language>uk</Language>"; done = 1 } { print }' \
             "$cfg" > "$cfg.ua_tmp" && cat "$cfg.ua_tmp" > "$cfg" && rm -f "$cfg.ua_tmp"
-        log "theme $t: uk added to $cfg"
+        log "theme $(basename "$(dirname "$d")"): uk added to $cfg"
     done
 }
 
 xml_uninstall() {
-    theme_dirs | while IFS= read -r d; do
-        grep -q "$MARK" "$d/$XML" 2>/dev/null && rm -f "$d/$XML" && log "theme $(basename "$(dirname "$d")"): $XML removed"
-    done
-    # a config.xml may be shared by several themes: drop uk only when none of them has uk.xml left
+    vpn_patched && sed -i '' "/$MARK/d" "$VPNJS" && log "vpn pages: $VPNJS unpatched"
+    rm -f "$UKDIR/$VPNXML"
+    # keep uk where an admin has put an own uk.xml into a theme sharing that config.xml
     theme_dirs | while IFS= read -r d; do
         cfg=$(theme_config "$d")
         has_uk "$cfg" || continue
@@ -213,7 +228,7 @@ install() {
         log "core patched"
     fi
 
-    # 3. legacy /vpn and /epa pages: uk.xml in every theme
+    # 3. legacy /vpn and /epa pages
     xml_install
 
     # 4. re-apply after reboot / firmware upgrade
@@ -261,9 +276,10 @@ uninstall() {
 status() {
     is_patched && echo "core:      patched" || echo "core:      NOT patched"
     [ -f "$UKDIR/$BUNDLE" ] && echo "bundle:    present" || echo "bundle:    MISSING"
+    cmp -s "$PACK/$XML" "$UKDIR/$VPNXML" && vpn_patched && echo "vpn pages: patched" || echo "vpn pages: NOT patched"
     theme_dirs | while IFS= read -r d; do
         t=$(basename "$(dirname "$d")")
-        [ -f "$d/$XML" ] && has_uk "$(theme_config "$d")" && echo "theme:     $t - uk" || echo "theme:     $t - NOT installed"
+        has_uk "$(theme_config "$d")" && echo "theme:     $t - uk listed" || echo "theme:     $t - uk NOT listed"
     done
     grep -q "$MARK" "$RC" 2>/dev/null && echo "boot hook: present" || echo "boot hook: MISSING"
     if firmware_strings_changed; then
