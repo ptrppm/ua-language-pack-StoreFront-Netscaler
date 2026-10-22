@@ -119,7 +119,7 @@
         ChromePluginHelperMessage: "Дозвольте запуск модуля Citrix на цьому веб-сайті для доступу до застосунків. Додаткові відомості див. у статті Citrix Knowledge Center {0}.",
 
 
-        CitrixCopyright: "\u00a9 Citrix Systems Inc., 2013-2024. Усі права захищені. \u00A0| \u00A0",
+        CitrixCopyright: "\u00a9 Citrix Systems Inc., 2013-2026. Усі права захищені. \u00A0| \u00A0",
         CitrixLicenseAgreement: "Ліцензійна угода Citrix",
         CitrixReceiver: "Citrix Receiver",
         CitrixReceiverlauncher: "Citrix Workspace Launcher",
